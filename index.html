@@ -593,6 +593,14 @@ footer p{font-size:.78rem;color:var(--txt2);}
     @keyframes hgFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
     .float-hg:hover{box-shadow:0 0 35px rgba(255,0,110,.7);animation:none;transform:scale(1.12);}
 
+
+    /* FIX: cursor pointer em tudo interativo */
+    a,button,.sol-card,.port-card,.pc-btn,.int-btn,.logo-btn,.urgency-opt,.slot,.consultant-opt{cursor:pointer!important;}
+    /* Logo img */
+    .nav-logo img{background:transparent!important;}
+    /* Port grid items alinhados */
+    .port-grid{align-items:start;}
+
 </style>
 </head>
 <body>
@@ -600,7 +608,19 @@ footer p{font-size:.78rem;color:var(--txt2);}
 <canvas id="canvas"></canvas>
 
 <nav>
-  <div class="nav-logo" style="display:flex;align-items:center;gap:.5rem;"><img src="logo.jpeg" alt="Kairos" style="height:36px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px rgba(245,158,11,.55));"/><span>Kairos</span></div>
+  <div class="nav-logo" style="display:flex;align-items:center;gap:.6rem;">
+    <img src="kairos_logo.png" alt="Kairos Digital"
+      style="height:46px;width:46px;object-fit:contain;border-radius:8px;
+             filter:drop-shadow(0 0 14px rgba(0,150,255,.8)) drop-shadow(0 0 6px rgba(0,245,255,.6));"/>
+    <div style="line-height:1.1;">
+      <span style="font-family:Space Grotesk,sans-serif;font-size:1.1rem;font-weight:800;
+        background:linear-gradient(135deg,#00BFFF,#00F5FF);
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+        letter-spacing:.08em;">KAIROS</span>
+      <span style="display:block;font-size:.46rem;font-weight:600;letter-spacing:.22em;
+        color:rgba(0,200,255,.5);text-transform:uppercase;font-family:monospace;">DIGITAL</span>
+    </div>
+  </div>
   <ul class="nav-links">
     <li><a href="#solucoes">Soluções</a></li>
     <li><a href="#como">Como Funciona</a></li>
@@ -608,7 +628,7 @@ footer p{font-size:.78rem;color:var(--txt2);}
     <li><a href="#sobre">Contato</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:.75rem;">
-      <button class="nav-cta" onclick="warpToCart()">Falar com a equipe</button>
+      <button class="nav-cta" onclick="openCart()">Falar com a equipe</button>
       <button class="cart-btn" id="btnCart" onclick="openCart()" title="Serviços selecionados">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         <span class="cart-badge" id="cartBadge" style="display:none">0</span>
@@ -783,81 +803,232 @@ footer p{font-size:.78rem;color:var(--txt2);}
 </section>
 
 
-<footer style="background:rgba(0,5,16,.95);border-top:1px solid rgba(0,245,255,.15);
-  padding:1.5rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;">
-  <div style="display:flex;align-items:center;gap:.6rem;">
-    <svg width="22" height="28" viewBox="0 0 64 88" fill="none">
-      <path d="M10 7 L32 44 L54 7 Z" stroke="url(#fp)" stroke-width="1.5" fill="rgba(0,245,255,.06)"/>
-      <path d="M10 81 L32 44 L54 81 Z" stroke="url(#fp)" stroke-width="1.5" fill="rgba(255,0,110,.05)"/>
-      <defs><linearGradient id="fp" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00F5FF"/><stop offset="100%" stop-color="#FF006E"/></linearGradient></defs>
-    </svg>
-    <span style="font-family:'Space Grotesk';font-size:.9rem;font-weight:700;
-      background:linear-gradient(135deg,#00F5FF,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
-      KAIROS DIGITAL
-    </span>
-  </div>
-  <p style="font-size:.72rem;color:rgba(0,245,255,.4);letter-spacing:.08em;">
-    AUTOMAÇÃO COM IA · GOIÂNIA · 2026
-  </p>
-  <div style="display:flex;gap:.8rem;align-items:center;">
-    <a href="team.html" style="font-size:.72rem;color:rgba(0,245,255,.5);text-decoration:none;
-      border:1px solid rgba(0,245,255,.2);padding:.22rem .65rem;border-radius:5px;
-      transition:all .2s;font-weight:600;letter-spacing:.05em;"
-      onmouseover="this.style.borderColor='#00F5FF';this.style.color='#00F5FF';"
-      onmouseout="this.style.borderColor='rgba(0,245,255,.2)';this.style.color='rgba(0,245,255,.5)';">
-      HQ INTERNO ⚡
-    </a>
-    <span style="font-size:.65rem;color:rgba(0,245,255,.25);letter-spacing:.06em;font-family:monospace;">K+K PRES. MODE</span>
+<footer style="background:rgba(0,5,16,.97);border-top:1px solid rgba(0,200,255,.15);
+  padding:2rem 2.5rem;position:relative;z-index:1;">
+  <div style="max-width:1160px;margin:0 auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.5rem;">
+      <div style="display:flex;align-items:center;gap:.7rem;">
+        <img src="kairos_logo.png" alt="Kairos Digital" style="height:40px;width:40px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(0,150,255,.6));border-radius:6px;"/>
+        <div>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:800;background:linear-gradient(135deg,#00BFFF,#00F5FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:.08em;display:block;">KAIROS DIGITAL</span>
+          <span style="font-size:.58rem;color:rgba(0,200,255,.4);letter-spacing:.15em;font-family:monospace;">AUTOMAÇÃO COM IA · GOIÂNIA · 2026</span>
+        </div>
+      </div>
+      <!-- BOTÃO DIAGNÓSTICO -->
+      <button onclick="openCart()" style="background:linear-gradient(135deg,#FF006E,#7B00FF);border:none;color:#fff;
+        font-size:.88rem;font-weight:800;padding:.8rem 2rem;border-radius:50px;cursor:pointer!important;
+        display:flex;align-items:center;gap:.5rem;
+        box-shadow:0 0 20px rgba(255,0,110,.4),0 4px 20px rgba(123,0,255,.3);
+        transition:all .25s;letter-spacing:.05em;"
+        onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 0 35px rgba(255,0,110,.65)'"
+        onmouseout="this.style.transform='';this.style.boxShadow='0 0 20px rgba(255,0,110,.4)'"
+      >
+        <span style="font-size:1rem;">⚡</span>
+        Diagnóstico Gratuito de IA
+      </button>
+      <div style="display:flex;gap:.8rem;align-items:center;">
+        <a href="team.html" style="font-size:.7rem;color:rgba(0,245,255,.45);text-decoration:none;border:1px solid rgba(0,245,255,.2);padding:.2rem .6rem;border-radius:5px;font-weight:600;letter-spacing:.05em;transition:all .2s;"
+          onmouseover="this.style.borderColor='#00F5FF';this.style.color='#00F5FF'"
+          onmouseout="this.style.borderColor='rgba(0,245,255,.2)';this.style.color='rgba(0,245,255,.45)'">
+          HQ INTERNO ⚡
+        </a>
+        <span style="font-size:.6rem;color:rgba(0,245,255,.2);font-family:monospace;">K+K PRES.MODE</span>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(0,245,255,.08);padding-top:1rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;">
+      <p style="font-size:.7rem;color:rgba(0,245,255,.3);">© 2026 Kairos Digital — Todos os direitos reservados</p>
+      <p style="font-size:.7rem;color:rgba(0,245,255,.2);">Vilson Mota · Matheus Schelle · Goiânia, GO</p>
+    </div>
   </div>
 </footer>
 
 <script>
-/* CYBERPUNK MATRIX BG */
+/* CYBERPUNK CITY BG */
 (function(){
   var cv=document.getElementById('canvas-bg'),ctx=cv.getContext('2d');
-  var W,H,cols,drops,chars='KAIROS0123456789ABCDEF<>{}[]|$#@!アイウエオカキクケコサ';
-  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;cols=Math.floor(W/18);drops=[];for(var i=0;i<cols;i++)drops[i]=Math.random()*-H;}
-  resize();window.addEventListener('resize',resize);
+  var W,H;
+  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+  resize();window.addEventListener('resize',function(){resize();buildCity();});
 
-  // Stars layer
-  var stars=[];for(var s=0;s<200;s++)stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.2+.2,t:Math.random()*Math.PI*2,ts:.01+Math.random()*.03});
+  // Stars
+  var stars=[];
+  for(var i=0;i<200;i++)stars.push({x:Math.random(),y:Math.random()*0.6,r:Math.random()*1+.2,t:Math.random()*6.28,ts:.005+Math.random()*.02});
 
-  function frame(){
-    // Stars
-    ctx.fillStyle='rgba(0,5,16,.15)';ctx.fillRect(0,0,W,H);
-    stars.forEach(function(s){s.t+=s.ts;var a=0.3+0.7*Math.abs(Math.sin(s.t));ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fillStyle='rgba(0,245,255,'+a+')';ctx.fill();});
-
-    // Matrix rain
-    ctx.font='13px monospace';
-    for(var i=0;i<cols;i++){
-      var ch=chars[Math.floor(Math.random()*chars.length)];
-      var y=drops[i];
-      // Head glow
-      ctx.fillStyle='#00F5FF';ctx.shadowColor='#00F5FF';ctx.shadowBlur=8;
-      ctx.fillText(ch,i*18,y);
-      ctx.shadowBlur=0;
-      // Trail
-      for(var t=1;t<8;t++){
-        var alpha=Math.max(0,(8-t)/8*0.18);
-        ctx.fillStyle='rgba(0,245,255,'+alpha+')';
-        ctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*18,y-t*18);
+  // Buildings
+  var buildings=[];
+  function buildCity(){
+    buildings=[];
+    // Far layer
+    for(var i=0;i<30;i++){
+      var w=30+Math.random()*60,h=80+Math.random()*200;
+      buildings.push({x:i*(W/28),y:H-h,w:w,h:h,layer:0,
+        color:'rgba(5,10,30,0.9)',
+        windows:[],neon:Math.random()>.6?'rgba(0,180,255,.35)':'rgba(150,0,255,.25)'});
+    }
+    // Mid layer
+    for(var j=0;j<20;j++){
+      var mw=40+Math.random()*80,mh=120+Math.random()*280;
+      var wins=[];
+      for(var r=0;r<Math.floor(mh/18);r++)for(var col=0;col<Math.floor(mw/14);col++){
+        wins.push({r:r,c:col,on:Math.random()>.35,blink:Math.random()>.88,phase:Math.random()*6.28});
       }
-      drops[i]+=18;
-      if(drops[i]>H+100&&Math.random()>.92)drops[i]=Math.random()*-300;
+      buildings.push({x:j*(W/18),y:H-mh,w:mw,h:mh,layer:1,color:'rgba(8,15,40,0.95)',windows:wins,
+        neon:['rgba(0,200,255,.5)','rgba(255,0,150,.4)','rgba(0,255,150,.35)'][Math.floor(Math.random()*3)]});
     }
+    // Near layer
+    for(var k=0;k<8;k++){
+      var nw=60+Math.random()*120,nh=200+Math.random()*350;
+      buildings.push({x:k*(W/7),y:H-nh,w:nw,h:nh,layer:2,color:'rgba(3,8,20,0.98)',windows:[],
+        neon:'rgba(0,245,255,.3)'});
+    }
+  }
+  buildCity();
 
-    // Occasional pink streak
-    if(Math.random()>.985){
-      var px=Math.random()*W;
-      ctx.strokeStyle='rgba(255,0,110,0.4)';ctx.lineWidth=1;
-      ctx.beginPath();ctx.moveTo(px,0);ctx.lineTo(px+Math.random()*30-15,H);ctx.stroke();
-    }
+  // Drones
+  var drones=[];
+  for(var d=0;d<12;d++)drones.push({
+    x:Math.random()*W,y:H*0.1+Math.random()*H*0.4,
+    vx:(Math.random()-.5)*0.8,vy:(Math.random()-.5)*0.2,
+    trail:[],color:['#00F5FF','#FF006E','#FFE000'][Math.floor(Math.random()*3)]
+  });
+
+  // Comets
+  var comets=[];
+  function spawnComet(){
+    comets.push({x:Math.random()*W,y:Math.random()*H*0.4,vx:3+Math.random()*5,vy:1+Math.random()*3,life:1});
+    if(comets.length>4)comets.shift();
+  }
+  setInterval(spawnComet,2500+Math.random()*3000);
+
+  var t=0;
+  function frame(){
+    t+=0.016;
+    ctx.clearRect(0,0,W,H);
+
+    // SKY gradient
+    var sky=ctx.createLinearGradient(0,0,0,H);
+    sky.addColorStop(0,'#000308');
+    sky.addColorStop(0.5,'#010820');
+    sky.addColorStop(0.75,'#030d1a');
+    sky.addColorStop(1,'#000508');
+    ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
+
+    // Stars
+    stars.forEach(function(s){
+      s.t+=s.ts;
+      var a=0.15+0.6*Math.abs(Math.sin(s.t));
+      ctx.globalAlpha=a;ctx.fillStyle='#fff';
+      ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fill();
+    });
+    ctx.globalAlpha=1;
+
+    // Comets
+    comets.forEach(function(cm){
+      cm.x+=cm.vx;cm.y+=cm.vy;cm.life-=0.012;
+      if(cm.life<=0)return;
+      ctx.save();ctx.globalAlpha=cm.life*0.6;
+      ctx.strokeStyle='rgba(200,240,255,0.8)';ctx.lineWidth=1.5;
+      ctx.shadowColor='#00F5FF';ctx.shadowBlur=8;
+      ctx.beginPath();ctx.moveTo(cm.x-cm.vx*12,cm.y-cm.vy*12);ctx.lineTo(cm.x,cm.y);ctx.stroke();
+      ctx.restore();
+    });
+    comets=comets.filter(function(cm){return cm.life>0&&cm.x<W+100;});
+
+    // Atmospheric haze bottom
+    var haze=ctx.createLinearGradient(0,H*0.55,0,H);
+    haze.addColorStop(0,'rgba(0,20,60,0)');
+    haze.addColorStop(0.6,'rgba(0,30,80,0.25)');
+    haze.addColorStop(1,'rgba(0,40,100,0.5)');
+    ctx.fillStyle=haze;ctx.fillRect(0,H*0.55,W,H*0.45);
+
+    // Buildings far
+    buildings.filter(function(b){return b.layer===0;}).forEach(function(b){
+      ctx.fillStyle=b.color;ctx.fillRect(b.x,b.y,b.w,b.h);
+      // Roof neon glow
+      ctx.fillStyle=b.neon;ctx.fillRect(b.x,b.y,b.w,2);
+      ctx.shadowColor=b.neon;ctx.shadowBlur=8;ctx.fillRect(b.x,b.y,b.w,1);ctx.shadowBlur=0;
+    });
+
+    // Buildings mid
+    buildings.filter(function(b){return b.layer===1;}).forEach(function(b){
+      ctx.fillStyle=b.color;ctx.fillRect(b.x,b.y,b.w,b.h);
+      // Windows
+      b.windows.forEach(function(w){
+        var lit=w.blink?Math.sin(t*2+w.phase)>0:w.on;
+        if(lit){
+          ctx.fillStyle='rgba(255,240,180,0.7)';
+          ctx.fillRect(b.x+w.c*14+3,b.y+w.r*18+3,8,10);
+        }
+      });
+      // Roof neon
+      ctx.shadowColor=b.neon;ctx.shadowBlur=15;
+      ctx.fillStyle=b.neon;ctx.fillRect(b.x,b.y,b.w,3);
+      ctx.shadowBlur=0;
+    });
+
+    // Ground neon reflection
+    var refl=ctx.createLinearGradient(0,H*0.8,0,H);
+    refl.addColorStop(0,'rgba(0,100,200,0)');
+    refl.addColorStop(0.5,'rgba(0,80,180,0.1)');
+    refl.addColorStop(1,'rgba(0,60,150,0.25)');
+    ctx.fillStyle=refl;ctx.fillRect(0,H*0.8,W,H*0.2);
+
+    // Buildings near (silhouette)
+    buildings.filter(function(b){return b.layer===2;}).forEach(function(b){
+      ctx.fillStyle=b.color;ctx.fillRect(b.x,b.y,b.w,b.h);
+      ctx.shadowColor=b.neon;ctx.shadowBlur=20;
+      ctx.fillStyle=b.neon;ctx.fillRect(b.x,b.y,b.w,2);
+      ctx.shadowBlur=0;
+    });
+
+    // Drones
+    drones.forEach(function(dr){
+      dr.x+=dr.vx;dr.y+=dr.vy;
+      if(dr.x<0||dr.x>W)dr.vx*=-1;
+      if(dr.y<H*0.1||dr.y>H*0.55)dr.vy*=-1;
+      dr.trail.push({x:dr.x,y:dr.y});
+      if(dr.trail.length>12)dr.trail.shift();
+      // Trail
+      dr.trail.forEach(function(pt,i){
+        ctx.globalAlpha=(i/dr.trail.length)*0.25;
+        ctx.fillStyle=dr.color;ctx.beginPath();ctx.arc(pt.x,pt.y,1,0,Math.PI*2);ctx.fill();
+      });
+      ctx.globalAlpha=1;
+      // Drone dot with glow
+      ctx.shadowColor=dr.color;ctx.shadowBlur=12;
+      ctx.fillStyle=dr.color;ctx.beginPath();ctx.arc(dr.x,dr.y,2.5,0,Math.PI*2);ctx.fill();
+      ctx.shadowBlur=0;
+    });
 
     requestAnimationFrame(frame);
   }
   frame();
 
   /* NEON EXPLOSION on click */
+  document.addEventListener('click',function(e){
+    if(e.target.closest('button,a,input,select,textarea,.slot,.int-btn,.logo-btn,.pc-btn,.port-card,.sol-card'))return;
+    var bx=e.clientX,by=e.clientY;
+    var st=Date.now(),dur=500;
+    (function pulse(){
+      var p=Math.min((Date.now()-st)/dur,1),ease=1-Math.pow(1-p,3);
+      var r=ease*160;
+      ctx.save();
+      ctx.strokeStyle='rgba(0,200,255,'+(0.8*(1-p))+')';ctx.lineWidth=2-p*1.5;
+      ctx.shadowColor='#00F5FF';ctx.shadowBlur=20*(1-p);
+      ctx.beginPath();ctx.arc(bx,by,r,0,Math.PI*2);ctx.stroke();
+      ctx.strokeStyle='rgba(255,0,150,'+(0.6*(1-p))+')';ctx.shadowColor='#FF0096';
+      ctx.beginPath();ctx.arc(bx,by,r*0.5,0,Math.PI*2);ctx.stroke();
+      for(var i=0;i<8;i++){var ang=i/8*Math.PI*2;
+        ctx.beginPath();ctx.moveTo(bx+Math.cos(ang)*r*0.55,by+Math.sin(ang)*r*0.55);
+        ctx.lineTo(bx+Math.cos(ang)*r*1.1,by+Math.sin(ang)*r*1.1);
+        ctx.strokeStyle='rgba(0,245,255,'+(0.7*(1-p))+')';ctx.lineWidth=1;ctx.stroke();}
+      ctx.restore();
+      if(p<1)requestAnimationFrame(pulse);
+    })();
+  });
+})();
+
+/* BLACK HOLE on click */
   document.addEventListener('click',function(e){
     if(e.target.closest('button,a,input,select,textarea,.slot,.int-btn,.logo-btn')) return;
     var bx=e.clientX,by=e.clientY;
