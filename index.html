@@ -449,6 +449,42 @@ footer p{font-size:.78rem;color:var(--txt2);}
       box-shadow:0 0 8px rgba(255,0,110,.6);}
     .cart-badge-nav.show{display:flex;}
 
+
+    /* CONSULTANT SELECTOR */
+    .consultant-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;}
+    .consultant-opt{background:var(--bg3);border:1px solid var(--brd);border-radius:12px;
+      padding:.9rem 1rem;display:flex;align-items:center;gap:.75rem;cursor:pointer;transition:all .2s;}
+    .consultant-opt:hover{border-color:rgba(0,245,255,.4);}
+    .consultant-opt.sel{border-color:#00F5FF;background:rgba(0,245,255,.08);
+      box-shadow:0 0 16px rgba(0,245,255,.15);}
+    .cons-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;
+      justify-content:center;font-family:'Space Grotesk';font-size:1.1rem;font-weight:800;
+      flex-shrink:0;color:#fff;}
+    .cons-name{font-size:.85rem;font-weight:700;color:var(--txt);}
+    .cons-role{font-size:.68rem;color:var(--txt2);}
+
+    /* FLOATING DIAGNÓSTICO BTN */
+    .float-diag{position:fixed;bottom:5.5rem;right:1.5rem;z-index:350;
+      background:linear-gradient(135deg,#FF006E,#7B00FF);
+      border:none;color:#fff;font-size:.8rem;font-weight:800;letter-spacing:.06em;
+      padding:.65rem 1.2rem;border-radius:50px;cursor:pointer;
+      display:flex;align-items:center;gap:.5rem;
+      box-shadow:0 0 20px rgba(255,0,110,.45),0 4px 20px rgba(123,0,255,.4);
+      transition:all .25s;white-space:nowrap;}
+    .float-diag:hover{transform:translateY(-3px) scale(1.04);
+      box-shadow:0 0 35px rgba(255,0,110,.65),0 8px 30px rgba(123,0,255,.55);}
+    .float-diag-pulse{width:9px;height:9px;border-radius:50%;background:#fff;flex-shrink:0;
+      box-shadow:0 0 8px rgba(255,255,255,.8);animation:blink 1.3s infinite;}
+
+
+    .btn-hero-main{font-size:.95rem!important;padding:.9rem 2rem!important;
+      letter-spacing:.05em;position:relative;overflow:hidden;}
+    .btn-hero-main::after{content:'';position:absolute;inset:0;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);
+      transform:translateX(-100%);transition:transform .5s;}
+    .btn-hero-main:hover::after{transform:translateX(100%);}
+    .btn-hero-sec{font-size:.9rem!important;padding:.88rem 1.8rem!important;}
+
 </style>
 </head>
 <body>
@@ -795,11 +831,33 @@ footer p{font-size:.78rem;color:var(--txt2);}
 </section>
 
 
-<footer>
-  <div class="foot-logo">Kairos Digital</div>
-  <p>Automação com IA para negócios · Goiânia, GO · 2026</p>
-  <p>© 2026 Kairos Digital — Todos os direitos reservados</p>
-<a href="team.html" style="font-size:.74rem;color:var(--p3);text-decoration:none;font-weight:600;border:1px solid rgba(124,58,237,.3);padding:.25rem .7rem;border-radius:6px;transition:all .2s;">HQ da Equipe</a></footer>
+<footer style="background:rgba(0,5,16,.95);border-top:1px solid rgba(0,245,255,.15);
+  padding:1.5rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;">
+  <div style="display:flex;align-items:center;gap:.6rem;">
+    <svg width="22" height="28" viewBox="0 0 64 88" fill="none">
+      <path d="M10 7 L32 44 L54 7 Z" stroke="url(#fp)" stroke-width="1.5" fill="rgba(0,245,255,.06)"/>
+      <path d="M10 81 L32 44 L54 81 Z" stroke="url(#fp)" stroke-width="1.5" fill="rgba(255,0,110,.05)"/>
+      <defs><linearGradient id="fp" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00F5FF"/><stop offset="100%" stop-color="#FF006E"/></linearGradient></defs>
+    </svg>
+    <span style="font-family:'Space Grotesk';font-size:.9rem;font-weight:700;
+      background:linear-gradient(135deg,#00F5FF,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+      KAIROS DIGITAL
+    </span>
+  </div>
+  <p style="font-size:.72rem;color:rgba(0,245,255,.4);letter-spacing:.08em;">
+    AUTOMAÇÃO COM IA · GOIÂNIA · 2026
+  </p>
+  <div style="display:flex;gap:.8rem;align-items:center;">
+    <a href="team.html" style="font-size:.72rem;color:rgba(0,245,255,.5);text-decoration:none;
+      border:1px solid rgba(0,245,255,.2);padding:.22rem .65rem;border-radius:5px;
+      transition:all .2s;font-weight:600;letter-spacing:.05em;"
+      onmouseover="this.style.borderColor='#00F5FF';this.style.color='#00F5FF';"
+      onmouseout="this.style.borderColor='rgba(0,245,255,.2)';this.style.color='rgba(0,245,255,.5)';">
+      HQ INTERNO ⚡
+    </a>
+    <span style="font-size:.65rem;color:rgba(0,245,255,.25);letter-spacing:.06em;font-family:monospace;">K+K PRES. MODE</span>
+  </div>
+</footer>
 
 <script>
 /* CYBERPUNK MATRIX BG */
@@ -998,38 +1056,54 @@ footer p{font-size:.78rem;color:var(--txt2);}
 
 <!-- OVERLAY -->
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-
 <aside class="cart-drawer" id="cartDrawer">
   <div class="drawer-header">
     <div>
-      <h2>Análise <span>de IA Gratuita</span></h2>
-      <p style="font-size:.72rem;color:var(--txt2);margin-top:.15rem;">Preencha o briefing — nossa equipe entra em contato em até 2h</p>
+      <h2>Diagnóstico <span>Gratuito de IA</span></h2>
+      <p style="font-size:.7rem;color:var(--txt2);margin-top:.15rem;">Preencha · Escolha o consultor · Enviamos em segundos</p>
     </div>
     <button class="btn-close-drawer" onclick="closeCart()">✕</button>
   </div>
 
   <div class="drawer-body">
 
-    <!-- SERVICOS SELECIONADOS -->
-    <div id="servsSection">
-      <div class="dsec-label">Soluções de interesse</div>
-      <div class="servs-lista" id="servsList">
-        <div class="servs-vazio" id="servsVazio">Clique em "Tenho Interesse" nos cards para adicionar soluções aqui.</div>
+    <!-- ESCOLHA O CONSULTOR -->
+    <div>
+      <div class="dsec-label">Falar com qual consultor?</div>
+      <div class="consultant-grid">
+        <div class="consultant-opt sel" id="cOpt0" onclick="selConsultor(0)">
+          <div class="cons-avatar" style="background:linear-gradient(135deg,#7B00FF,#FFE000);">V</div>
+          <div class="cons-name">Vilson Mota</div>
+          <div class="cons-role">CEO · Vendas &amp; IA</div>
+        </div>
+        <div class="consultant-opt" id="cOpt1" onclick="selConsultor(1)">
+          <div class="cons-avatar" style="background:linear-gradient(135deg,#00F5FF,#7B00FF);">M</div>
+          <div class="cons-name">Matheus Schelle</div>
+          <div class="cons-role">Co-CEO · Cripto &amp; Tech</div>
+        </div>
       </div>
     </div>
 
-    <!-- DADOS PESSOAIS -->
+    <!-- SOLUÇÕES SELECIONADAS -->
+    <div id="servsSection">
+      <div class="dsec-label">Soluções de interesse</div>
+      <div class="servs-lista" id="servsList">
+        <div class="servs-vazio" id="servsVazio">Clique em "Tenho Interesse" nos cards ou selecione abaixo.</div>
+      </div>
+    </div>
+
+    <!-- DADOS -->
     <div>
       <div class="dsec-label">Seus dados</div>
       <div class="form-grid">
         <div class="field"><label>Nome completo *</label><input type="text" id="fNome" placeholder="Seu nome"/></div>
         <div class="field"><label>WhatsApp *</label><input type="tel" id="fTel" placeholder="(62) 9xxxx-xxxx"/></div>
         <div class="field"><label>Empresa *</label><input type="text" id="fEmpresa" placeholder="Nome da empresa"/></div>
-        <div class="field"><label>Cargo / Função</label><input type="text" id="fCargo" placeholder="Ex: Dono, Gerente, Diretor..."/></div>
+        <div class="field"><label>Cargo</label><input type="text" id="fCargo" placeholder="Ex: Dono, Gerente..."/></div>
       </div>
     </div>
 
-    <!-- BRIEFING DA EMPRESA -->
+    <!-- BRIEFING -->
     <div>
       <div class="dsec-label">Briefing da empresa</div>
       <div class="form-grid">
@@ -1050,76 +1124,53 @@ footer p{font-size:.78rem;color:var(--txt2);}
             <option>🔧 Construção / Reforma</option>
             <option>🚗 Automóveis / Concessionária</option>
             <option>✂️ Beleza / Barbearia / Estética</option>
-            <option>📦 Logística / Transporte</option>
             <option>🌐 Tecnologia / Software</option>
             <option>Outro ramo</option>
           </select>
         </div>
-
         <div class="field full">
           <label>Nível de urgência *</label>
           <div class="urgency-grid" id="urgencyGrid">
-            <div class="urgency-opt" onclick="selUrgency(this,'🔴 Urgente — preciso implementar agora')">
-              <span class="urg-icon">🔴</span>
-              <span class="urg-label">Urgente</span>
-              <span class="urg-sub">Preciso agora</span>
+            <div class="urgency-opt" onclick="selUrgency(this,'🔴 Urgente — preciso agora')">
+              <span class="urg-icon">🔴</span><span class="urg-label">Urgente</span><span class="urg-sub">Preciso agora</span>
             </div>
-            <div class="urgency-opt" onclick="selUrgency(this,'🟠 Alta — nos próximos 30 dias')">
-              <span class="urg-icon">🟠</span>
-              <span class="urg-label">Alta</span>
-              <span class="urg-sub">Próx. 30 dias</span>
+            <div class="urgency-opt" onclick="selUrgency(this,'🟠 Alta — 30 dias')">
+              <span class="urg-icon">🟠</span><span class="urg-label">Alta</span><span class="urg-sub">30 dias</span>
             </div>
-            <div class="urgency-opt" onclick="selUrgency(this,'🟡 Média — nos próximos 3 meses')">
-              <span class="urg-icon">🟡</span>
-              <span class="urg-label">Média</span>
-              <span class="urg-sub">Próx. 3 meses</span>
+            <div class="urgency-opt" onclick="selUrgency(this,'🟡 Média — 3 meses')">
+              <span class="urg-icon">🟡</span><span class="urg-label">Média</span><span class="urg-sub">3 meses</span>
             </div>
-            <div class="urgency-opt" onclick="selUrgency(this,'🟢 Baixa — estou pesquisando')">
-              <span class="urg-icon">🟢</span>
-              <span class="urg-label">Baixa</span>
-              <span class="urg-sub">Pesquisando</span>
+            <div class="urgency-opt" onclick="selUrgency(this,'🟢 Baixa — pesquisando')">
+              <span class="urg-icon">🟢</span><span class="urg-label">Baixa</span><span class="urg-sub">Pesquisando</span>
             </div>
           </div>
         </div>
-
         <div class="field full">
-          <label>Qual o principal desafio que quer resolver? *</label>
-          <textarea id="fDesafio" rows="2" placeholder="Ex: Perco clientes por demora no atendimento, não tenho controle de estoque, quero automatizar meu WhatsApp..."></textarea>
+          <label>Principal desafio a resolver *</label>
+          <textarea id="fDesafio" rows="2" placeholder="Ex: Perco clientes por demora no atendimento, quero automatizar processos repetitivos..."></textarea>
         </div>
-
-        <div class="field">
-          <label>Já usa alguma IA hoje?</label>
-          <select id="fIA">
-            <option value="">Selecione...</option>
-            <option>Sim, já uso IA ativamente</option>
-            <option>Sim, mas de forma básica</option>
-            <option>Não, mas quero começar</option>
-            <option>Não sei por onde começar</option>
+        <div class="field"><label>Já usa IA hoje?</label>
+          <select id="fIA"><option value="">Selecione...</option>
+            <option>Sim, ativamente</option><option>Sim, mas básico</option>
+            <option>Não, mas quero</option><option>Não sei começar</option>
           </select>
         </div>
-
-        <div class="field">
-          <label>Tem equipe de TI?</label>
-          <select id="fTI">
-            <option value="">Selecione...</option>
-            <option>Sim, equipe interna</option>
-            <option>Terceirizado / Freelancer</option>
-            <option>Não tenho equipe de TI</option>
+        <div class="field"><label>Equipe de TI?</label>
+          <select id="fTI"><option value="">Selecione...</option>
+            <option>Sim, interna</option><option>Terceirizado</option><option>Não tenho</option>
           </select>
         </div>
-
-        <div class="field full">
-          <label>Mensagem adicional (opcional)</label>
-          <textarea id="fMsg" rows="2" placeholder="Algo mais que queira nos contar antes da call..."></textarea>
+        <div class="field full"><label>Mensagem adicional (opcional)</label>
+          <textarea id="fMsg" rows="2" placeholder="Algo mais que queira nos contar..."></textarea>
         </div>
       </div>
     </div>
 
-    <!-- AGENDAMENTO DA CALL -->
+    <!-- AGENDAMENTO -->
     <div>
       <div class="dsec-label">Agendar a call gratuita</div>
-      <div class="field" style="margin-bottom:.8rem;">
-        <label>Data preferida *</label>
+      <div class="field" style="margin-bottom:.75rem;">
+        <label>Data *</label>
         <input type="date" id="fData" style="width:100%;"/>
       </div>
       <div class="dsec-label">Horário *</div>
@@ -1141,9 +1192,9 @@ footer p{font-size:.78rem;color:var(--txt2);}
   <div class="drawer-footer">
     <button class="wa-send-btn" onclick="enviarWA()">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-      Quero minha Análise Gratuita →
+      <span id="waBtnText">Enviar para Vilson via WhatsApp</span>
     </button>
-    <p class="drawer-note">Você será direcionado ao WhatsApp com o briefing completo.<br/>Nossa equipe retorna em até 2h para confirmar a call.</p>
+    <p class="drawer-note">Diagnóstico 100% gratuito · Nossa equipe confirma em até 2h ⚡</p>
   </div>
 </aside>
 
@@ -1218,50 +1269,60 @@ function selSlot(el, hora){
   slotSel = hora;
 }
 
+
+/* CONSULTOR */
+var consultorIdx = 0;
+var CONSULTORES = [
+  {nome:'Vilson Mota',   wa:'5562984452548'},
+  {nome:'Matheus Schelle',wa:'5562981554992'}
+];
+function selConsultor(i){
+  consultorIdx = i;
+  document.querySelectorAll('.consultant-opt').forEach(function(o,j){
+    o.classList.toggle('sel', j===i);
+  });
+  document.getElementById('waBtnText').textContent = 'Enviar para '+CONSULTORES[i].nome+' via WhatsApp';
+}
+
 function enviarWA(){
   var n    = document.getElementById('fNome').value.trim();
   var tel  = document.getElementById('fTel').value.trim();
   var emp  = document.getElementById('fEmpresa').value.trim();
   var ramo = document.getElementById('fRamo').value;
-  var desaf= document.getElementById('fDesafio').value.trim();
+  var desaf= document.getElementById('fDesafio') ? document.getElementById('fDesafio').value.trim() : '';
   var dt   = document.getElementById('fData').value;
-  if(!n)     { alert('Por favor, informe seu nome.'); return; }
-  if(!tel)   { alert('Por favor, informe seu WhatsApp.'); return; }
-  if(!emp)   { alert('Por favor, informe o nome da empresa.'); return; }
-  if(!ramo)  { alert('Por favor, selecione o ramo de atividade.'); return; }
-  if(!urgSel){ alert('Por favor, selecione o nivel de urgencia.'); return; }
-  if(!desaf) { alert('Por favor, descreva o principal desafio.'); return; }
-  if(!dt)    { alert('Por favor, selecione uma data para a call.'); return; }
-  if(!slotSel){ alert('Por favor, selecione um horario.'); return; }
-  var cargo = document.getElementById('fCargo').value.trim();
-  var ia    = document.getElementById('fIA').value;
-  var ti    = document.getElementById('fTI').value;
-  var msg   = document.getElementById('fMsg').value.trim();
-  var p = dt.split('-'); var dtFmt = p[2]+'/'+p[1]+'/'+p[0];
-  var txt = '\uD83D\uDE80 *BRIEFING — KAIROS DIGITAL*\n';
-  txt += 'Solicitacao de Analise de IA Gratuita\n\n';
-  txt += '*Dados do Contato:*\n';
-  txt += '\uD83D\uDC64 *Nome:* '+n+'\n';
-  txt += '\uD83D\uDCF1 *WhatsApp:* '+tel+'\n';
-  txt += '\uD83C\uDFE2 *Empresa:* '+emp+'\n';
-  if(cargo) txt += '\uD83D\uDCBC *Cargo:* '+cargo+'\n';
-  txt += '\n*Sobre a Empresa:*\n';
-  txt += '\uD83C\uDFAF *Ramo:* '+ramo+'\n';
-  txt += '\u26A0\uFE0F *Urgencia:* '+urgSel+'\n';
-  if(ia) txt += '\uD83E\uDD16 *Usa IA hoje:* '+ia+'\n';
-  if(ti) txt += '\uD83D\uDCBB *Equipe TI:* '+ti+'\n';
-  txt += '\n*Desafio Principal:*\n'+desaf+'\n';
+  if(!n)    { alert('Informe seu nome.'); return; }
+  if(!tel)  { alert('Informe seu WhatsApp.'); return; }
+  if(!emp)  { alert('Informe a empresa.'); return; }
+  if(!ramo) { alert('Selecione o ramo.'); return; }
+  if(!dt)   { alert('Selecione uma data.'); return; }
+  if(!slotSel){ alert('Selecione um horario.'); return; }
+  var cargo= document.getElementById('fCargo').value.trim();
+  var ia   = document.getElementById('fIA') ? document.getElementById('fIA').value : '';
+  var ti   = document.getElementById('fTI') ? document.getElementById('fTI').value : '';
+  var msg  = document.getElementById('fMsg').value.trim();
+  var pp = dt.split('-'); var dtf = pp[2]+'/'+pp[1]+'/'+pp[0];
+  var cons = CONSULTORES[consultorIdx];
+
+  var txt = '\uD83D\uDE80 *DIAGN\u00D3STICO GRATUITO — KAIROS DIGITAL*\n';
+  txt += 'Solicitacao via site · Consultor: '+cons.nome+'\n\n';
+  txt += '*Contato:*\n\uD83D\uDC64 '+n+'\n\uD83D\uDCF1 '+tel+'\n\uD83C\uDFE2 '+emp+'\n';
+  if(cargo) txt += '\uD83D\uDCBC '+cargo+'\n';
+  txt += '\n*Empresa:*\n\uD83C\uDFAF Ramo: '+ramo+'\n';
+  if(urgSel) txt += '\u26A0\uFE0F Urgencia: '+urgSel+'\n';
+  if(ia) txt += '\uD83E\uDD16 Usa IA: '+ia+'\n';
+  if(ti) txt += '\uD83D\uDCBB TI: '+ti+'\n';
   if(servicos && servicos.length){
-    txt += '\n*Solucoes de Interesse:*\n';
+    txt += '\n*Solucoes de interesse:*\n';
     servicos.forEach(function(s){ txt += '\u2705 '+s+'\n'; });
   }
-  txt += '\n*Call Agendada:*\n';
-  txt += '\uD83D\uDCC5 *Data:* '+dtFmt+'\n';
-  txt += '\u23F0 *Horario:* '+slotSel+'\n';
+  if(desaf) txt += '\n*Desafio principal:*\n'+desaf+'\n';
+  txt += '\n*Call agendada:*\n\uD83D\uDCC5 '+dtf+' \u23F0 '+slotSel+'\n';
   if(msg) txt += '\n*Obs:* '+msg;
-  txt += '\n\n_Enviado pelo site Kairos Digital_';
-  window.open('https://wa.me/5562981554992?text='+encodeURIComponent(txt),'_blank');
+  txt += '\n\n_Enviado via Kairos Digital_';
+  window.open('https://wa.me/'+cons.wa+'?text='+encodeURIComponent(txt),'_blank');
 }
+
 function enviarWA_bak(){
   var nome = document.getElementById('fNome').value.trim();
   var empresa = document.getElementById('fEmpresa').value.trim();
@@ -1491,6 +1552,14 @@ function tickHG(){
 }
 tickHG();
 </script>
+
+
+<!-- FLOATING DIAGNÓSTICO BTN -->
+<button class="float-diag" onclick="warpToCart()" id="floatDiag">
+  <span class="float-diag-pulse"></span>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+  <span>Diagnóstico Gratuito</span>
+</button>
 
 </body>
 </html>
