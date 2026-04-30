@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kairos Digital — Soluções que Escalam</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#000510;--bg2:#050d1a;--bg3:#0a1628;
+  --txt:#E0F7FF;--txt2:#7ECFEA;
+  --c:#00F5FF;--m:#FF006E;--y:#FFE000;--p:#7B00FF;--g:#00FF88;
+  --brd:rgba(0,245,255,.18);
+  --nc:0 0 20px #00F5FF,0 0 40px rgba(0,245,255,.3);
+  --nm:0 0 20px #FF006E,0 0 40px rgba(255,0,110,.3);
+  --ny:0 0 20px #FFE000,0 0 40px rgba(255,224,0,.3);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh;}
+#cvbg{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:rgba(0,5,16,.94);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:64px;box-shadow:0 0 30px rgba(0,245,255,.06);}
+.nav-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;}
+.nav-logo svg{filter:drop-shadow(0 0 6px rgba(0,245,255,.5));}
+.nav-logo-text{font-family:'Space Grotesk';font-size:1.1rem;font-weight:800;letter-spacing:.06em;
+  background:linear-gradient(135deg,#00F5FF,#FFE000,#FF006E);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-logo-sub{font-size:.48rem;color:rgba(0,245,255,.45);letter-spacing:.2em;text-transform:uppercase;font-family:monospace;display:block;margin-top:-.1rem;}
+.nav-r{display:flex;gap:.75rem;align-items:center;}
+.nav-back{background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.3);color:var(--c);
+  font-size:.78rem;font-weight:600;padding:.38rem .9rem;border-radius:7px;text-decoration:none;transition:all .2s;letter-spacing:.04em;}
+.nav-back:hover{background:rgba(0,245,255,.18);box-shadow:var(--nc);}
+.nav-diag{background:linear-gradient(135deg,var(--m),var(--p));border:none;color:#fff;
+  font-size:.78rem;font-weight:700;padding:.42rem 1rem;border-radius:7px;cursor:pointer;
+  letter-spacing:.04em;transition:all .2s;box-shadow:var(--nm);}
+.nav-diag:hover{transform:scale(1.04);box-shadow:0 0 30px rgba(255,0,110,.5);}
+
+/* HERO */
+.port-hero{position:relative;z-index:1;text-align:center;padding:5rem 2rem 3rem;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.3);
+  border-radius:50px;padding:.38rem 1rem;font-size:.72rem;font-weight:700;
+  color:var(--c);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem;
+  box-shadow:0 0 20px rgba(0,245,255,.1);}
+.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--c);
+  box-shadow:0 0 8px var(--c);animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.port-hero h1{font-family:'Space Grotesk';font-size:clamp(2.4rem,6vw,5rem);
+  font-weight:800;line-height:1.05;margin-bottom:1.2rem;}
+.port-hero h1 .cy{background:linear-gradient(135deg,#00F5FF,#7B00FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.port-hero h1 .mg{background:linear-gradient(135deg,#FF006E,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.port-hero p{font-size:clamp(.92rem,1.8vw,1.1rem);color:var(--txt2);max-width:600px;margin:0 auto 2rem;line-height:1.75;}
+.hero-stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem;}
+.hstat{text-align:center;}
+.hstat-n{font-family:'Space Grotesk';font-size:2rem;font-weight:800;
+  background:linear-gradient(135deg,var(--c),var(--y));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hstat-l{font-size:.72rem;color:var(--txt2);margin-top:.1rem;letter-spacing:.06em;text-transform:uppercase;}
+
+/* PORTFOLIO GRID */
+.port-section{position:relative;z-index:1;padding:0 2rem 5rem;}
+.port-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;max-width:1280px;margin:0 auto;}
+
+/* SERVICE CARD */
+.srv-card{background:var(--bg2);border:1px solid var(--brd);border-radius:22px;
+  overflow:hidden;cursor:pointer;transition:all .35s;position:relative;
+  transform-style:preserve-3d;}
+.srv-card:hover{transform:translateY(-8px) perspective(800px) rotateY(2deg);
+  box-shadow:0 0 30px rgba(0,245,255,.2),0 20px 60px rgba(0,0,0,.5);}
+.srv-card::before{content:'';position:absolute;inset:0;border-radius:22px;
+  background:linear-gradient(135deg,rgba(0,245,255,.05),transparent 50%,rgba(255,0,110,.04));
+  opacity:0;transition:opacity .35s;z-index:2;pointer-events:none;}
+.srv-card:hover::before{opacity:1;}
+
+/* Card image */
+.srv-img-wrap{position:relative;height:320px;overflow:hidden;}
+.srv-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.srv-card:hover .srv-img-wrap img{transform:scale(1.08);}
+.srv-img-overlay{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,5,16,.95) 0%,rgba(0,5,16,.4) 50%,transparent 100%);
+  z-index:1;}
+.srv-img-badge{position:absolute;top:1rem;right:1rem;z-index:3;
+  font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:.25rem .7rem;border-radius:50px;border:1px solid;}
+.badge-cyan{background:rgba(0,245,255,.12);color:var(--c);border-color:rgba(0,245,255,.4);}
+.badge-magenta{background:rgba(255,0,110,.12);color:var(--m);border-color:rgba(255,0,110,.4);}
+.badge-yellow{background:rgba(255,224,0,.12);color:var(--y);border-color:rgba(255,224,0,.4);}
+.badge-purple{background:rgba(123,0,255,.15);color:#C084FC;border-color:rgba(123,0,255,.4);}
+.badge-green{background:rgba(0,255,136,.1);color:var(--g);border-color:rgba(0,255,136,.35);}
+
+/* Card body */
+.srv-body{padding:1.5rem 1.6rem 1.7rem;position:relative;z-index:2;}
+.srv-category{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--c);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;}
+.srv-category::before{content:'';width:8px;height:2px;background:var(--c);border-radius:1px;
+  box-shadow:0 0 6px var(--c);}
+.srv-title{font-family:'Space Grotesk';font-size:1.25rem;font-weight:800;margin-bottom:.5rem;line-height:1.2;}
+.srv-desc{font-size:.83rem;color:var(--txt2);line-height:1.65;margin-bottom:1.1rem;}
+.srv-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.1rem;}
+.srv-tag{font-size:.65rem;font-weight:600;padding:.18rem .55rem;border-radius:50px;
+  background:rgba(0,245,255,.07);border:1px solid rgba(0,245,255,.2);color:rgba(0,245,255,.7);}
+.srv-cta{display:flex;align-items:center;justify-content:space-between;}
+.srv-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:700;
+  color:var(--c);background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.3);
+  padding:.45rem 1rem;border-radius:8px;cursor:pointer;transition:all .2s;letter-spacing:.04em;}
+.srv-btn:hover{background:rgba(0,245,255,.18);box-shadow:var(--nc);}
+.srv-arrow{font-size:1rem;color:var(--txt2);transition:transform .2s;}
+.srv-card:hover .srv-arrow{transform:translateX(4px);color:var(--c);}
+
+/* Featured card (first) */
+.srv-card.featured{grid-column:span 2;}
+.srv-card.featured .srv-img-wrap{height:420px;}
+.srv-card.featured .srv-title{font-size:1.6rem;}
+@media(max-width:900px){.srv-card.featured{grid-column:span 1;}}
+
+/* DETAIL MODAL */
+.detail-overlay{position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.92);
+  display:none;align-items:flex-start;justify-content:center;padding:1rem;
+  backdrop-filter:blur(12px);overflow-y:auto;}
+.detail-overlay.open{display:flex;}
+.detail-box{background:var(--bg2);border:1px solid var(--brd);border-radius:24px;
+  max-width:900px;width:100%;margin:2rem auto;position:relative;
+  box-shadow:0 0 80px rgba(0,245,255,.12);animation:slideUp .35s ease;}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.detail-close{position:absolute;top:1rem;right:1rem;background:rgba(0,245,255,.08);
+  border:1px solid rgba(0,245,255,.25);color:var(--c);cursor:pointer;
+  width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;z-index:10;transition:all .2s;}
+.detail-close:hover{background:rgba(255,0,110,.15);border-color:var(--m);color:var(--m);}
+
+.detail-hero{position:relative;height:340px;border-radius:22px 22px 0 0;overflow:hidden;}
+.detail-hero img{width:100%;height:100%;object-fit:cover;}
+.detail-hero-overlay{position:absolute;inset:0;
+  background:linear-gradient(to right,rgba(0,5,16,.92) 0%,rgba(0,5,16,.5) 60%,transparent 100%),
+             linear-gradient(to top,rgba(0,5,16,.8) 0%,transparent 50%);}
+.detail-hero-content{position:absolute;bottom:2rem;left:2.5rem;z-index:2;max-width:55%;}
+.detail-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--c);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;}
+.detail-title{font-family:'Space Grotesk';font-size:clamp(1.5rem,3vw,2.4rem);font-weight:800;
+  line-height:1.1;margin-bottom:.6rem;}
+.detail-subtitle{font-size:.88rem;color:var(--txt2);line-height:1.6;}
+
+.detail-body{padding:2.5rem;}
+
+/* Pain/Gain blocks */
+.pain-block{background:linear-gradient(135deg,rgba(255,0,110,.06),rgba(123,0,255,.06));
+  border:1px solid rgba(255,0,110,.2);border-radius:14px;padding:1.4rem;margin-bottom:1.4rem;}
+.pain-label{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--m);margin-bottom:.8rem;display:flex;align-items:center;gap:.4rem;}
+.pain-label::before{content:'⚠';font-size:.9rem;}
+.pain-text{font-size:.92rem;color:var(--txt2);line-height:1.7;}
+.pain-text strong{color:var(--txt);}
+
+.gain-block{background:linear-gradient(135deg,rgba(0,245,255,.05),rgba(0,255,136,.04));
+  border:1px solid rgba(0,245,255,.2);border-radius:14px;padding:1.4rem;margin-bottom:1.4rem;}
+.gain-label{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--c);margin-bottom:.8rem;display:flex;align-items:center;gap:.4rem;}
+.gain-label::before{content:'✦';font-size:.9rem;}
+
+/* Feature list */
+.features{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem;}
+.feature{display:flex;align-items:flex-start;gap:.75rem;padding:.9rem 1rem;
+  background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.12);border-radius:10px;}
+.feat-icon{font-size:1.3rem;flex-shrink:0;margin-top:.1rem;}
+.feat-title{font-size:.85rem;font-weight:700;color:var(--txt);margin-bottom:.15rem;}
+.feat-desc{font-size:.75rem;color:var(--txt2);line-height:1.5;}
+
+/* Urgency banner */
+.urgency-banner{background:linear-gradient(135deg,rgba(255,224,0,.08),rgba(255,0,110,.06));
+  border:1px solid rgba(255,224,0,.25);border-radius:12px;padding:1.1rem 1.4rem;
+  margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;}
+.urg-icon-big{font-size:2rem;flex-shrink:0;}
+.urg-text{font-size:.85rem;line-height:1.6;color:var(--txt2);}
+.urg-text strong{color:var(--y);}
+
+/* Results */
+.results{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.5rem;}
+.result{background:var(--bg3);border:1px solid var(--brd);border-radius:12px;
+  padding:1rem;text-align:center;}
+.result-n{font-family:'Space Grotesk';font-size:1.8rem;font-weight:800;
+  background:linear-gradient(135deg,var(--c),var(--y));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.result-l{font-size:.7rem;color:var(--txt2);margin-top:.2rem;}
+
+/* CTA actions */
+.detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+.detail-btn-main{padding:1rem;background:linear-gradient(135deg,var(--m),var(--p));
+  border:none;color:#fff;font-size:.92rem;font-weight:800;border-radius:12px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  box-shadow:var(--nm);transition:all .2s;letter-spacing:.04em;}
+.detail-btn-main:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(255,0,110,.6);}
+.detail-btn-sec{padding:1rem;background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.35);
+  color:var(--c);font-size:.88rem;font-weight:700;border-radius:12px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;transition:all .2s;}
+.detail-btn-sec:hover{background:rgba(0,245,255,.18);box-shadow:var(--nc);}
+
+/* GALLERY inside detail */
+.detail-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1.4rem;}
+.detail-gallery img{width:100%;border-radius:8px;border:1px solid var(--brd);
+  transition:transform .2s,border-color .2s;cursor:pointer;}
+.detail-gallery img:hover{transform:scale(1.03);border-color:rgba(0,245,255,.4);}
+
+/* WARP CANVAS */
+#warpCv{position:fixed;inset:0;z-index:99985;pointer-events:none;}
+#warpCv.go{pointer-events:all;}
+
+/* FLOAT BTN */
+.float-diag{position:fixed;bottom:2rem;right:2rem;z-index:350;
+  background:linear-gradient(135deg,#FF006E,#7B00FF);border:none;color:#fff;
+  font-size:.8rem;font-weight:800;padding:.7rem 1.3rem;border-radius:50px;cursor:pointer;
+  display:flex;align-items:center;gap:.5rem;box-shadow:var(--nm);
+  transition:all .25s;animation:floatBob 3s ease-in-out infinite;}
+@keyframes floatBob{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+.float-diag:hover{box-shadow:0 0 40px rgba(255,0,110,.7);animation:none;transform:scale(1.05);}
+.pulse-dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:blink 1.3s infinite;}
+
+/* SCAN LINES */
+body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,245,255,.012) 2px,rgba(0,245,255,.012) 4px);}
+
+@media(max-width:768px){
+  .features,.results,.detail-actions{grid-template-columns:1fr;}
+  .detail-gallery{grid-template-columns:1fr 1fr;}
+  .detail-hero{height:240px;}
+  nav{padding:0 1rem;}
+}
+</style>
+</head>
+<body>
+<canvas id="cvbg"></canvas>
+<canvas id="warpCv"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo" onclick="warpBack(event)">
+    <svg width="28" height="34" viewBox="0 0 64 88" fill="none">
+      <defs><linearGradient id="nl" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00F5FF"/><stop offset="100%" stop-color="#FF006E"/></linearGradient></defs>
+      <path d="M10 7 L32 44 L54 7 Z" fill="rgba(0,245,255,.1)" stroke="url(#nl)" stroke-width="2"/>
+      <path d="M10 81 L32 44 L54 81 Z" fill="rgba(255,0,110,.08)" stroke="url(#nl)" stroke-width="2"/>
+      <circle cx="32" cy="44" r="3" fill="#FFE000"><animate attributeName="opacity" values=".3;1;.3" dur="1.2s" repeatCount="indefinite"/></circle>
+    </svg>
+    <div><span class="nav-logo-text">KAIROS</span><span class="nav-logo-sub">DIGITAL // PORTFOLIO</span></div>
+  </a>
+  <div class="nav-r">
+    <a href="index.html" class="nav-back" onclick="warpBack(event)">← Voltar ao site</a>
+    <button class="nav-diag" onclick="openDiag()">⚡ Diagnóstico Gratuito</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="port-hero">
+  <div class="hero-eyebrow">Soluções Reais · Resultados Comprovados</div>
+  <h1>
+    <span class="cy">Transformamos negócios</span><br/>
+    com <span class="mg">Inteligência Artificial.</span>
+  </h1>
+  <p>Cada empresa tem uma dor. Temos a solução. Clique em qualquer serviço e descubra como a IA pode escalar o seu negócio ainda este mês.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n">+237%</div><div class="hstat-l">Crescimento médio</div></div>
+    <div class="hstat"><div class="hstat-n">48h</div><div class="hstat-l">Para implementar</div></div>
+    <div class="hstat"><div class="hstat-n">5</div><div class="hstat-l">Segmentos atendidos</div></div>
+    <div class="hstat"><div class="hstat-n">24/7</div><div class="hstat-l">IA trabalhando</div></div>
+  </div>
+</div>
+
+<!-- GRID DE SERVIÇOS -->
+<div class="port-section">
+  <div class="port-grid" id="portGrid"></div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="detail-overlay" id="detailOverlay">
+  <div class="detail-box" id="detailBox">
+    <button class="detail-close" onclick="closeDetail()">✕</button>
+    <div class="detail-hero">
+      <img id="dHeroImg" src="" alt=""/>
+      <div class="detail-hero-overlay"></div>
+      <div class="detail-hero-content">
+        <div class="detail-eyebrow" id="dEyebrow"></div>
+        <div class="detail-title" id="dTitle"></div>
+        <div class="detail-subtitle" id="dSub"></div>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div class="pain-block">
+        <div class="pain-label">A DOR QUE O SEU NEGÓCIO SENTE AGORA</div>
+        <div class="pain-text" id="dPain"></div>
+      </div>
+      <div class="gain-block">
+        <div class="gain-label">COMO A KAIROS RESOLVE</div>
+        <div id="dGain"></div>
+      </div>
+      <div class="features" id="dFeatures"></div>
+      <div class="results" id="dResults"></div>
+      <div class="urgency-banner">
+        <div class="urg-icon-big">⏳</div>
+        <div class="urg-text" id="dUrgency"></div>
+      </div>
+      <div class="detail-gallery" id="dGallery"></div>
+      <div class="detail-actions">
+        <button class="detail-btn-main" id="dBtnMain" onclick="openDiag()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          Quero essa solução agora
+        </button>
+        <button class="detail-btn-sec" onclick="closeDetail()">← Ver outros serviços</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIAGNÓSTICO MODAL (mini) -->
+<div class="detail-overlay" id="diagOverlay">
+  <div class="detail-box" style="max-width:560px;">
+    <button class="detail-close" onclick="document.getElementById('diagOverlay').classList.remove('open')">✕</button>
+    <div style="padding:2rem;">
+      <div style="text-align:center;margin-bottom:1.5rem;">
+        <div style="font-size:2.5rem;margin-bottom:.5rem;">⚡</div>
+        <h3 style="font-family:'Space Grotesk';font-size:1.4rem;font-weight:800;margin-bottom:.4rem;background:linear-gradient(135deg,#FF006E,#7B00FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Diagnóstico Gratuito de IA</h3>
+        <p style="font-size:.84rem;color:var(--txt2);">Preencha e nossa equipe entra em contato em até 2h.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.7rem;">
+        <input id="dNome" type="text" placeholder="Nome completo *" style="background:var(--bg3);border:1px solid var(--brd);color:var(--txt);border-radius:9px;padding:.65rem .9rem;font-size:.88rem;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='#FF006E'" onblur="this.style.borderColor='var(--brd)'"/>
+        <input id="dTel" type="tel" placeholder="WhatsApp * (62) 9xxxx-xxxx" style="background:var(--bg3);border:1px solid var(--brd);color:var(--txt);border-radius:9px;padding:.65rem .9rem;font-size:.88rem;outline:none;" onfocus="this.style.borderColor='#FF006E'" onblur="this.style.borderColor='var(--brd)'"/>
+        <input id="dEmp" type="text" placeholder="Empresa *" style="background:var(--bg3);border:1px solid var(--brd);color:var(--txt);border-radius:9px;padding:.65rem .9rem;font-size:.88rem;outline:none;" onfocus="this.style.borderColor='#FF006E'" onblur="this.style.borderColor='var(--brd)'"/>
+        <select id="dServ" style="background:var(--bg3);border:1px solid var(--brd);color:var(--txt);border-radius:9px;padding:.65rem .9rem;font-size:.88rem;outline:none;">
+          <option value="">Serviço de interesse...</option>
+          <option>📊 Dashboard Inteligente</option>
+          <option>🤖 Automação com IA</option>
+          <option>🏥 Clínica 24h com IA</option>
+          <option>🏨 Hospitalidade 4.0</option>
+          <option>🎯 Consultoria Estratégica</option>
+          <option>Outro / Quero saber mais</option>
+        </select>
+        <textarea id="dMsg" rows="2" placeholder="Principal desafio do seu negócio..." style="background:var(--bg3);border:1px solid var(--brd);color:var(--txt);border-radius:9px;padding:.65rem .9rem;font-size:.88rem;outline:none;resize:none;" onfocus="this.style.borderColor='#FF006E'" onblur="this.style.borderColor='var(--brd)'"></textarea>
+        <button onclick="envDiag()" style="padding:1rem;background:linear-gradient(135deg,#FF006E,#7B00FF);border:none;color:#fff;font-size:.95rem;font-weight:800;border-radius:12px;cursor:pointer;box-shadow:0 0 20px rgba(255,0,110,.4);transition:all .2s;letter-spacing:.04em;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+          Quero meu Diagnóstico Gratuito →
+        </button>
+        <p style="font-size:.68rem;color:rgba(0,245,255,.35);text-align:center;">100% gratuito · Sem compromisso · Resposta em até 2h</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING BTN -->
+<button class="float-diag" onclick="openDiag()">
+  <span class="pulse-dot"></span>
+  Diagnóstico Gratuito
+</button>
+
+<script>
+/* MATRIX BG */
+(function(){
+  var cv=document.getElementById('cvbg'),ctx=cv.getContext('2d');
+  var W,H,cols,drops,chars='KAIROS01ABCDEF<>{}|$アイウエカキ';
+  function r(){W=cv.width=innerWidth;H=cv.height=innerHeight;cols=Math.floor(W/18);drops=[];for(var i=0;i<cols;i++)drops[i]=Math.random()*-H;}
+  r();window.addEventListener('resize',r);
+  var stars=[];for(var s=0;s<150;s++)stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1+.2,t:Math.random()*6,ts:.01+Math.random()*.03});
+  function frame(){
+    ctx.fillStyle='rgba(0,5,16,.18)';ctx.fillRect(0,0,W,H);
+    stars.forEach(function(s){s.t+=s.ts;ctx.globalAlpha=0.2+0.5*Math.abs(Math.sin(s.t));ctx.fillStyle='#00F5FF';ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;});
+    ctx.font='12px monospace';
+    for(var i=0;i<cols;i++){
+      var ch=chars[Math.floor(Math.random()*chars.length)];
+      ctx.fillStyle='#00F5FF';ctx.shadowColor='#00F5FF';ctx.shadowBlur=6;
+      ctx.fillText(ch,i*18,drops[i]);ctx.shadowBlur=0;
+      for(var t=1;t<6;t++){ctx.fillStyle='rgba(0,245,255,'+(Math.max(0,(6-t)/6*.14))+')';ctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*18,drops[i]-t*18);}
+      drops[i]+=18;if(drops[i]>H+50&&Math.random()>.92)drops[i]=Math.random()*-200;
+    }
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* WARP ENGINE */
+var wCv=document.getElementById('warpCv'),wCtx=wCv.getContext('2d'),wBusy=false;
+function runWarp(cb){
+  if(wBusy)return cb&&cb();wBusy=true;
+  wCv.width=innerWidth;wCv.height=innerHeight;wCv.classList.add('go');
+  var cx=innerWidth/2,cy=innerHeight/2,maxR=Math.sqrt(cx*cx+cy*cy)*1.5,st=null,dur=650,rot=0;
+  (function frame(ts){
+    if(!st)st=ts;var p=Math.min((ts-st)/dur,1);var e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+    wCtx.clearRect(0,0,wCv.width,wCv.height);rot+=.1;
+    wCtx.fillStyle='rgba(0,0,0,'+(e*.88)+')';wCtx.fillRect(0,0,wCv.width,wCv.height);
+    for(var i=6;i>0;i--){var r=maxR*(1-e*.88)*(i/6),a=(1-e)*(i/6)*.65;
+      var g=wCtx.createRadialGradient(cx,cy,0,cx,cy,r);
+      g.addColorStop(0,'rgba(0,0,0,'+(e*.9)+')');g.addColorStop(.25,'rgba(123,0,255,'+(a*.9)+')');
+      g.addColorStop(.55,'rgba(0,245,255,'+(a*.7)+')');g.addColorStop(.8,'rgba(255,0,110,'+(a*.4)+')');g.addColorStop(1,'rgba(0,0,0,0)');
+      wCtx.fillStyle=g;wCtx.beginPath();wCtx.arc(cx,cy,r,0,Math.PI*2);wCtx.fill();}
+    wCtx.save();wCtx.translate(cx,cy);wCtx.rotate(rot);
+    for(var arm=0;arm<3;arm++){wCtx.rotate(Math.PI*2/3);
+      for(var t=0;t<50;t++){var ang=t*.16,rad=maxR*(1-e*.9)*(50-t)/50*.8;
+        wCtx.beginPath();wCtx.arc(Math.cos(ang)*rad,Math.sin(ang)*rad*.5,1.4,0,Math.PI*2);
+        wCtx.fillStyle='rgba('+['0,245,255','255,0,110','255,224,0'][arm]+','+(((50-t)/50)*(1-e)*.45)+')';wCtx.fill();}}
+    wCtx.restore();
+    var sg=wCtx.createRadialGradient(cx,cy,0,cx,cy,35*e);sg.addColorStop(0,'rgba(255,255,255,'+e+')');sg.addColorStop(.4,'rgba(0,245,255,'+(e*.7)+')');sg.addColorStop(1,'rgba(0,0,0,0)');
+    wCtx.fillStyle=sg;wCtx.beginPath();wCtx.arc(cx,cy,35*e,0,Math.PI*2);wCtx.fill();
+    if(p>=1){wCtx.fillStyle='rgba(255,255,255,.92)';wCtx.fillRect(0,0,wCv.width,wCv.height);
+      if(cb)cb();var fo=1;(function fade(){fo-=.1;wCv.style.opacity=Math.max(0,fo)+'';if(fo>0)requestAnimationFrame(fade);else{wCv.classList.remove('go');wBusy=false;}})();return;}
+    requestAnimationFrame(frame);
+  })();
+}
+function warpBack(e){e.preventDefault();runWarp(function(){window.location.href='index.html';});}
+
+/* SERVICES DATA */
+var SERVICES=[
+  {
+    id:'dashboard',
+    category:'BI & Analytics',
+    badge:'badge-cyan',
+    title:'Dashboards que Falam',
+    subtitle:'Decisões em Tempo Real',
+    desc:'Seu negócio tem dados. Mas você enxerga eles? Transformamos números brutos em painel interativo que mostra vendas, perdas, estoque e KPIs em segundos.',
+    tags:['Stock em tempo real','Vendas monitoradas','Perdas reduzidas','KPIs automáticos'],
+    imgs:['insta_dashboard_1.png','insta_dashboard_2.png','insta_dashboard_3.png'],
+    pain:'Você toma decisões no escuro. Não sabe quais produtos vendem mais, onde está perdendo dinheiro, nem qual dia da semana tem mais saída. <strong>Cada decisão sem dados é uma aposta.</strong> E no mercado competitivo de hoje, apostar é perder.',
+    gain:'<p style="font-size:.9rem;color:var(--txt2);line-height:1.7;">Dashboard em tempo real que centraliza <strong style="color:var(--txt);">todas as informações do seu negócio</strong> em uma tela. Vendas por hora, alertas de ruptura de estoque, comparativo de períodos e previsão de demanda — tudo automático, tudo atualizado.</p>',
+    features:[
+      {icon:'📊',title:'Stock em Tempo Real',desc:'Saiba o que está vendendo agora, antes de acabar no estoque'},
+      {icon:'💰',title:'Vendas Monitoradas',desc:'Ticket médio, faturamento diário e metas com alertas automáticos'},
+      {icon:'📉',title:'Perdas Identificadas',desc:'Detecta desperdício e desvios antes de virar prejuízo real'},
+      {icon:'🧠',title:'Decisões Inteligentes',desc:'IA sugere ações baseadas nos padrões do seu negócio'},
+    ],
+    results:[{n:'+87%',l:'Visibilidade operacional'},{n:'-34%',l:'Perdas identificadas'},{n:'3h→0',l:'Tempo em relatórios'}],
+    urgency:'<strong>Cada dia sem dados é dinheiro invisível.</strong> Enquanto você decide no feeling, seus concorrentes que usam dashboard já sabem o que vender amanhã. A Kairos implementa em 48h. O que você está esperando?',
+    color:'--c',
+    wa_msg:'Quero um Dashboard Inteligente para meu negocio'
+  },
+  {
+    id:'automacao',
+    category:'IA & Automação',
+    badge:'badge-magenta',
+    title:'Escala com IA',
+    subtitle:'O Futuro é Agora',
+    desc:'Automatize tarefas repetitivas, atendimento, relatórios e processos operacionais. Sua equipe foca no que importa. A IA cuida do resto.',
+    tags:['WhatsApp automático','Atendimento 24/7','Processos escaláveis','Zero tarefa repetitiva'],
+    imgs:['insta_automacao_1.png','insta_automacao_2.png','insta_dashboard_1.png'],
+    pain:'Você está pagando salário humano para tarefa que uma IA executa em 2 segundos. Seus funcionários ficam horas respondendo as mesmas perguntas, preenchendo planilhas e gerando relatórios manualmente. <strong>Isso é dinheiro e tempo desperdiçado.</strong>',
+    gain:'<p style="font-size:.9rem;color:var(--txt2);line-height:1.7;">Implementamos automações com IA que <strong style="color:var(--txt);">trabalham 24 horas por dia sem folga, sem erro, sem reclamação.</strong> WhatsApp, e-mail, Instagram, relatórios, atendimento — tudo automatizado com inteligência real.</p>',
+    features:[
+      {icon:'💬',title:'WhatsApp com IA',desc:'Responde, qualifica leads e agenda reuniões automaticamente'},
+      {icon:'⚡',title:'Processos Zerados',desc:'Elimina tarefas manuais repetitivas que consomem tempo da equipe'},
+      {icon:'📱',title:'Multi-canal',desc:'Instagram, WhatsApp, e-mail e site integrados em um fluxo só'},
+      {icon:'📈',title:'Escala Sem Limites',desc:'Atenda 10x mais clientes sem contratar nenhuma pessoa a mais'},
+    ],
+    results:[{n:'10x',l:'Capacidade de atendimento'},{n:'-60%',l:'Custo operacional'},{n:'24/7',l:'Disponibilidade total'}],
+    urgency:'<strong>Cada mês sem automação é receita perdida.</strong> Uma empresa concorrente que automatizou o WhatsApp hoje responde em 2 segundos. A sua demora 4 horas. Quem o cliente escolhe? A Kairos entrega em 48h.',
+    color:'--m',
+    wa_msg:'Quero automatizar meu negocio com IA'
+  },
+  {
+    id:'clinica',
+    category:'Saúde & Clínicas',
+    badge:'badge-green',
+    title:'Clínica 24h com IA',
+    subtitle:'Atendimento que Nunca Para',
+    desc:'Pacientes precisam de atendimento fora do horário comercial. IA que responde, agenda consultas e filtra urgências enquanto sua equipe descansa.',
+    tags:['Agendamento automático','Atendimento 24h','Triagem inteligente','Sem recepcionista extra'],
+    imgs:['insta_clinica_1.png','insta_clinica_2.png','insta_clinica_3.png'],
+    pain:'Pacientes ligam às 22h e ninguém atende. Recepcionistas sobrecarregadas com perguntas repetitivas. Agenda bagunçada com faltas que poderiam ser evitadas. <strong>Você perde pacientes todo dia por falta de atendimento fora do horário.</strong>',
+    gain:'<p style="font-size:.9rem;color:var(--txt2);line-height:1.7;">Assistente de IA que <strong style="color:var(--txt);">atende seus pacientes 24 horas</strong>, agenda consultas automaticamente, envia lembretes que reduzem faltas em 60% e triagem inteligente que identifica urgências.</p>',
+    features:[
+      {icon:'🏥',title:'Atendimento 24/7',desc:'Nenhum paciente fica sem resposta, nem às 3h da manhã'},
+      {icon:'📅',title:'Agenda Automática',desc:'Marca, desmarca e reagenda consultas sem intervenção humana'},
+      {icon:'📲',title:'Lembretes Inteligentes',desc:'Reduz faltas em até 60% com lembretes personalizados'},
+      {icon:'🔍',title:'Triagem com IA',desc:'Identifica urgências e prioriza casos críticos automaticamente'},
+    ],
+    results:[{n:'-60%',l:'Taxa de faltas'},{n:'+40%',l:'Novos agendamentos'},{n:'24h',l:'Atendimento ativo'}],
+    urgency:'<strong>Pacientes que não são atendidos vão para o concorrente — e raramente voltam.</strong> Com IA, sua clínica atende fora do horário sem custo de hora extra. Implementação em 48h. Quantos pacientes você perdeu esta semana?',
+    color:'--g',
+    wa_msg:'Quero implementar IA na minha clinica'
+  },
+  {
+    id:'hotel',
+    category:'Hospitalidade 4.0',
+    badge:'badge-yellow',
+    title:'Hotel & Pousada com IA',
+    subtitle:'Check-in que Encanta',
+    desc:'Hóspedes modernos esperam experiências personalizadas. IA que faz check-in, responde dúvidas, sugere atividades e transforma avaliações.',
+    tags:['Check-in automático','Concierge virtual','Experiências personalizadas','Reviews positivos'],
+    imgs:['insta_hotel_1.png','insta_hotel_2.png','insta_hotel_3.png'],
+    pain:'Hóspedes reclamam de espera no check-in. Equipe sobrecarregada com perguntas óbvias. Avaliações medianas porque ninguém personaliza a experiência. <strong>Hotel que não encanta não recebe avaliação 5 estrelas — e sem 5 estrelas, perde reservas.</strong>',
+    gain:'<p style="font-size:.9rem;color:var(--txt2);line-height:1.7;">Implementamos um <strong style="color:var(--txt);">concierge virtual com IA</strong> que faz check-in automatizado, responde dúvidas, sugere restaurantes e passeios baseado no perfil do hóspede — e tudo isso melhora suas avaliações no Booking e Google.</p>',
+    features:[
+      {icon:'🏨',title:'Check-in Inteligente',desc:'Processo rápido e personalizado que encanta desde a chegada'},
+      {icon:'🤖',title:'Concierge Virtual',desc:'Responde perguntas e faz recomendações personalizadas 24/7'},
+      {icon:'⭐',title:'Reviews Automáticos',desc:'Sistema que incentiva hóspedes satisfeitos a avaliar positivamente'},
+      {icon:'📊',title:'Dashboard da Pousada',desc:'Taxa de ocupação, RevPAR e métricas de satisfação em tempo real'},
+    ],
+    results:[{n:'+43%',l:'Avaliações positivas'},{n:'+28%',l:'Taxa de retorno'},{n:'5★',l:'Meta de rating'}],
+    urgency:'<strong>Uma estrela a mais no Booking pode dobrar sua taxa de ocupação.</strong> Hóspedes de hoje pesquisam online antes de reservar. Pousada sem IA vai ficar para trás enquanto a concorrência modernizada lotará as reservas.',
+    color:'--y',
+    wa_msg:'Quero modernizar minha pousada com IA'
+  },
+  {
+    id:'consultoria',
+    category:'Estratégia & Crescimento',
+    badge:'badge-purple',
+    title:'Encontre a Dor. Escale o Negócio.',
+    subtitle:'Consultoria Estratégica com IA',
+    desc:'Diagnóstico completo do seu negócio + plano de escala personalizado com IA. Identificamos gargalos invisíveis e criamos o caminho para o próximo nível.',
+    tags:['Diagnóstico completo','Plano de escala','KPIs definidos','Implementação guiada'],
+    imgs:['insta_consultoria_1.png','insta_consultoria_2.png','insta_consultoria_3.png'],
+    pain:'Seu negócio cresce mas você não sabe por quê. Ou pior: está estagnado e não sabe por onde começar. Decisões tomadas no feeling. Reuniões intermináveis sem resultado. <strong>Crescimento sem estratégia é sorte — e sorte acaba.</strong>',
+    gain:'<p style="font-size:.9rem;color:var(--txt2);line-height:1.7;">Fazemos um <strong style="color:var(--txt);">diagnóstico cirúrgico</strong> do seu negócio: encontramos onde você está perdendo dinheiro, qual processo está freando o crescimento e qual alavanca, se ativada, gera resultado imediato. Depois entregamos o plano + implementamos.</p>',
+    features:[
+      {icon:'🔍',title:'Diagnóstico Profundo',desc:'Análise completa de processos, receita, custos e oportunidades'},
+      {icon:'🎯',title:'Alavancas Identificadas',desc:'Onde está o dinheiro escondido no seu negócio atual'},
+      {icon:'📋',title:'Plano de Escala',desc:'Roadmap 90 dias com ações priorizadas por impacto e viabilidade'},
+      {icon:'🤝',title:'Implementação Guiada',desc:'Não entregamos só o plano — executamos junto com você'},
+    ],
+    results:[{n:'+237%',l:'Crescimento médio'},{n:'305%',l:'ROI médio'},{n:'90d',l:'Para resultados'}],
+    urgency:'<strong>Cada mês que passa sem estratégia é receita que fica na mesa.</strong> Empresas que trabalham com consultoria estratégica crescem 3x mais rápido. A Kairos já diagnosticou empresas que cresceram 237% em 90 dias. Você quer ser o próximo?',
+    color:'--p',
+    wa_msg:'Quero a consultoria estrategica da Kairos'
+  }
+];
+
+/* RENDER CARDS */
+function renderCards(){
+  var grid=document.getElementById('portGrid');grid.innerHTML='';
+  SERVICES.forEach(function(s,i){
+    var card=document.createElement('div');
+    card.className='srv-card'+(i===0?' featured':'');
+    card.onclick=function(){openDetail(s);};
+    card.innerHTML=
+      '<div class="srv-img-wrap">'+
+        '<img src="'+s.imgs[0]+'" alt="'+s.title+'" loading="lazy"/>'+
+        '<div class="srv-img-overlay"></div>'+
+        '<div class="srv-img-badge '+s.badge+'">'+s.category+'</div>'+
+      '</div>'+
+      '<div class="srv-body">'+
+        '<div class="srv-category">'+s.category+'</div>'+
+        '<div class="srv-title">'+s.title+'</div>'+
+        '<div class="srv-desc">'+s.desc+'</div>'+
+        '<div class="srv-tags">'+s.tags.map(function(t){return'<span class="srv-tag">'+t+'</span>';}).join('')+'</div>'+
+        '<div class="srv-cta">'+
+          '<button class="srv-btn">Ver detalhes →</button>'+
+          '<span class="srv-arrow">→</span>'+
+        '</div>'+
+      '</div>';
+    grid.appendChild(card);
+  });
+}
+
+/* OPEN DETAIL */
+function openDetail(s){
+  runWarp(function(){
+    document.getElementById('dHeroImg').src=s.imgs[0];
+    document.getElementById('dEyebrow').textContent=s.category;
+    document.getElementById('dTitle').textContent=s.title;
+    document.getElementById('dSub').textContent=s.subtitle;
+    document.getElementById('dPain').innerHTML=s.pain;
+    document.getElementById('dGain').innerHTML=s.gain;
+    var feats=document.getElementById('dFeatures');feats.innerHTML='';
+    s.features.forEach(function(f){feats.innerHTML+='<div class="feature"><div class="feat-icon">'+f.icon+'</div><div><div class="feat-title">'+f.title+'</div><div class="feat-desc">'+f.desc+'</div></div></div>';});
+    var res=document.getElementById('dResults');res.innerHTML='';
+    s.results.forEach(function(r){res.innerHTML+='<div class="result"><div class="result-n">'+r.n+'</div><div class="result-l">'+r.l+'</div></div>';});
+    document.getElementById('dUrgency').innerHTML=s.urgency;
+    var gal=document.getElementById('dGallery');gal.innerHTML='';
+    s.imgs.forEach(function(img){gal.innerHTML+='<img src="'+img+'" alt="'+s.title+'" loading="lazy"/>';});
+    document.getElementById('dBtnMain').onclick=function(){
+      window.open('https://wa.me/5562981554992?text='+encodeURIComponent('Ola, vim pelo portfolio da Kairos e '+s.wa_msg),'_blank');
+    };
+    document.getElementById('detailOverlay').classList.add('open');
+    document.getElementById('detailOverlay').scrollTop=0;
+  });
+}
+function closeDetail(){
+  runWarp(function(){document.getElementById('detailOverlay').classList.remove('open');});
+}
+
+/* DIAG */
+function openDiag(){document.getElementById('diagOverlay').classList.add('open');}
+function envDiag(){
+  var n=document.getElementById('dNome').value.trim();
+  var t=document.getElementById('dTel').value.trim();
+  var e=document.getElementById('dEmp').value.trim();
+  if(!n||!t||!e){alert('Preencha nome, WhatsApp e empresa.');return;}
+  var srv=document.getElementById('dServ').value;
+  var msg=document.getElementById('dMsg').value.trim();
+  var txt='🚀 DIAGNÓSTICO GRATUITO — KAIROS DIGITAL\n\n';
+  txt+='Nome: '+n+'\nWhatsApp: '+t+'\nEmpresa: '+e+'\n';
+  if(srv)txt+='Servico: '+srv+'\n';
+  if(msg)txt+='\nDesafio: '+msg;
+  txt+='\n\n_Enviado via Portfolio Kairos_';
+  window.open('https://wa.me/5562981554992?text='+encodeURIComponent(txt),'_blank');
+}
+
+/* 3D TILT */
+document.addEventListener('mousemove',function(e){
+  document.querySelectorAll('.srv-card').forEach(function(c){
+    var r=c.getBoundingClientRect();
+    var dx=(e.clientX-(r.left+r.width/2))/r.width*16;
+    var dy=(e.clientY-(r.top+r.height/2))/r.height*16;
+    if(Math.abs(dx)<20&&Math.abs(dy)<20&&r.width>0){
+      c.style.transform='perspective(900px) rotateY('+dx+'deg) rotateX('+(-dy)+'deg) translateY(-6px)';
+    }
+  });
+});
+document.addEventListener('mouseleave',function(){
+  document.querySelectorAll('.srv-card').forEach(function(c){c.style.transform='';});
+});
+
+renderCards();
+</script>
+</body>
+</html>
