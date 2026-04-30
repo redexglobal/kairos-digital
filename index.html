@@ -218,6 +218,30 @@ footer p{font-size:.78rem;color:var(--txt2);}
     .hg-cta-btn{display:block;width:100%;margin-top:.6rem;background:linear-gradient(135deg,var(--p),var(--p2));border:none;color:#fff;font-size:.7rem;font-weight:700;padding:.42rem;border-radius:7px;text-align:center;cursor:pointer!important;transition:opacity .2s;}
     .hg-cta-btn:hover{opacity:.85;}
 
+
+    /* CEO CARD */
+    .ceo-card{display:flex;gap:1.8rem;background:var(--bg2);border:1px solid var(--brd);border-radius:20px;padding:1.8rem;margin-top:0;align-items:flex-start;transition:border-color .3s;}
+    .ceo-card:hover{border-color:rgba(245,158,11,.4);}
+    .ceo-photo-wrap{position:relative;flex-shrink:0;}
+    .ceo-photo{width:140px;height:170px;object-fit:cover;object-position:top center;border-radius:14px;display:block;border:2px solid rgba(245,158,11,.3);}
+    .ceo-glow{position:absolute;inset:-4px;border-radius:16px;background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(124,58,237,.1));z-index:-1;filter:blur(8px);}
+    .ceo-badge{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(124,58,237,.1));border:1px solid rgba(245,158,11,.3);color:var(--gold);padding:.22rem .7rem;border-radius:50px;margin-bottom:.5rem;}
+    .ceo-name{font-family:'Space Grotesk';font-size:1.4rem;font-weight:800;margin-bottom:.15rem;}
+    .ceo-title{font-size:.8rem;color:var(--p3);font-weight:600;margin-bottom:.7rem;}
+    .ceo-bio{font-size:.82rem;color:var(--txt2);line-height:1.65;margin-bottom:.9rem;}
+    .ceo-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.85rem;}
+    .ceo-tag{font-size:.7rem;font-weight:600;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.22);color:var(--p3);padding:.2rem .6rem;border-radius:50px;}
+    .ceo-elite{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.18);border-radius:10px;padding:.6rem .85rem;margin-bottom:.85rem;}
+    .elite-label{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.25rem;}
+    .elite-names{font-size:.76rem;color:var(--txt2);}
+    .ceo-contacts{display:flex;flex-wrap:wrap;gap:.5rem;}
+    .ceo-contact-btn{display:inline-flex;align-items:center;gap:.4rem;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.28);color:#25D366;font-size:.75rem;font-weight:600;padding:.38rem .75rem;border-radius:8px;text-decoration:none;transition:all .2s;}
+    .ceo-contact-btn:hover{background:rgba(37,211,102,.22);color:#fff;}
+    .ceo-contact-btn.ig{background:rgba(225,48,108,.1);border-color:rgba(225,48,108,.28);color:#E1306C;}
+    .ceo-contact-btn.ig:hover{background:rgba(225,48,108,.2);color:#fff;}
+    .membro-placeholder{display:flex;align-items:center;gap:1rem;background:var(--bg2);border:1px dashed var(--brd);border-radius:14px;padding:1.1rem 1.3rem;}
+    @media(max-width:640px){.ceo-card{flex-direction:column;}.ceo-photo{width:100%;height:220px;}}
+
 </style>
 </head>
 <body>
@@ -472,37 +496,70 @@ footer p{font-size:.78rem;color:var(--txt2);}
 <div class="divider"></div>
 
 <!-- SOBRE -->
+<!-- ABOUT -->
 <section id="sobre">
   <div class="container">
     <div class="sobre-grid">
-      <div class="sobre-text">
-        <p class="sec-label">Quem somos</p>
-        <h2 class="sec-title">A equipe por trás da <span class="hl">Kairos</span></h2>
-        <p class="sec-desc">A Kairos nasceu da combinação de visão de negócios e tecnologia de ponta. Somos uma equipe focada em transformar operações comuns em sistemas inteligentes com IA.</p>
-        <p class="sec-desc" style="margin-top:1rem;">Com base em Goiânia-GO, atendemos negócios de todos os tamanhos — do açougue de bairro à rede de supermercados — entregando soluções que funcionam de verdade.</p>
-        <div class="equipe">
-          <div class="membro">
-            <div class="membro-avatar">W</div>
-            <div>
-              <div class="membro-nome">Vilson</div>
-              <div class="membro-cargo">CEO & Fundador</div>
-            </div>
+      <div>
+        <p class="sec-label" data-t="ab.label">Quem somos</p>
+        <h2 class="sec-title">A equipe <span class="hl" data-t="ab.hl">Kairos</span></h2>
+        <p class="sec-desc" data-t="ab.desc">Combinamos visão de negócios, expertise em vendas e tecnologia de ponta com IA. Com base em Goiânia-GO, atendemos negócios de todos os tamanhos com soluções que funcionam de verdade.</p>
+
+        <!-- VILSON CARD -->
+        <div class="ceo-card" style="margin-top:2rem;">
+          <div class="ceo-photo-wrap">
+            <img src="vilson.jpeg" alt="Vilson Mota" class="ceo-photo"/>
+            <div class="ceo-glow"></div>
           </div>
-          <div class="membro">
-            <div class="membro-avatar">M</div>
-            <div>
-              <div class="membro-nome">Matheus</div>
-              <div class="membro-cargo">Co-CEO & Fundador</div>
+          <div class="ceo-info">
+            <div class="ceo-badge">Co-CEO &amp; Fundador</div>
+            <h3 class="ceo-name">Vilson Mota</h3>
+            <p class="ceo-title">Especialista em Vendas · IA &amp; Tech · Corretor</p>
+            <p class="ceo-bio">Vendedor nato com presença em mais de 20 estados brasileiros. Ex-consultor da Porto Seguro Seguradora, corretor de imóveis em Goiânia e pioneiro em tecnologia DeFi na região. Certificado pela Anthropic — criadora do Claude Code — em IA aplicada e educação digital. Membro do time de elite do Cultura Builder.</p>
+            <div class="ceo-tags">
+              <span class="ceo-tag">🤖 Anthropic · Claude Code</span>
+              <span class="ceo-tag">🏆 Cultura Builder</span>
+              <span class="ceo-tag">🏠 Corretor · Goiânia</span>
+              <span class="ceo-tag">🛡️ Porto Seguro</span>
+              <span class="ceo-tag">₿ DeFi Pioneer</span>
+            </div>
+            <div class="ceo-elite">
+              <span class="elite-label">Time de elite</span>
+              <span class="elite-names">Kelvin Nascimento · Caio Vicentino · Deco Montenegro · Bruno Pessoa</span>
+            </div>
+            <div class="ceo-contacts">
+              <a href="https://wa.me/5562984452548" target="_blank" class="ceo-contact-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                (62) 98445-2548
+              </a>
+              <a href="https://wa.me/5562984924326" target="_blank" class="ceo-contact-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                (62) 98492-4326
+              </a>
+              <a href="https://instagram.com/motavilson" target="_blank" class="ceo-contact-btn ig">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                @motavilson
+              </a>
             </div>
           </div>
         </div>
+
+        <!-- MATHEUS placeholder -->
+        <div class="membro-placeholder" style="margin-top:1.2rem;">
+          <div class="membro-av" style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--a),var(--g));display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-size:1.2rem;font-weight:700;flex-shrink:0;">M</div>
+          <div>
+            <div style="font-weight:700;font-size:.95rem;">Matheus</div>
+            <div style="font-size:.78rem;color:var(--p3);">Co-CEO &amp; Co-Fundador</div>
+            <div style="font-size:.76rem;color:var(--txt2);margin-top:.2rem;">Perfil completo em breve</div>
+          </div>
+        </div>
+
       </div>
-      <div class="sobre-visual">
-        <div class="mini-card"><div class="ic">🤖</div><strong>IA</strong><span>100% integrada</span></div>
-        <div class="mini-card"><div class="ic">⚡</div><strong>48h</strong><span>Entrega media</span></div>
-        <div class="mini-card"><div class="ic">🏪</div><strong>8+</strong><span>Tipos de solucao</span></div>
-        <div class="mini-card"><div class="ic">📍</div><strong>GO</strong><span>Goiania - Brasil</span></div>
-        <div class="mini-card" style="grid-column:span 2;"><div class="ic">🚀</div><strong style="font-size:1.1rem;">Kairos</strong><span style="font-size:.8rem;">Do grego: o momento certo. Sua empresa na hora certa, com a tecnologia certa.</span></div>
+      <div class="s-stats">
+        <div class="s-stat"><div class="s-n">20+</div><div class="s-l">Estados atendidos</div></div>
+        <div class="s-stat"><div class="s-n">8+</div><div class="s-l" data-t="ab.s1">Soluções ativas</div></div>
+        <div class="s-stat"><div class="s-n">48h</div><div class="s-l" data-t="ab.s2">Entrega média</div></div>
+        <div class="s-stat"><div class="s-n">100%</div><div class="s-l" data-t="ab.s3">IA integrada</div></div>
       </div>
     </div>
   </div>
