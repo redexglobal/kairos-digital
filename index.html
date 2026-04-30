@@ -204,7 +204,7 @@ footer p{font-size:.78rem;color:var(--txt2);}
   footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
 }
 
-    *{cursor:none!important;}
+    *{cursor:none!important;} button,a,.sol-card,.port-card,.urgency-opt,.slot,.consultant-opt,.int-btn,.logo-btn,.pc-btn{cursor:none!important;}
     .c-dot{position:fixed;width:11px;height:11px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);box-shadow:0 0 10px rgba(245,158,11,.8);transition:transform .08s;}
     .c-ring{position:fixed;width:32px;height:32px;border:2px solid rgba(245,158,11,.45);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:left .1s,top .1s;}
     .c-trail{position:fixed;border-radius:50%;pointer-events:none;z-index:99997;transform:translate(-50%,-50%);}
@@ -464,13 +464,7 @@ footer p{font-size:.78rem;color:var(--txt2);}
     .cons-role{font-size:.68rem;color:var(--txt2);}
 
     /* FLOATING DIAGNÓSTICO BTN */
-    .float-diag{position:fixed;bottom:5.5rem;right:1.5rem;z-index:350;
-      background:linear-gradient(135deg,#FF006E,#7B00FF);
-      border:none;color:#fff;font-size:.8rem;font-weight:800;letter-spacing:.06em;
-      padding:.65rem 1.2rem;border-radius:50px;cursor:pointer;
-      display:flex;align-items:center;gap:.5rem;
-      box-shadow:0 0 20px rgba(255,0,110,.45),0 4px 20px rgba(123,0,255,.4);
-      transition:all .25s;white-space:nowrap;}
+    
     .float-diag:hover{transform:translateY(-3px) scale(1.04);
       box-shadow:0 0 35px rgba(255,0,110,.65),0 8px 30px rgba(123,0,255,.55);}
     .float-diag-pulse{width:9px;height:9px;border-radius:50%;background:#fff;flex-shrink:0;
@@ -588,6 +582,16 @@ footer p{font-size:.78rem;color:var(--txt2);}
       display:flex;align-items:center;justify-content:center;transition:all .2s;}
     .pdet-btn-sec:hover{background:rgba(0,245,255,.15);box-shadow:0 0 15px rgba(0,245,255,.2);}
     @media(max-width:640px){.pdet-feats,.pdet-results,.pdet-actions{grid-template-columns:1fr;}.pdet-gallery{grid-template-columns:1fr 1fr;}}
+
+
+    .float-hg{position:fixed;bottom:2rem;right:2rem;z-index:350;
+      background:linear-gradient(135deg,rgba(255,0,110,.15),rgba(123,0,255,.15));
+      border:1px solid rgba(255,0,110,.5);width:56px;height:56px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;cursor:pointer!important;
+      box-shadow:0 0 20px rgba(255,0,110,.4),0 0 40px rgba(123,0,255,.2);
+      transition:all .25s;animation:hgFloat 3s ease-in-out infinite;}
+    @keyframes hgFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+    .float-hg:hover{box-shadow:0 0 35px rgba(255,0,110,.7);animation:none;transform:scale(1.12);}
 
 </style>
 </head>
@@ -1008,141 +1012,104 @@ footer p{font-size:.78rem;color:var(--txt2);}
   <div class="drawer-header">
     <div>
       <h2>Diagnóstico <span>Gratuito de IA</span></h2>
-      <p style="font-size:.7rem;color:var(--txt2);margin-top:.15rem;">Preencha · Escolha o consultor · Enviamos em segundos</p>
+      <p style="font-size:.7rem;color:var(--txt2);margin-top:.15rem;">Selecione o serviço · Preencha · Enviamos em segundos</p>
     </div>
-    <button class="btn-close-drawer" onclick="closeCart()">✕</button>
+    <button class="btn-close-drawer" onclick="closeCart()" style="cursor:pointer!important;">✕</button>
   </div>
 
   <div class="drawer-body">
 
-    <!-- ESCOLHA O CONSULTOR -->
+    <!-- CONSULTOR -->
     <div>
       <div class="dsec-label">Falar com qual consultor?</div>
-      <div class="consultant-grid">
-        <div class="consultant-opt sel" id="cOpt0" onclick="selConsultor(0)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;">
+        <div class="consultant-opt sel" id="cOpt0" onclick="selConsultor(0)" style="cursor:pointer!important;">
           <div class="cons-avatar" style="background:linear-gradient(135deg,#7B00FF,#FFE000);">V</div>
-          <div class="cons-name">Vilson Mota</div>
-          <div class="cons-role">CEO · Vendas &amp; IA</div>
+          <div><div class="cons-name">Vilson Mota</div><div class="cons-role">CEO · Vendas &amp; IA</div></div>
         </div>
-        <div class="consultant-opt" id="cOpt1" onclick="selConsultor(1)">
+        <div class="consultant-opt" id="cOpt1" onclick="selConsultor(1)" style="cursor:pointer!important;">
           <div class="cons-avatar" style="background:linear-gradient(135deg,#00F5FF,#7B00FF);">M</div>
-          <div class="cons-name">Matheus Schelle</div>
-          <div class="cons-role">Co-CEO · Cripto &amp; Tech</div>
+          <div><div class="cons-name">Matheus Schelle</div><div class="cons-role">Co-CEO · Cripto &amp; Tech</div></div>
         </div>
       </div>
     </div>
 
-    <!-- SOLUÇÕES SELECIONADAS -->
-    <div id="servsSection">
-      <div class="dsec-label">Soluções de interesse</div>
-      <div class="servs-lista" id="servsList">
-        <div class="servs-vazio" id="servsVazio">Clique em "Tenho Interesse" nos cards ou selecione abaixo.</div>
+    <!-- SERVIÇOS SELECIONADOS (auto) -->
+    <div>
+      <div class="dsec-label">Serviço de interesse</div>
+      <div id="servsList">
+        <div id="servsVazio" style="font-size:.8rem;color:var(--txt2);padding:.8rem;text-align:center;background:rgba(0,245,255,.03);border:1px dashed var(--brd);border-radius:9px;">
+          Clique em qualquer card de serviço ou selecione abaixo.
+        </div>
       </div>
+      <select id="fSolucao" style="width:100%;margin-top:.5rem;background:var(--bg3);border:1px solid var(--brd);color:var(--txt);border-radius:9px;padding:.6rem .85rem;font-size:.84rem;outline:none;transition:border-color .2s;">
+        <option value="">Ou selecione o serviço...</option>
+        <option>📊 Dashboard Inteligente</option>
+        <option>🤖 Automação com IA</option>
+        <option>🏥 Clínica 24h com IA</option>
+        <option>🏨 Hospitalidade 4.0</option>
+        <option>🎯 Consultoria Estratégica</option>
+        <option>🥩 Painel Digital de Açougue</option>
+        <option>🏪 Vitrine Digital de Produtos</option>
+        <option>Outro / Quero saber mais</option>
+      </select>
     </div>
 
-    <!-- DADOS -->
+    <!-- DADOS OBRIGATÓRIOS -->
     <div>
       <div class="dsec-label">Seus dados</div>
-      <div class="form-grid">
+      <div style="display:flex;flex-direction:column;gap:.65rem;">
         <div class="field"><label>Nome completo *</label><input type="text" id="fNome" placeholder="Seu nome"/></div>
-        <div class="field"><label>WhatsApp *</label><input type="tel" id="fTel" placeholder="(62) 9xxxx-xxxx"/></div>
         <div class="field"><label>Empresa *</label><input type="text" id="fEmpresa" placeholder="Nome da empresa"/></div>
-        <div class="field"><label>Cargo</label><input type="text" id="fCargo" placeholder="Ex: Dono, Gerente..."/></div>
+        <div class="field"><label>WhatsApp *</label><input type="tel" id="fTel" placeholder="(62) 9xxxx-xxxx"/></div>
       </div>
     </div>
 
-    <!-- BRIEFING -->
+    <!-- OPCIONAIS (colapsáveis) -->
     <div>
-      <div class="dsec-label">Briefing da empresa</div>
-      <div class="form-grid">
-        <div class="field full">
-          <label>Ramo de atividade *</label>
-          <select id="fRamo">
+      <div class="dsec-label" onclick="toggleOpcional()" style="cursor:pointer!important;user-select:none;">
+        Informações opcionais <span id="opcToggle" style="color:var(--txt2);font-size:.8rem;">▼ ver</span>
+      </div>
+      <div id="opcionalFields" style="display:none;flex-direction:column;gap:.65rem;margin-top:.5rem;">
+        <div class="field"><label>Cargo / Função</label><input type="text" id="fCargo" placeholder="Ex: Dono, Gerente, Diretor..."/></div>
+        <div class="field"><label>Ramo de atividade</label>
+          <select id="fRamo" style="background:var(--bg3);border:1px solid var(--brd);color:var(--txt);border-radius:9px;padding:.6rem .85rem;font-size:.84rem;outline:none;">
             <option value="">Selecione o ramo...</option>
-            <option>🥩 Açougue / Frigorífico</option>
-            <option>🏪 Mercado / Supermercado</option>
-            <option>🏠 Imobiliária / Corretor</option>
-            <option>🍽️ Restaurante / Alimentação</option>
-            <option>🏥 Saúde / Clínica / Farmácia</option>
-            <option>📚 Educação / Cursos</option>
-            <option>🛒 E-commerce / Loja Online</option>
-            <option>🏭 Indústria / Distribuição</option>
-            <option>💼 Serviços / Consultoria</option>
-            <option>💰 Financeiro / Investimentos</option>
-            <option>🔧 Construção / Reforma</option>
-            <option>🚗 Automóveis / Concessionária</option>
-            <option>✂️ Beleza / Barbearia / Estética</option>
-            <option>🌐 Tecnologia / Software</option>
-            <option>Outro ramo</option>
+            <option>🥩 Açougue / Frigorífico</option><option>🏪 Mercado / Supermercado</option>
+            <option>🏠 Imobiliária / Corretor</option><option>🍽️ Restaurante / Alimentação</option>
+            <option>🏥 Saúde / Clínica</option><option>📚 Educação / Cursos</option>
+            <option>🛒 E-commerce</option><option>🏭 Indústria / Distribuição</option>
+            <option>💼 Serviços / Consultoria</option><option>💰 Financeiro / Investimentos</option>
+            <option>🌐 Tecnologia / Software</option><option>Outro</option>
           </select>
         </div>
-        <div class="field full">
-          <label>Nível de urgência *</label>
-          <div class="urgency-grid" id="urgencyGrid">
-            <div class="urgency-opt" onclick="selUrgency(this,'🔴 Urgente — preciso agora')">
-              <span class="urg-icon">🔴</span><span class="urg-label">Urgente</span><span class="urg-sub">Preciso agora</span>
+        <div class="field"><label>Nível de urgência</label>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-top:.3rem;" id="urgencyGrid">
+            <div class="urgency-opt" onclick="selUrgency(this,'🔴 Urgente')" style="cursor:pointer!important;">
+              <span class="urg-icon">🔴</span><span class="urg-label">Urgente</span><span class="urg-sub">Agora</span>
             </div>
-            <div class="urgency-opt" onclick="selUrgency(this,'🟠 Alta — 30 dias')">
+            <div class="urgency-opt" onclick="selUrgency(this,'🟠 Alta — 30 dias')" style="cursor:pointer!important;">
               <span class="urg-icon">🟠</span><span class="urg-label">Alta</span><span class="urg-sub">30 dias</span>
             </div>
-            <div class="urgency-opt" onclick="selUrgency(this,'🟡 Média — 3 meses')">
+            <div class="urgency-opt" onclick="selUrgency(this,'🟡 Média — 3 meses')" style="cursor:pointer!important;">
               <span class="urg-icon">🟡</span><span class="urg-label">Média</span><span class="urg-sub">3 meses</span>
             </div>
-            <div class="urgency-opt" onclick="selUrgency(this,'🟢 Baixa — pesquisando')">
+            <div class="urgency-opt" onclick="selUrgency(this,'🟢 Baixa')" style="cursor:pointer!important;">
               <span class="urg-icon">🟢</span><span class="urg-label">Baixa</span><span class="urg-sub">Pesquisando</span>
             </div>
           </div>
         </div>
-        <div class="field full">
-          <label>Principal desafio a resolver *</label>
-          <textarea id="fDesafio" rows="2" placeholder="Ex: Perco clientes por demora no atendimento, quero automatizar processos repetitivos..."></textarea>
-        </div>
-        <div class="field"><label>Já usa IA hoje?</label>
-          <select id="fIA"><option value="">Selecione...</option>
-            <option>Sim, ativamente</option><option>Sim, mas básico</option>
-            <option>Não, mas quero</option><option>Não sei começar</option>
-          </select>
-        </div>
-        <div class="field"><label>Equipe de TI?</label>
-          <select id="fTI"><option value="">Selecione...</option>
-            <option>Sim, interna</option><option>Terceirizado</option><option>Não tenho</option>
-          </select>
-        </div>
-        <div class="field full"><label>Mensagem adicional (opcional)</label>
-          <textarea id="fMsg" rows="2" placeholder="Algo mais que queira nos contar..."></textarea>
-        </div>
-      </div>
-    </div>
-
-    <!-- AGENDAMENTO -->
-    <div>
-      <div class="dsec-label">Agendar a call gratuita</div>
-      <div class="field" style="margin-bottom:.75rem;">
-        <label>Data *</label>
-        <input type="date" id="fData" style="width:100%;"/>
-      </div>
-      <div class="dsec-label">Horário *</div>
-      <div class="time-slots" id="timeSlots">
-        <div class="slot" onclick="selSlot(this,'08:00')">08:00</div>
-        <div class="slot" onclick="selSlot(this,'09:00')">09:00</div>
-        <div class="slot" onclick="selSlot(this,'10:00')">10:00</div>
-        <div class="slot" onclick="selSlot(this,'11:00')">11:00</div>
-        <div class="slot" onclick="selSlot(this,'14:00')">14:00</div>
-        <div class="slot" onclick="selSlot(this,'15:00')">15:00</div>
-        <div class="slot" onclick="selSlot(this,'16:00')">16:00</div>
-        <div class="slot" onclick="selSlot(this,'17:00')">17:00</div>
-        <div class="slot" onclick="selSlot(this,'18:00')">18:00</div>
       </div>
     </div>
 
   </div>
 
   <div class="drawer-footer">
-    <button class="wa-send-btn" onclick="enviarWA()">
+    <button class="wa-send-btn" onclick="enviarWA()" style="cursor:pointer!important;">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
       <span id="waBtnText">Enviar para Vilson via WhatsApp</span>
     </button>
-    <p class="drawer-note">Diagnóstico 100% gratuito · Nossa equipe confirma em até 2h ⚡</p>
+    <p class="drawer-note">Diagnóstico 100% gratuito · Resposta em até 2h ⚡</p>
   </div>
 </aside>
 
@@ -1233,18 +1200,32 @@ function selConsultor(i){
 }
 
 function enviarWA(){
-  var n    = document.getElementById('fNome').value.trim();
-  var tel  = document.getElementById('fTel').value.trim();
-  var emp  = document.getElementById('fEmpresa').value.trim();
-  var ramo = document.getElementById('fRamo').value;
-  var desaf= document.getElementById('fDesafio') ? document.getElementById('fDesafio').value.trim() : '';
-  var dt   = document.getElementById('fData').value;
-  if(!n)    { alert('Informe seu nome.'); return; }
-  if(!tel)  { alert('Informe seu WhatsApp.'); return; }
-  if(!emp)  { alert('Informe a empresa.'); return; }
-  if(!ramo) { alert('Selecione o ramo.'); return; }
-  if(!dt)   { alert('Selecione uma data.'); return; }
-  if(!slotSel){ alert('Selecione um horario.'); return; }
+  var n   = document.getElementById('fNome').value.trim();
+  var emp = document.getElementById('fEmpresa').value.trim();
+  var tel = document.getElementById('fTel').value.trim();
+  if(!n)  {alert('Informe seu nome.');return;}
+  if(!emp){alert('Informe a empresa.');return;}
+  if(!tel){alert('Informe seu WhatsApp.');return;}
+  var sol   = document.getElementById('fSolucao') ? document.getElementById('fSolucao').value : '';
+  var cargo = document.getElementById('fCargo') ? document.getElementById('fCargo').value.trim() : '';
+  var ramo  = document.getElementById('fRamo') ? document.getElementById('fRamo').value : '';
+  var cons  = CONSULTORES[consultorIdx];
+  var txt = '\uD83D\uDE80 *DIAGN\u00D3STICO GRATUITO — KAIROS DIGITAL*\n';
+  txt += 'Consultor: '+cons.nome+'\n\n';
+  txt += '*Nome:* '+n+'\n';
+  txt += '*Empresa:* '+emp+'\n';
+  txt += '*WhatsApp:* '+tel+'\n';
+  if(cargo) txt += '*Cargo:* '+cargo+'\n';
+  if(ramo)  txt += '*Ramo:* '+ramo+'\n';
+  if(sol)   txt += '*Servi\u00E7o de interesse:* '+sol+'\n';
+  if(urgSel) txt += '*Urg\u00EAncia:* '+urgSel+'\n';
+  if(servicos && servicos.length){
+    txt += '\n*Solu\u00E7\u00F5es marcadas:*\n';
+    servicos.forEach(function(s){txt+='\u2705 '+s+'\n';});
+  }
+  txt += '\n_Enviado via Kairos Digital_';
+  window.open('https://wa.me/'+cons.wa+'?text='+encodeURIComponent(txt),'_blank');
+}
   var cargo= document.getElementById('fCargo').value.trim();
   var ia   = document.getElementById('fIA') ? document.getElementById('fIA').value : '';
   var ti   = document.getElementById('fTI') ? document.getElementById('fTI').value : '';
@@ -1476,38 +1457,84 @@ var MSGS=[
   {t:10, m:'Ultima oportunidade!',u:'Feche agora!'}
 ];
 function tickHG(){
-  var el=Date.now()-hgSt-hgBonus,pct=Math.max(0,1-el/HG_DUR);
-  var sT=document.getElementById('sTop'),sB=document.getElementById('sBot');
-  if(sT){sT.setAttribute('height',String(32*pct));sT.setAttribute('y',String(6+32*(1-pct)));}
-  if(sB){var bh=37*(1-pct);sB.setAttribute('height',String(bh));}
-  if(pct>0&&Math.random()>.65){
-    var sp=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    sp.setAttribute('cx','28');sp.setAttribute('cy','37');sp.setAttribute('r','1');
-    sp.setAttribute('fill','rgba(245,158,11,.9)');
-    var pg=document.getElementById('sP');if(pg)pg.appendChild(sp);
-    var ss=Date.now();
-    (function(el2){
-      (function a(){var pp=(Date.now()-ss)/220;el2.setAttribute('cy',String(37+4*pp));el2.setAttribute('opacity',String(1-pp));if(pp<1)requestAnimationFrame(a);else if(el2.parentNode)el2.parentNode.removeChild(el2);})();
-    })(sp);
+  var elapsed = Date.now() - hgSt - hgBonus;
+  var pct = Math.max(0, Math.min(1, 1 - elapsed / HG_DUR));
+
+  // AREIA TOP — diminui de baixo pra cima (parte de cima esvazia)
+  var sandTopEl = document.getElementById('sTop');
+  var sandBotEl = document.getElementById('sBot');
+  var fSandTopEl = document.getElementById('fSandTop');
+  var fSandBotEl = document.getElementById('fSandBot');
+
+  if(sandTopEl){
+    var topH = 37 * pct;
+    var topY = 6 + 37 * (1 - pct); // empurra pra baixo conforme esvazia
+    sandTopEl.setAttribute('height', topH.toFixed(1));
+    sandTopEl.setAttribute('y', topY.toFixed(1));
   }
-  var cur=MSGS[0];for(var i=MSGS.length-1;i>=0;i--)if(pct*100<=MSGS[i].t){cur=MSGS[i];break;}
+  if(sandBotEl){
+    // Areia sobe de baixo — começa em y=70 e cresce pra cima
+    var botH = 37 * (1 - pct);
+    sandBotEl.setAttribute('height', botH.toFixed(1));
+    // Com transform scale(1,-1) translate(0,-76), o rect cresce pra cima
+    sandBotEl.setAttribute('y', (70 - botH).toFixed(1));
+  }
+  // Mini widget flutuante
+  if(fSandTopEl){fSandTopEl.setAttribute('height',(32*pct).toFixed(1));fSandTopEl.setAttribute('y',(6+32*(1-pct)).toFixed(1));}
+  if(fSandBotEl){fSandBotEl.setAttribute('height',(32*(1-pct)).toFixed(1));fSandBotEl.setAttribute('y',(70-32*(1-pct)).toFixed(1));}
+
+  // Partículas caindo
+  if(pct > 0 && Math.random() > 0.55){
+    var sp = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    sp.setAttribute('cx','28');sp.setAttribute('cy','37');sp.setAttribute('r','1.5');
+    sp.setAttribute('fill','rgba(255,224,0,.95)');
+    var pg = document.getElementById('sP'); if(pg) pg.appendChild(sp);
+    var ss = Date.now();
+    (function(el){(function a(){var pp=(Date.now()-ss)/200;
+      el.setAttribute('cy',String(37+5*pp));el.setAttribute('opacity',String(1-pp));
+      if(pp<1)requestAnimationFrame(a);else if(el.parentNode)el.parentNode.removeChild(el);
+    })();})(sp);
+  }
+
+  // Mensagens de urgência
+  var p100 = pct * 100;
+  var msgs = [{t:100,m:'Oportunidade disponível',u:null},{t:70,m:'Disponibilidade limitada',u:null},{t:50,m:'Vagas reduzindo...',u:'Reserve sua vaga!'},{t:30,m:'Quase esgotado!',u:'Apenas 2 vagas!'},{t:10,m:'Última oportunidade!',u:'Feche agora!'}];
+  var cur = msgs[0];
+  for(var i=msgs.length-1;i>=0;i--)if(p100<=msgs[i].t){cur=msgs[i];break;}
   var mEl=document.getElementById('hgMsg'),uEl=document.getElementById('hgUrg');
   if(mEl)mEl.textContent=cur.m;
   if(uEl){if(cur.u){uEl.style.display='block';uEl.textContent=cur.u;}else uEl.style.display='none';}
   var w=document.getElementById('hgW');
-  if(w){if(pct<.3)w.style.borderColor='rgba(239,68,68,.7)';else if(pct<.6)w.style.borderColor='rgba(245,158,11,.6)';}
-  if(pct>0)setTimeout(tickHG,80);
+  if(w){if(pct<.3)w.style.borderColor='rgba(239,68,68,.7)';else if(pct<.6)w.style.borderColor='rgba(255,224,0,.5)';}
+
+  if(pct>0)requestAnimationFrame(tickHG);
 }
-tickHG();
+requestAnimationFrame(tickHG);
 </script>
 
 
-<!-- FLOATING DIAGNÓSTICO BTN -->
-<button class="float-diag" onclick="warpToCart()" id="floatDiag">
-  <span class="float-diag-pulse"></span>
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
-  <span>Diagnóstico Gratuito</span>
+<!-- FLOATING HOURGLASS -->
+<button class="float-hg" id="floatHg" onclick="openCart()" title="Diagnóstico Gratuito">
+  <svg width="28" height="36" viewBox="0 0 56 76" fill="none">
+    <defs>
+      <linearGradient id="fhg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FF006E"/>
+        <stop offset="50%" stop-color="#FFE000"/>
+        <stop offset="100%" stop-color="#7B00FF"/>
+      </linearGradient>
+      <clipPath id="fhgt"><path d="M10 6 L28 38 L46 6 Z"/></clipPath>
+      <clipPath id="fhgb"><path d="M10 70 L28 38 L46 70 Z"/></clipPath>
+    </defs>
+    <rect x="6" y="1" width="44" height="5" rx="2" fill="url(#fhg)"/>
+    <rect x="6" y="70" width="44" height="5" rx="2" fill="url(#fhg)"/>
+    <path d="M10 6 L28 38 L46 6 Z" fill="rgba(255,0,110,.1)" stroke="url(#fhg)" stroke-width="1.5"/>
+    <path d="M10 70 L28 38 L46 70 Z" fill="rgba(123,0,255,.08)" stroke="url(#fhg)" stroke-width="1.5"/>
+    <rect id="fSandTop" x="8" y="6" width="40" height="32" fill="rgba(255,224,0,.8)" clip-path="url(#fhgt)"/>
+    <rect id="fSandBot" x="8" y="70" width="40" height="0" fill="rgba(255,0,110,.7)" clip-path="url(#fhgb)" transform="scale(1,-1) translate(0,-76)"/>
+    <circle id="fWaist" cx="28" cy="38" r="2.5" fill="#FFE000">
+      <animate attributeName="opacity" values=".3;1;.3" dur="1s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
 </button>
-
 </body>
 </html>
