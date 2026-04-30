@@ -203,6 +203,21 @@ footer p{font-size:.78rem;color:var(--txt2);}
   .sobre-grid{grid-template-columns:1fr;gap:2rem;}
   footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
 }
+
+    *{cursor:none!important;}
+    .c-dot{position:fixed;width:11px;height:11px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);box-shadow:0 0 10px rgba(245,158,11,.8);transition:transform .08s;}
+    .c-ring{position:fixed;width:32px;height:32px;border:2px solid rgba(245,158,11,.45);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:left .1s,top .1s;}
+    .c-trail{position:fixed;border-radius:50%;pointer-events:none;z-index:99997;transform:translate(-50%,-50%);}
+    .portal-ov{position:fixed;inset:0;z-index:99990;pointer-events:none;}
+    .portal-ov.go{pointer-events:all;}
+    .hg-widget{position:fixed;bottom:1.4rem;left:1.4rem;z-index:300;background:rgba(3,7,18,.9);border:1px solid rgba(245,158,11,.35);border-radius:16px;padding:.9rem 1.1rem;width:175px;backdrop-filter:blur(14px);box-shadow:0 8px 30px rgba(0,0,0,.45);}
+    .hg-ttl{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;text-align:center;}
+    .hg-svg-w{display:flex;justify-content:center;margin-bottom:.5rem;}
+    .hg-msg{font-size:.67rem;color:var(--txt2);text-align:center;line-height:1.4;}
+    .hg-urg{font-size:.69rem;font-weight:700;color:#ef4444;text-align:center;margin-top:.25rem;animation:blink 1.4s infinite;}
+    .hg-cta-btn{display:block;width:100%;margin-top:.6rem;background:linear-gradient(135deg,var(--p),var(--p2));border:none;color:#fff;font-size:.7rem;font-weight:700;padding:.42rem;border-radius:7px;text-align:center;cursor:pointer!important;transition:opacity .2s;}
+    .hg-cta-btn:hover{opacity:.85;}
+
 </style>
 </head>
 <body>
@@ -210,7 +225,7 @@ footer p{font-size:.78rem;color:var(--txt2);}
 <canvas id="canvas"></canvas>
 
 <nav>
-  <div class="nav-logo">Kairos Digital</div>
+  <div class="nav-logo" style="display:flex;align-items:center;gap:.5rem;"><img src="logo.jpeg" alt="Kairos" style="height:36px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px rgba(245,158,11,.55));"/><span>Kairos</span></div>
   <ul class="nav-links">
     <li><a href="#solucoes">Soluções</a></li>
     <li><a href="#como">Como Funciona</a></li>
@@ -262,7 +277,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
             <div class="browser-dots"><span></span><span></span><span></span></div>
             <div class="browser-url">samuca-carnes.vercel.app</div>
           </div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://samuca-carnes.vercel.app" target="_blank" class="preview-link">
             <img src="https://image.thum.io/get/width/600/crop/380/https://samuca-carnes.vercel.app" alt="Automação de WhatsApp" loading="lazy"/>
           </a>
@@ -274,7 +288,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
           </div>
           <div class="sol-name">Automação de WhatsApp</div>
           <div class="sol-desc">Atendimento automático, respostas inteligentes e envio de ofertas via WhatsApp com IA. Nunca mais perca um cliente por demora.</div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://samuca-carnes.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
         </div>
       </div>
@@ -284,7 +297,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
             <div class="browser-dots"><span></span><span></span><span></span></div>
             <div class="browser-url">ourodigital-tau.vercel.app</div>
           </div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://ourodigital-tau.vercel.app" target="_blank" class="preview-link">
             <img src="https://image.thum.io/get/width/600/crop/380/https://ourodigital-tau.vercel.app" alt="Automação de Instagram" loading="lazy"/>
           </a>
@@ -296,7 +308,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
           </div>
           <div class="sol-name">Automação de Instagram</div>
           <div class="sol-desc">Respostas automáticas nos comentários e DMs, agendamento inteligente de posts e análise de engajamento com IA.</div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://ourodigital-tau.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
         </div>
       </div>
@@ -306,7 +317,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
             <div class="browser-dots"><span></span><span></span><span></span></div>
             <div class="browser-url">ramiresvendas.vercel.app</div>
           </div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://ramiresvendas.vercel.app" target="_blank" class="preview-link">
             <img src="https://image.thum.io/get/width/600/crop/380/https://ramiresvendas.vercel.app" alt="Automação de Twitter/X" loading="lazy"/>
           </a>
@@ -318,7 +328,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
           </div>
           <div class="sol-name">Automação de Twitter/X</div>
           <div class="sol-desc">Publicação automatizada, monitoramento de menções e respostas geradas por IA — sua marca ativa 24 horas por dia.</div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://ramiresvendas.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
         </div>
       </div>
@@ -328,7 +337,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
             <div class="browser-dots"><span></span><span></span><span></span></div>
             <div class="browser-url">ramiresvendas.vercel.app</div>
           </div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://ramiresvendas.vercel.app" target="_blank" class="preview-link">
             <img src="https://image.thum.io/get/width/600/crop/380/https://ramiresvendas.vercel.app" alt="Dashboard de Vendas" loading="lazy"/>
           </a>
@@ -340,7 +348,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
           </div>
           <div class="sol-name">Dashboard de Vendas</div>
           <div class="sol-desc">Painel interativo em tempo real com métricas de vendas, metas e alertas automáticos. Decisões mais rápidas.</div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://ramiresvendas.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
         </div>
       </div>
@@ -350,7 +357,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
             <div class="browser-dots"><span></span><span></span><span></span></div>
             <div class="browser-url">sistema-perda-mercado.vercel.app</div>
           </div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://sistema-perda-mercado.vercel.app" target="_blank" class="preview-link">
             <img src="https://image.thum.io/get/width/600/crop/380/https://sistema-perda-mercado.vercel.app" alt="Dashboard de Perdas" loading="lazy"/>
           </a>
@@ -362,7 +368,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
           </div>
           <div class="sol-name">Dashboard de Perdas</div>
           <div class="sol-desc">Identifica e monitora perdas operacionais automaticamente. Alertas em tempo real para desvios e vencimentos.</div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://sistema-perda-mercado.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
         </div>
       </div>
@@ -372,7 +377,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
             <div class="browser-dots"><span></span><span></span><span></span></div>
             <div class="browser-url">supermercado-treviso.vercel.app</div>
           </div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://supermercado-treviso.vercel.app" target="_blank" class="preview-link">
             <img src="https://image.thum.io/get/width/600/crop/380/https://supermercado-treviso.vercel.app" alt="Controle de Estoque" loading="lazy"/>
           </a>
@@ -384,7 +388,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
           </div>
           <div class="sol-name">Controle de Estoque</div>
           <div class="sol-desc">Sistema inteligente de entrada, saída e inventário com alertas de reposição automáticos e previsão de demanda.</div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://supermercado-treviso.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
         </div>
       </div>
@@ -394,7 +397,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
             <div class="browser-dots"><span></span><span></span><span></span></div>
             <div class="browser-url">samuca-painel.vercel.app</div>
           </div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://samuca-painel.vercel.app" target="_blank" class="preview-link">
             <img src="https://image.thum.io/get/width/600/crop/380/https://samuca-painel.vercel.app" alt="Painel Digital de Açougue" loading="lazy"/>
           </a>
@@ -406,7 +408,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
           </div>
           <div class="sol-name">Painel Digital de Açougue</div>
           <div class="sol-desc">Painel TV profissional com preços em rotação automática e fotos dos cortes. O cliente vê os preços em tempo real.</div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://samuca-painel.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
         </div>
       </div>
@@ -416,7 +417,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
             <div class="browser-dots"><span></span><span></span><span></span></div>
             <div class="browser-url">supermercado-treviso.vercel.app</div>
           </div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://supermercado-treviso.vercel.app" target="_blank" class="preview-link">
             <img src="https://image.thum.io/get/width/600/crop/380/https://supermercado-treviso.vercel.app" alt="Vitrine Digital de Produtos" loading="lazy"/>
           </a>
@@ -428,7 +428,6 @@ footer p{font-size:.78rem;color:var(--txt2);}
           </div>
           <div class="sol-name">Vitrine Digital de Produtos</div>
           <div class="sol-desc">Exposição dinâmica de produtos de mercados e lojas em painéis digitais com atualização de preços em tempo real.</div>
-          <button class="interesse-btn" onclick="addService(this)" data-nome="">Tenho Interesse ✦</button>
           <a href="https://supermercado-treviso.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
         </div>
       </div>
@@ -772,5 +771,136 @@ Aguardo o contato para confirmar!';
 })();
 
 </script>
+
+<div class="c-dot" id="cDot"></div>
+<div class="c-ring" id="cRing"></div>
+<canvas class="portal-ov" id="portalCv"></canvas>
+<div class="hg-widget" id="hgW">
+  <div class="hg-ttl">Seu Tempo</div>
+  <div class="hg-svg-w">
+    <svg width="56" height="76" viewBox="0 0 56 76">
+      <rect x="6" y="1" width="44" height="5" rx="2" fill="#C9A227" opacity=".9"/>
+      <rect x="6" y="70" width="44" height="5" rx="2" fill="#C9A227" opacity=".9"/>
+      <path d="M10 6 L28 38 L46 6 Z" fill="rgba(201,162,39,.12)" stroke="#C9A227" stroke-width="1.4"/>
+      <path d="M10 70 L28 38 L46 70 Z" fill="rgba(201,162,39,.07)" stroke="#C9A227" stroke-width="1.4"/>
+      <clipPath id="tc"><path d="M10 6 L28 38 L46 6 Z"/></clipPath>
+      <rect id="sTop" x="8" y="6" width="40" height="32" fill="rgba(245,158,11,.75)" clip-path="url(#tc)"/>
+      <clipPath id="bc"><path d="M10 70 L28 38 L46 70 Z"/></clipPath>
+      <rect id="sBot" x="8" y="38" width="40" height="0" fill="rgba(245,158,11,.5)" clip-path="url(#bc)"/>
+      <g id="sP"></g>
+    </svg>
+  </div>
+  <div class="hg-msg" id="hgMsg">Oportunidade disponivel</div>
+  <div class="hg-urg" id="hgUrg" style="display:none"></div>
+  <button class="hg-cta-btn" onclick="openCart()">Fechar Agora</button>
+</div>
+
+<script>
+/* CURSOR */
+var CD=document.getElementById('cDot'),CR=document.getElementById('cRing');
+var mx=window.innerWidth/2,my=window.innerHeight/2;
+document.addEventListener('mousemove',function(e){
+  mx=e.clientX;my=e.clientY;
+  CD.style.left=mx+'px';CD.style.top=my+'px';
+  CR.style.left=mx+'px';CR.style.top=my+'px';
+  if(Math.random()>.55)spawnT(mx,my);
+});
+document.addEventListener('click',function(){
+  CD.style.transform='translate(-50%,-50%) scale(2)';
+  setTimeout(function(){CD.style.transform='translate(-50%,-50%) scale(1)';},200);
+});
+function spawnT(x,y){
+  var el=document.createElement('div');el.className='c-trail';
+  var s=2+Math.random()*5,h=38+Math.random()*30;
+  el.style.cssText='left:'+x+'px;top:'+y+'px;width:'+s+'px;height:'+s+'px;background:hsla('+h+',90%,60%,.8);';
+  document.body.appendChild(el);
+  var st=Date.now(),dur=350+Math.random()*250,vx=(Math.random()-.5)*1.8,vy=(Math.random()-.5)*1.8;
+  (function tick(){
+    var p=(Date.now()-st)/dur;if(p>=1){if(el.parentNode)el.parentNode.removeChild(el);return;}
+    el.style.left=(parseFloat(el.style.left)+vx)+'px';
+    el.style.top=(parseFloat(el.style.top)+vy)+'px';
+    el.style.opacity=(1-p)*.8;
+    el.style.transform='translate(-50%,-50%) scale('+(1-p*.6)+')';
+    requestAnimationFrame(tick);
+  })();
+}
+
+/* PORTAL TRANSITION */
+var pCv=document.getElementById('portalCv'),pCtx=pCv.getContext('2d'),pBusy=false;
+function runPortal(cb){
+  if(pBusy)return;pBusy=true;
+  pCv.width=innerWidth;pCv.height=innerHeight;
+  pCv.classList.add('go');
+  var cx=mx,cy=my,maxR=Math.sqrt(Math.pow(Math.max(cx,innerWidth-cx),2)+Math.pow(Math.max(cy,innerHeight-cy),2));
+  var st=null,dur=380;
+  (function frame(ts){
+    if(!st)st=ts;
+    var p=Math.min((ts-st)/dur,1),e=p<.5?2*p*p:-1+(4-2*p)*p;
+    pCtx.clearRect(0,0,pCv.width,pCv.height);
+    for(var i=7;i>0;i--){
+      var r=maxR*e*(i/7),a=(1-p)*(i/7)*.55;
+      var g=pCtx.createRadialGradient(cx,cy,0,cx,cy,r);
+      g.addColorStop(0,'rgba(124,58,237,'+a+')');
+      g.addColorStop(.5,'rgba(168,85,247,'+(a*.5)+')');
+      g.addColorStop(1,'rgba(0,0,0,0)');
+      pCtx.fillStyle=g;pCtx.beginPath();pCtx.arc(cx,cy,r,0,Math.PI*2);pCtx.fill();
+    }
+    for(var j=0;j<4;j++){
+      pCtx.save();pCtx.translate(cx,cy);pCtx.rotate(e*Math.PI*2*(j%2?1:-1));
+      pCtx.strokeStyle='rgba(245,158,11,'+(0.4*(1-p))+')';pCtx.lineWidth=1.2;
+      pCtx.beginPath();
+      for(var k=0;k<6;k++){var ang=k/6*Math.PI*2;pCtx.moveTo(0,0);pCtx.lineTo(Math.cos(ang)*maxR*e,Math.sin(ang)*maxR*e);}
+      pCtx.stroke();pCtx.restore();
+    }
+    if(p<1){requestAnimationFrame(frame);}
+    else{pCtx.clearRect(0,0,pCv.width,pCv.height);pCv.classList.remove('go');pBusy=false;if(cb)cb();}
+  })();
+}
+document.addEventListener('click',function(e){
+  var a=e.target.closest('a[href^="#"]');
+  if(a&&!e.defaultPrevented){
+    e.preventDefault();
+    var tgt=document.querySelector(a.getAttribute('href'));
+    if(tgt){runPortal(function(){tgt.scrollIntoView({behavior:'smooth'});});}
+  }
+});
+
+/* HOURGLASS TIMER */
+var HG_DUR=(180+Math.random()*120)*1000,hgSt=Date.now(),hgBonus=0;
+document.addEventListener('click',function(){hgBonus+=2800;});
+document.addEventListener('scroll',function(){hgBonus+=200;});
+var MSGS=[
+  {t:100,m:'Oportunidade disponivel',u:null},
+  {t:70, m:'Disponibilidade limitada',u:null},
+  {t:50, m:'Vagas reduzindo...',u:'Reserve sua vaga!'},
+  {t:30, m:'Quase esgotado!',u:'Apenas 2 vagas!'},
+  {t:10, m:'Ultima oportunidade!',u:'Feche agora!'}
+];
+function tickHG(){
+  var el=Date.now()-hgSt-hgBonus,pct=Math.max(0,1-el/HG_DUR);
+  var sT=document.getElementById('sTop'),sB=document.getElementById('sBot');
+  if(sT){sT.setAttribute('height',String(32*pct));sT.setAttribute('y',String(6+32*(1-pct)));}
+  if(sB){sB.setAttribute('height',String(32*(1-pct)));sB.setAttribute('y',String(38+32*pct));sB.setAttribute('transform','scale(1,-1) translate(0,-76)');}
+  if(pct>0&&Math.random()>.65){
+    var sp=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    sp.setAttribute('cx','28');sp.setAttribute('cy','37');sp.setAttribute('r','1');
+    sp.setAttribute('fill','rgba(245,158,11,.9)');
+    var pg=document.getElementById('sP');if(pg)pg.appendChild(sp);
+    var ss=Date.now();
+    (function(el2){
+      (function a(){var pp=(Date.now()-ss)/220;el2.setAttribute('cy',String(37+4*pp));el2.setAttribute('opacity',String(1-pp));if(pp<1)requestAnimationFrame(a);else if(el2.parentNode)el2.parentNode.removeChild(el2);})();
+    })(sp);
+  }
+  var cur=MSGS[0];for(var i=MSGS.length-1;i>=0;i--)if(pct*100<=MSGS[i].t){cur=MSGS[i];break;}
+  var mEl=document.getElementById('hgMsg'),uEl=document.getElementById('hgUrg');
+  if(mEl)mEl.textContent=cur.m;
+  if(uEl){if(cur.u){uEl.style.display='block';uEl.textContent=cur.u;}else uEl.style.display='none';}
+  var w=document.getElementById('hgW');
+  if(w){if(pct<.3)w.style.borderColor='rgba(239,68,68,.7)';else if(pct<.6)w.style.borderColor='rgba(245,158,11,.6)';}
+  if(pct>0)setTimeout(tickHG,80);
+}
+tickHG();
+</script>
+
 </body>
 </html>
