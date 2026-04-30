@@ -485,6 +485,110 @@ footer p{font-size:.78rem;color:var(--txt2);}
     .btn-hero-main:hover::after{transform:translateX(100%);}
     .btn-hero-sec{font-size:.9rem!important;padding:.88rem 1.8rem!important;}
 
+
+    /* PORTFOLIO CARDS */
+    .port-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.4rem;}
+    .port-card{background:var(--bg2);border:1px solid var(--brd);border-radius:20px;
+      overflow:hidden;cursor:pointer;transition:all .3s;position:relative;transform-style:preserve-3d;}
+    .port-card:hover{transform:translateY(-8px) perspective(800px) rotateY(2deg);
+      box-shadow:0 0 30px rgba(0,245,255,.2),0 20px 60px rgba(0,0,0,.5);}
+    .port-card::before{content:'';position:absolute;inset:0;border-radius:20px;
+      background:linear-gradient(135deg,rgba(0,245,255,.05),transparent 50%,rgba(255,0,110,.04));
+      opacity:0;transition:opacity .3s;z-index:2;pointer-events:none;}
+    .port-card:hover::before{opacity:1;}
+    .port-card.featured{grid-column:span 2;}
+    .port-card.featured .pc-img-wrap{height:380px;}
+    @media(max-width:900px){.port-card.featured{grid-column:span 1;}}
+    .pc-img-wrap{height:280px;overflow:hidden;position:relative;}
+    .pc-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s;display:block;}
+    .port-card:hover .pc-img-wrap img{transform:scale(1.08);}
+    .pc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,5,16,.95) 0%,rgba(0,5,16,.3) 50%,transparent 100%);}
+    .pc-badge{position:absolute;top:.9rem;right:.9rem;z-index:3;
+      font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      padding:.22rem .65rem;border-radius:50px;border:1px solid;}
+    .pb-cyan{background:rgba(0,245,255,.12);color:#00F5FF;border-color:rgba(0,245,255,.4);}
+    .pb-pink{background:rgba(255,0,110,.12);color:#FF006E;border-color:rgba(255,0,110,.4);}
+    .pb-green{background:rgba(0,255,136,.1);color:#00FF88;border-color:rgba(0,255,136,.35);}
+    .pb-yellow{background:rgba(255,224,0,.12);color:#FFE000;border-color:rgba(255,224,0,.4);}
+    .pb-purple{background:rgba(123,0,255,.15);color:#C084FC;border-color:rgba(123,0,255,.4);}
+    .pc-body{padding:1.3rem 1.4rem 1.5rem;}
+    .pc-cat{font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+      color:#00F5FF;margin-bottom:.45rem;display:flex;align-items:center;gap:.35rem;}
+    .pc-cat::before{content:'';width:8px;height:2px;background:#00F5FF;border-radius:1px;box-shadow:0 0 6px #00F5FF;}
+    .pc-title{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:800;margin-bottom:.4rem;line-height:1.2;}
+    .pc-desc{font-size:.82rem;color:var(--txt2);line-height:1.62;margin-bottom:.9rem;}
+    .pc-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.9rem;}
+    .pc-tag{font-size:.62rem;font-weight:600;padding:.16rem .5rem;border-radius:50px;
+      background:rgba(0,245,255,.06);border:1px solid rgba(0,245,255,.18);color:rgba(0,245,255,.7);}
+    .pc-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:700;
+      color:#00F5FF;background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.28);
+      padding:.42rem .9rem;border-radius:8px;cursor:pointer;transition:all .2s;}
+    .pc-btn:hover{background:rgba(0,245,255,.18);box-shadow:0 0 15px rgba(0,245,255,.2);}
+
+    /* DETAIL MODAL */
+    #portDetailOverlay{position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.92);
+      display:none;align-items:flex-start;justify-content:center;padding:1rem;
+      backdrop-filter:blur(14px);overflow-y:auto;}
+    #portDetailOverlay.open{display:flex;}
+    .pdet-box{background:var(--bg2);border:1px solid var(--brd);border-radius:22px;
+      max-width:880px;width:100%;margin:2rem auto;position:relative;
+      box-shadow:0 0 80px rgba(0,245,255,.1);animation:pdetIn .35s ease;}
+    @keyframes pdetIn{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+    .pdet-close{position:absolute;top:1rem;right:1rem;background:rgba(0,245,255,.08);
+      border:1px solid rgba(0,245,255,.25);color:#00F5FF;cursor:pointer;
+      width:34px;height:34px;border-radius:9px;display:flex;align-items:center;
+      justify-content:center;font-size:1rem;z-index:10;transition:all .2s;}
+    .pdet-close:hover{background:rgba(255,0,110,.15);border-color:#FF006E;color:#FF006E;}
+    .pdet-hero{position:relative;height:300px;border-radius:20px 20px 0 0;overflow:hidden;}
+    .pdet-hero img{width:100%;height:100%;object-fit:cover;}
+    .pdet-hero-ov{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,5,16,.92) 0%,rgba(0,5,16,.45) 55%,transparent 100%),linear-gradient(to top,rgba(0,5,16,.7) 0%,transparent 50%);}
+    .pdet-hero-txt{position:absolute;bottom:1.8rem;left:2rem;z-index:2;max-width:55%;}
+    .pdet-eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#00F5FF;margin-bottom:.4rem;}
+    .pdet-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.3rem,2.8vw,2.1rem);font-weight:800;line-height:1.1;margin-bottom:.4rem;}
+    .pdet-sub{font-size:.84rem;color:var(--txt2);}
+    .pdet-body{padding:2rem 2.2rem;}
+    .pdet-pain{background:linear-gradient(135deg,rgba(255,0,110,.06),rgba(123,0,255,.05));
+      border:1px solid rgba(255,0,110,.2);border-radius:12px;padding:1.2rem;margin-bottom:1.2rem;}
+    .pdet-pain-lbl{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+      color:#FF006E;margin-bottom:.6rem;display:flex;align-items:center;gap:.35rem;}
+    .pdet-pain-lbl::before{content:'⚠';}
+    .pdet-pain-txt{font-size:.88rem;color:var(--txt2);line-height:1.7;}
+    .pdet-gain{background:linear-gradient(135deg,rgba(0,245,255,.04),rgba(0,255,136,.03));
+      border:1px solid rgba(0,245,255,.18);border-radius:12px;padding:1.2rem;margin-bottom:1.2rem;}
+    .pdet-gain-lbl{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+      color:#00F5FF;margin-bottom:.6rem;display:flex;align-items:center;gap:.35rem;}
+    .pdet-gain-lbl::before{content:'✦';}
+    .pdet-feats{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:1.2rem;}
+    .pdet-feat{display:flex;align-items:flex-start;gap:.65rem;padding:.8rem .9rem;
+      background:rgba(0,245,255,.03);border:1px solid rgba(0,245,255,.1);border-radius:9px;}
+    .pdet-feat-ic{font-size:1.2rem;flex-shrink:0;margin-top:.1rem;}
+    .pdet-feat-title{font-size:.82rem;font-weight:700;color:var(--txt);margin-bottom:.12rem;}
+    .pdet-feat-desc{font-size:.72rem;color:var(--txt2);line-height:1.5;}
+    .pdet-results{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1.2rem;}
+    .pdet-result{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:.9rem;text-align:center;}
+    .pdet-result-n{font-family:'Space Grotesk',sans-serif;font-size:1.7rem;font-weight:800;
+      background:linear-gradient(135deg,#00F5FF,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .pdet-result-l{font-size:.68rem;color:var(--txt2);margin-top:.15rem;}
+    .pdet-urgency{background:linear-gradient(135deg,rgba(255,224,0,.07),rgba(255,0,110,.05));
+      border:1px solid rgba(255,224,0,.22);border-radius:10px;padding:1rem 1.2rem;
+      margin-bottom:1.2rem;display:flex;align-items:center;gap:.9rem;}
+    .pdet-urg-ic{font-size:1.8rem;flex-shrink:0;}
+    .pdet-urg-txt{font-size:.84rem;color:var(--txt2);line-height:1.65;}
+    .pdet-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1.3rem;}
+    .pdet-gallery img{width:100%;border-radius:7px;border:1px solid var(--brd);transition:transform .2s,border-color .2s;cursor:pointer;}
+    .pdet-gallery img:hover{transform:scale(1.04);border-color:rgba(0,245,255,.4);}
+    .pdet-actions{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
+    .pdet-btn-main{padding:.95rem;background:linear-gradient(135deg,#FF006E,#7B00FF);border:none;
+      color:#fff;font-size:.9rem;font-weight:800;border-radius:11px;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;gap:.5rem;
+      box-shadow:0 0 20px rgba(255,0,110,.35);transition:all .2s;letter-spacing:.04em;}
+    .pdet-btn-main:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(255,0,110,.6);}
+    .pdet-btn-sec{padding:.95rem;background:rgba(0,245,255,.07);border:1px solid rgba(0,245,255,.3);
+      color:#00F5FF;font-size:.86rem;font-weight:700;border-radius:11px;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;transition:all .2s;}
+    .pdet-btn-sec:hover{background:rgba(0,245,255,.15);box-shadow:0 0 15px rgba(0,245,255,.2);}
+    @media(max-width:640px){.pdet-feats,.pdet-results,.pdet-actions{grid-template-columns:1fr;}.pdet-gallery{grid-template-columns:1fr 1fr;}}
+
 </style>
 </head>
 <body>
@@ -530,175 +634,19 @@ footer p{font-size:.78rem;color:var(--txt2);}
 <div class="divider"></div>
 
 <!-- SOLUÇÕES -->
-<section id="solucoes">
+<section id="solucoes" style="background:rgba(0,5,16,.6);">
   <div class="container">
-    <div style="text-align:center;margin-bottom:.5rem;">
+    <div style="text-align:center;margin-bottom:3.5rem;">
       <p class="sec-label">O que fazemos</p>
-      <h2 class="sec-title">Soluções que <span class="hl">geram resultado</span></h2>
-      <p class="sec-desc" style="margin:0 auto;">Cada produto foi construído para resolver um problema real de negócio — com IA, automação e visual de alto impacto.</p>
-    </div>
-    <div class="sol-grid">
-      <div class="sol-card">
-        <div class="sol-preview">
-          <div class="browser-bar">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <div class="browser-url">samuca-carnes.vercel.app</div>
-          </div>
-          <a href="https://samuca-carnes.vercel.app" target="_blank" class="preview-link">
-            <img src="https://image.thum.io/get/width/600/crop/380/https://samuca-carnes.vercel.app" alt="Automação de WhatsApp" loading="lazy"/>
-          </a>
-        </div>
-        <div class="sol-body">
-          <div class="sol-icon-row">
-            <div class="sol-icon purple">💬</div>
-            <span class="sol-tag">IA + Mensageria</span>
-          </div>
-          <div class="sol-name">Automação de WhatsApp</div>
-          <div class="sol-desc">Atendimento automático, respostas inteligentes e envio de ofertas via WhatsApp com IA. Nunca mais perca um cliente por demora.</div>
-          <a href="https://samuca-carnes.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
-        </div>
-      </div>
-      <div class="sol-card">
-        <div class="sol-preview">
-          <div class="browser-bar">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <div class="browser-url">ourodigital-tau.vercel.app</div>
-          </div>
-          <a href="https://ourodigital-tau.vercel.app" target="_blank" class="preview-link">
-            <img src="https://image.thum.io/get/width/600/crop/380/https://ourodigital-tau.vercel.app" alt="Automação de Instagram" loading="lazy"/>
-          </a>
-        </div>
-        <div class="sol-body">
-          <div class="sol-icon-row">
-            <div class="sol-icon purple">📸</div>
-            <span class="sol-tag">Social Media AI</span>
-          </div>
-          <div class="sol-name">Automação de Instagram</div>
-          <div class="sol-desc">Respostas automáticas nos comentários e DMs, agendamento inteligente de posts e análise de engajamento com IA.</div>
-          <a href="https://ourodigital-tau.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
-        </div>
-      </div>
-      <div class="sol-card">
-        <div class="sol-preview">
-          <div class="browser-bar">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <div class="browser-url">ramiresvendas.vercel.app</div>
-          </div>
-          <a href="https://ramiresvendas.vercel.app" target="_blank" class="preview-link">
-            <img src="https://image.thum.io/get/width/600/crop/380/https://ramiresvendas.vercel.app" alt="Automação de Twitter/X" loading="lazy"/>
-          </a>
-        </div>
-        <div class="sol-body">
-          <div class="sol-icon-row">
-            <div class="sol-icon cyan">🐦</div>
-            <span class="sol-tag">Social Media AI</span>
-          </div>
-          <div class="sol-name">Automação de Twitter/X</div>
-          <div class="sol-desc">Publicação automatizada, monitoramento de menções e respostas geradas por IA — sua marca ativa 24 horas por dia.</div>
-          <a href="https://ramiresvendas.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
-        </div>
-      </div>
-      <div class="sol-card">
-        <div class="sol-preview">
-          <div class="browser-bar">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <div class="browser-url">ramiresvendas.vercel.app</div>
-          </div>
-          <a href="https://ramiresvendas.vercel.app" target="_blank" class="preview-link">
-            <img src="https://image.thum.io/get/width/600/crop/380/https://ramiresvendas.vercel.app" alt="Dashboard de Vendas" loading="lazy"/>
-          </a>
-        </div>
-        <div class="sol-body">
-          <div class="sol-icon-row">
-            <div class="sol-icon green">📊</div>
-            <span class="sol-tag">BI em Tempo Real</span>
-          </div>
-          <div class="sol-name">Dashboard de Vendas</div>
-          <div class="sol-desc">Painel interativo em tempo real com métricas de vendas, metas e alertas automáticos. Decisões mais rápidas.</div>
-          <a href="https://ramiresvendas.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
-        </div>
-      </div>
-      <div class="sol-card">
-        <div class="sol-preview">
-          <div class="browser-bar">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <div class="browser-url">sistema-perda-mercado.vercel.app</div>
-          </div>
-          <a href="https://sistema-perda-mercado.vercel.app" target="_blank" class="preview-link">
-            <img src="https://image.thum.io/get/width/600/crop/380/https://sistema-perda-mercado.vercel.app" alt="Dashboard de Perdas" loading="lazy"/>
-          </a>
-        </div>
-        <div class="sol-body">
-          <div class="sol-icon-row">
-            <div class="sol-icon orange">📉</div>
-            <span class="sol-tag">Gestão Operacional</span>
-          </div>
-          <div class="sol-name">Dashboard de Perdas</div>
-          <div class="sol-desc">Identifica e monitora perdas operacionais automaticamente. Alertas em tempo real para desvios e vencimentos.</div>
-          <a href="https://sistema-perda-mercado.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
-        </div>
-      </div>
-      <div class="sol-card">
-        <div class="sol-preview">
-          <div class="browser-bar">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <div class="browser-url">supermercado-treviso.vercel.app</div>
-          </div>
-          <a href="https://supermercado-treviso.vercel.app" target="_blank" class="preview-link">
-            <img src="https://image.thum.io/get/width/600/crop/380/https://supermercado-treviso.vercel.app" alt="Controle de Estoque" loading="lazy"/>
-          </a>
-        </div>
-        <div class="sol-body">
-          <div class="sol-icon-row">
-            <div class="sol-icon green">📦</div>
-            <span class="sol-tag">Estoque Inteligente</span>
-          </div>
-          <div class="sol-name">Controle de Estoque</div>
-          <div class="sol-desc">Sistema inteligente de entrada, saída e inventário com alertas de reposição automáticos e previsão de demanda.</div>
-          <a href="https://supermercado-treviso.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
-        </div>
-      </div>
-      <div class="sol-card">
-        <div class="sol-preview">
-          <div class="browser-bar">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <div class="browser-url">samuca-painel.vercel.app</div>
-          </div>
-          <a href="https://samuca-painel.vercel.app" target="_blank" class="preview-link">
-            <img src="https://image.thum.io/get/width/600/crop/380/https://samuca-painel.vercel.app" alt="Painel Digital de Açougue" loading="lazy"/>
-          </a>
-        </div>
-        <div class="sol-body">
-          <div class="sol-icon-row">
-            <div class="sol-icon orange">🥩</div>
-            <span class="sol-tag">TV Display</span>
-          </div>
-          <div class="sol-name">Painel Digital de Açougue</div>
-          <div class="sol-desc">Painel TV profissional com preços em rotação automática e fotos dos cortes. O cliente vê os preços em tempo real.</div>
-          <a href="https://samuca-painel.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
-        </div>
-      </div>
-      <div class="sol-card">
-        <div class="sol-preview">
-          <div class="browser-bar">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <div class="browser-url">supermercado-treviso.vercel.app</div>
-          </div>
-          <a href="https://supermercado-treviso.vercel.app" target="_blank" class="preview-link">
-            <img src="https://image.thum.io/get/width/600/crop/380/https://supermercado-treviso.vercel.app" alt="Vitrine Digital de Produtos" loading="lazy"/>
-          </a>
-        </div>
-        <div class="sol-body">
-          <div class="sol-icon-row">
-            <div class="sol-icon cyan">🏪</div>
-            <span class="sol-tag">Digital Signage</span>
-          </div>
-          <div class="sol-name">Vitrine Digital de Produtos</div>
-          <div class="sol-desc">Exposição dinâmica de produtos de mercados e lojas em painéis digitais com atualização de preços em tempo real.</div>
-          <a href="https://supermercado-treviso.vercel.app" target="_blank" class="sol-demo-btn">Ver modelo ao vivo &rarr;</a>
-        </div>
+      <h2 class="sec-title">Soluções que <span class="hl">transformam negócios</span></h2>
+      <p class="sec-desc" style="margin:0 auto;max-width:580px;">Cada empresa tem uma dor. Temos a solução. Clique em qualquer serviço e descubra como a IA pode escalar o seu negócio ainda este mês.</p>
+      <div style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;">
+        <div style="text-align:center;"><div style="font-family:Space Grotesk,sans-serif;font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#00F5FF,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">+237%</div><div style="font-size:.72rem;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em;">Crescimento médio</div></div>
+        <div style="text-align:center;"><div style="font-family:Space Grotesk,sans-serif;font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#00F5FF,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">48h</div><div style="font-size:.72rem;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em;">Para implementar</div></div>
+        <div style="text-align:center;"><div style="font-family:Space Grotesk,sans-serif;font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#00F5FF,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">24/7</div><div style="font-size:.72rem;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em;">IA trabalhando</div></div>
       </div>
     </div>
+    <div class="port-grid" id="portGrid"></div>
   </div>
 </section>
 
