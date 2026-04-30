@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kairos Digital — Automação com IA para Negócios</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --p:   #7C3AED;
+  --p2:  #A855F7;
+  --p3:  #C084FC;
+  --a:   #06B6D4;
+  --a2:  #22D3EE;
+  --g:   #10B981;
+  --bg:  #030712;
+  --bg2: #0a0f1e;
+  --bg3: #0f172a;
+  --txt: #F1F5F9;
+  --txt2:#94A3B8;
+  --brd: rgba(124,58,237,0.2);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;overflow-x:hidden;}
+
+/* ── CANVAS PARTICLES ── */
+#canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(3,7,18,.85);
+  backdrop-filter:blur(20px);border-bottom:1px solid var(--brd);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 4rem;height:68px;}
+.nav-logo{font-family:'Space Grotesk';font-size:1.35rem;font-weight:700;
+  background:linear-gradient(135deg,var(--p2),var(--a));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:.04em;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{color:var(--txt2);text-decoration:none;font-size:.88rem;font-weight:500;
+  transition:color .2s;}
+.nav-links a:hover{color:var(--txt);}
+.nav-cta{background:linear-gradient(135deg,var(--p),var(--p2));
+  color:#fff;border:none;padding:.55rem 1.5rem;border-radius:8px;
+  font-size:.88rem;font-weight:600;cursor:pointer;transition:opacity .2s;}
+.nav-cta:hover{opacity:.85;}
+
+/* ── HERO ── */
+#hero{position:relative;z-index:1;min-height:100vh;display:flex;
+  align-items:center;justify-content:center;text-align:center;
+  padding:100px 2rem 4rem;}
+.hero-inner{max-width:860px;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.35);
+  border-radius:50px;padding:.4rem 1.1rem;font-size:.78rem;font-weight:600;
+  color:var(--p3);letter-spacing:.05em;margin-bottom:1.8rem;}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--p2);box-shadow:0 0 8px var(--p2);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+h1{font-family:'Space Grotesk';font-size:clamp(2.8rem,7vw,5.5rem);
+  font-weight:700;line-height:1.08;margin-bottom:1.4rem;}
+h1 .hl{background:linear-gradient(135deg,var(--p2) 0%,var(--a) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-desc{font-size:clamp(1rem,2vw,1.2rem);color:var(--txt2);line-height:1.75;
+  max-width:620px;margin:0 auto 2.5rem;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;
+  background:linear-gradient(135deg,var(--p),var(--p2));
+  color:#fff;font-weight:600;font-size:.95rem;
+  padding:.85rem 2rem;border-radius:10px;text-decoration:none;
+  box-shadow:0 4px 24px rgba(124,58,237,.45);transition:transform .2s,box-shadow .2s;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(124,58,237,.65);}
+.btn-outline{display:inline-flex;align-items:center;gap:.5rem;
+  border:1.5px solid rgba(124,58,237,.5);color:var(--p3);
+  font-weight:600;font-size:.95rem;
+  padding:.85rem 2rem;border-radius:10px;text-decoration:none;
+  transition:background .2s,border-color .2s;}
+.btn-outline:hover{background:rgba(124,58,237,.1);border-color:var(--p2);}
+
+/* hero stats */
+.hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;
+  margin-top:4rem;padding-top:3rem;
+  border-top:1px solid rgba(255,255,255,.06);}
+.stat{text-align:center;}
+.stat-n{font-family:'Space Grotesk';font-size:2.2rem;font-weight:700;
+  background:linear-gradient(135deg,var(--p2),var(--a));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat-l{font-size:.8rem;color:var(--txt2);margin-top:.2rem;}
+
+/* ── SECTION COMMONS ── */
+section{position:relative;z-index:1;padding:6rem 2rem;}
+.container{max-width:1180px;margin:0 auto;}
+.sec-label{font-size:.72rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--p3);margin-bottom:.6rem;}
+.sec-title{font-family:'Space Grotesk';font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:700;line-height:1.2;margin-bottom:.8rem;}
+.sec-title .hl{background:linear-gradient(135deg,var(--p2),var(--a));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sec-desc{color:var(--txt2);line-height:1.7;font-size:.95rem;max-width:540px;}
+
+/* divider */
+.divider{width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(124,58,237,.4),transparent);
+  margin:0;}
+
+/* ── SOLUTIONS ── */
+#solucoes{background:var(--bg2);}
+.sol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:1.5rem;margin-top:3.5rem;}
+.sol-card{background:var(--bg3);border:1px solid var(--brd);border-radius:20px;
+  padding:2rem;transition:transform .3s,border-color .3s,box-shadow .3s;
+  position:relative;overflow:hidden;}
+.sol-card::before{content:'';position:absolute;inset:0;opacity:0;
+  background:linear-gradient(135deg,rgba(124,58,237,.08),transparent);
+  transition:opacity .3s;}
+.sol-card:hover{transform:translateY(-6px);border-color:rgba(124,58,237,.5);
+  box-shadow:0 16px 40px rgba(124,58,237,.15);}
+.sol-card:hover::before{opacity:1;}
+.sol-icon{width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:1.3rem;}
+.sol-icon.purple{background:rgba(124,58,237,.15);}
+.sol-icon.cyan{background:rgba(6,182,212,.15);}
+.sol-icon.green{background:rgba(16,185,129,.15);}
+.sol-icon.orange{background:rgba(249,115,22,.15);}
+.sol-name{font-family:'Space Grotesk';font-size:1.15rem;font-weight:700;
+  margin-bottom:.5rem;}
+.sol-desc{font-size:.88rem;color:var(--txt2);line-height:1.65;}
+.sol-tag{display:inline-block;margin-top:1.1rem;font-size:.72rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  background:rgba(124,58,237,.12);color:var(--p3);
+  padding:.28rem .75rem;border-radius:50px;border:1px solid rgba(124,58,237,.25);}
+
+/* ── COMO FUNCIONA ── */
+#como{background:var(--bg);}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1.5rem;margin-top:3.5rem;}
+.step{text-align:center;padding:2rem 1.5rem;}
+.step-num{width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p),var(--p2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk';font-size:1.3rem;font-weight:700;
+  margin:0 auto 1.2rem;box-shadow:0 4px 20px rgba(124,58,237,.4);}
+.step-name{font-family:'Space Grotesk';font-size:1.05rem;font-weight:700;margin-bottom:.5rem;}
+.step-desc{font-size:.85rem;color:var(--txt2);line-height:1.65;}
+
+/* ── SOBRE / EQUIPE ── */
+#sobre{background:var(--bg2);}
+.sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.sobre-text .sec-desc{max-width:100%;font-size:1rem;}
+.sobre-text p+p{margin-top:1rem;}
+.equipe{display:flex;gap:2rem;margin-top:2.5rem;flex-wrap:wrap;}
+.membro{display:flex;align-items:center;gap:1rem;
+  background:var(--bg3);border:1px solid var(--brd);border-radius:16px;
+  padding:1.1rem 1.4rem;flex:1;min-width:200px;}
+.membro-avatar{width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p),var(--a));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk';font-size:1.2rem;font-weight:700;
+  flex-shrink:0;overflow:hidden;}
+.membro-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.membro-nome{font-weight:700;font-size:.95rem;}
+.membro-cargo{font-size:.78rem;color:var(--p3);font-weight:500;}
+.sobre-visual{background:var(--bg3);border:1px solid var(--brd);border-radius:24px;
+  padding:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.mini-card{background:var(--bg2);border:1px solid var(--brd);border-radius:14px;
+  padding:1.2rem;text-align:center;}
+.mini-card .ic{font-size:1.8rem;margin-bottom:.5rem;}
+.mini-card strong{display:block;font-family:'Space Grotesk';font-size:1.4rem;
+  font-weight:700;background:linear-gradient(135deg,var(--p2),var(--a));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.mini-card span{font-size:.72rem;color:var(--txt2);}
+
+/* ── CTA ── */
+#cta{background:var(--bg);text-align:center;}
+.cta-box{background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(6,182,212,.1));
+  border:1px solid rgba(124,58,237,.3);border-radius:28px;
+  padding:4rem 3rem;max-width:760px;margin:0 auto;
+  box-shadow:0 0 80px rgba(124,58,237,.12);}
+.cta-box h2{font-family:'Space Grotesk';font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:700;margin-bottom:1rem;}
+.cta-box p{color:var(--txt2);font-size:1rem;line-height:1.7;margin-bottom:2rem;}
+.wa-btn{display:inline-flex;align-items:center;gap:.7rem;
+  background:linear-gradient(135deg,#16a34a,#22c55e);
+  color:#fff;font-weight:700;font-size:1rem;
+  padding:1rem 2.5rem;border-radius:12px;text-decoration:none;
+  box-shadow:0 4px 24px rgba(34,197,94,.4);transition:transform .2s,box-shadow .2s;}
+.wa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(34,197,94,.6);}
+
+/* ── FOOTER ── */
+footer{position:relative;z-index:1;background:var(--bg);
+  border-top:1px solid var(--brd);padding:2.5rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.foot-logo{font-family:'Space Grotesk';font-size:1.1rem;font-weight:700;
+  background:linear-gradient(135deg,var(--p2),var(--a));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+footer p{font-size:.78rem;color:var(--txt2);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:0 1.5rem;}
+  .nav-links{display:none;}
+  .sobre-grid{grid-template-columns:1fr;gap:2rem;}
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<nav>
+  <div class="nav-logo">Kairos Digital</div>
+  <ul class="nav-links">
+    <li><a href="#solucoes">Soluções</a></li>
+    <li><a href="#como">Como Funciona</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#cta">Contato</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Falar com a equipe</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">✦ Automação com Inteligência Artificial</div>
+    <h1>Seu negócio no<br/><span class="hl">momento certo.</span></h1>
+    <p class="hero-desc">A Kairos Digital cria soluções sob medida com IA — automações, dashboards e painéis que transformam a operação do seu negócio em tempo real.</p>
+    <div class="hero-btns">
+      <a href="#solucoes" class="btn-primary">Ver soluções</a>
+      <a href="#cta" class="btn-outline">Falar com a equipe</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n">8+</div><div class="stat-l">Soluções ativas</div></div>
+      <div class="stat"><div class="stat-n">100%</div><div class="stat-l">IA integrada</div></div>
+      <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">Automação contínua</div></div>
+      <div class="stat"><div class="stat-n">Goiânia</div><div class="stat-l">Base de operações</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOLUÇÕES -->
+<section id="solucoes">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:.5rem;">
+      <p class="sec-label">O que fazemos</p>
+      <h2 class="sec-title">Soluções que <span class="hl">geram resultado</span></h2>
+      <p class="sec-desc" style="margin:0 auto;">Cada produto foi construído para resolver um problema real de negócio — com IA, automação e visual de alto impacto.</p>
+    </div>
+    <div class="sol-grid">
+
+      <div class="sol-card">
+        <div class="sol-icon purple">💬</div>
+        <div class="sol-name">Automação de WhatsApp</div>
+        <div class="sol-desc">Atendimento automático, respostas inteligentes e envio de ofertas via WhatsApp com IA treinada no seu negócio. Nunca mais perca um cliente por demora.</div>
+        <span class="sol-tag">IA + Mensageria</span>
+      </div>
+
+      <div class="sol-card">
+        <div class="sol-icon purple">📸</div>
+        <div class="sol-name">Automação de Instagram</div>
+        <div class="sol-desc">Respostas automáticas nos comentários e DMs, agendamento inteligente de posts e análise de engajamento com IA para crescer mais rápido.</div>
+        <span class="sol-tag">Social Media AI</span>
+      </div>
+
+      <div class="sol-card">
+        <div class="sol-icon cyan">🐦</div>
+        <div class="sol-name">Automação de Twitter/X</div>
+        <div class="sol-desc">Publicação automatizada, monitoramento de menções e respostas geradas por IA para manter sua marca ativa e relevante 24 horas por dia.</div>
+        <span class="sol-tag">Social Media AI</span>
+      </div>
+
+      <div class="sol-card">
+        <div class="sol-icon green">📊</div>
+        <div class="sol-name">Dashboard de Vendas</div>
+        <div class="sol-desc">Painel interativo em tempo real com métricas de vendas, metas, ranking de produtos e alertas automáticos. Decisões mais rápidas, resultados maiores.</div>
+        <span class="sol-tag">BI em Tempo Real</span>
+      </div>
+
+      <div class="sol-card">
+        <div class="sol-icon orange">📉</div>
+        <div class="sol-name">Dashboard de Perdas</div>
+        <div class="sol-desc">Identifica e monitora perdas operacionais automaticamente. Alertas em tempo real para desvios, vencimentos e quebras — reducao de custos garantida.</div>
+        <span class="sol-tag">Gestão Operacional</span>
+      </div>
+
+      <div class="sol-card">
+        <div class="sol-icon green">📦</div>
+        <div class="sol-name">Controle de Estoque</div>
+        <div class="sol-desc">Sistema inteligente de entrada, saída e inventário com alertas de reposição automáticos e previsão de demanda por IA para nunca faltar produto.</div>
+        <span class="sol-tag">Estoque Inteligente</span>
+      </div>
+
+      <div class="sol-card">
+        <div class="sol-icon orange">🥩</div>
+        <div class="sol-name">Painel Digital de Açougue</div>
+        <div class="sol-desc">Painel TV profissional com preços em rotação automática, fotos dos cortes e design impactante. O cliente vê os preços em tempo real enquanto escolhe.</div>
+        <span class="sol-tag">TV Display</span>
+      </div>
+
+      <div class="sol-card">
+        <div class="sol-icon cyan">🏪</div>
+        <div class="sol-name">Vitrine Digital de Produtos</div>
+        <div class="sol-desc">Exposição dinâmica de produtos de mercados, lojas e distribuidoras em painéis digitais com atualização de preços em tempo real e rotação automática.</div>
+        <span class="sol-tag">Digital Signage</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMO FUNCIONA -->
+<section id="como">
+  <div class="container">
+    <div style="text-align:center;">
+      <p class="sec-label">Processo</p>
+      <h2 class="sec-title">Como a Kairos <span class="hl">trabalha</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-name">Diagnóstico</div>
+        <div class="step-desc">Entendemos o seu negócio, os processos e onde a automação gera mais impacto imediato.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-name">Construção</div>
+        <div class="step-desc">Desenvolvemos a solução com IA sob medida — rápido, sem burocracia, direto ao ponto.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-name">Deploy</div>
+        <div class="step-desc">Publicamos e configuramos tudo — no seu domínio, na sua TV, no seu WhatsApp. Pronto para usar.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-name">Suporte Contínuo</div>
+        <div class="step-desc">Monitoramos, ajustamos e evoluímos a solução conforme o seu negócio cresce.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-text">
+        <p class="sec-label">Quem somos</p>
+        <h2 class="sec-title">A equipe por trás da <span class="hl">Kairos</span></h2>
+        <p class="sec-desc">A Kairos nasceu da combinação de visão de negócios e tecnologia de ponta. Somos uma equipe focada em transformar operações comuns em sistemas inteligentes com IA.</p>
+        <p class="sec-desc" style="margin-top:1rem;">Com base em Goiânia-GO, atendemos negócios de todos os tamanhos — do açougue de bairro à rede de supermercados — entregando soluções que funcionam de verdade.</p>
+        <div class="equipe">
+          <div class="membro">
+            <div class="membro-avatar">W</div>
+            <div>
+              <div class="membro-nome">Vilson</div>
+              <div class="membro-cargo">CEO & Fundador</div>
+            </div>
+          </div>
+          <div class="membro">
+            <div class="membro-avatar">M</div>
+            <div>
+              <div class="membro-nome">Mateus</div>
+              <div class="membro-cargo">Co-CEO & Fundador</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sobre-visual">
+        <div class="mini-card"><div class="ic">🤖</div><strong>IA</strong><span>100% integrada</span></div>
+        <div class="mini-card"><div class="ic">⚡</div><strong>48h</strong><span>Entrega media</span></div>
+        <div class="mini-card"><div class="ic">🏪</div><strong>8+</strong><span>Tipos de solucao</span></div>
+        <div class="mini-card"><div class="ic">📍</div><strong>GO</strong><span>Goiania - Brasil</span></div>
+        <div class="mini-card" style="grid-column:span 2;"><div class="ic">🚀</div><strong style="font-size:1.1rem;">Kairos</strong><span style="font-size:.8rem;">Do grego: o momento certo. Sua empresa na hora certa, com a tecnologia certa.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Pronto para <span style="background:linear-gradient(135deg,#7C3AED,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">automatizar seu negócio?</span></h2>
+      <p>Fale com a equipe da Kairos agora mesmo. Sem enrolação — em 48 horas sua solução pode estar no ar.</p>
+      <a href="https://wa.me/5562981363653?text=Oi%2C%20vim%20pelo%20site%20da%20Kairos%20Digital%20e%20quero%20conhecer%20as%20solu%C3%A7%C3%B5es!" target="_blank" class="wa-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo">Kairos Digital</div>
+  <p>Automação com IA para negócios · Goiânia, GO · 2026</p>
+  <p>© 2026 Kairos Digital — Todos os direitos reservados</p>
+</footer>
+
+<script>
+/* PARTICLES */
+(function(){
+  var c=document.getElementById('canvas'),ctx=c.getContext('2d');
+  var pts=[],N=70;
+  function resize(){c.width=innerWidth;c.height=innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  for(var i=0;i<N;i++) pts.push({
+    x:Math.random()*innerWidth, y:Math.random()*innerHeight,
+    vx:(Math.random()-.5)*.3, vy:(Math.random()-.5)*.3,
+    r:Math.random()*1.5+.5
+  });
+  function frame(){
+    ctx.clearRect(0,0,c.width,c.height);
+    pts.forEach(function(p){
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>c.width) p.vx*=-1;
+      if(p.y<0||p.y>c.height) p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(124,58,237,.6)';ctx.fill();
+    });
+    pts.forEach(function(p,i){
+      pts.forEach(function(q,j){
+        if(j<=i) return;
+        var dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<130){
+          ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+          ctx.strokeStyle='rgba(124,58,237,'+(0.12*(1-d/130))+')';
+          ctx.lineWidth=.8;ctx.stroke();
+        }
+      });
+    });
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+</script>
+</body>
+</html>
