@@ -242,6 +242,149 @@ footer p{font-size:.78rem;color:var(--txt2);}
     .membro-placeholder{display:flex;align-items:center;gap:1rem;background:var(--bg2);border:1px dashed var(--brd);border-radius:14px;padding:1.1rem 1.3rem;}
     @media(max-width:640px){.ceo-card{flex-direction:column;}.ceo-photo{width:100%;height:220px;}}
 
+
+    .urgency-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem;margin-top:.3rem;}
+    .urgency-opt{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;
+      padding:.65rem .5rem;text-align:center;cursor:pointer;transition:all .2s;}
+    .urgency-opt:hover{border-color:rgba(124,58,237,.5);background:rgba(124,58,237,.08);}
+    .urgency-opt.sel{border-color:var(--p2);background:rgba(124,58,237,.15);}
+    .urg-icon{display:block;font-size:1.3rem;margin-bottom:.2rem;}
+    .urg-label{display:block;font-size:.75rem;font-weight:700;color:var(--txt);}
+    .urg-sub{display:block;font-size:.62rem;color:var(--txt2);margin-top:.1rem;}
+
+
+    /* ── CYBERPUNK GLOBAL ── */
+    body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+      background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,245,255,.015) 2px,rgba(0,245,255,.015) 4px);
+      animation:scanlines 8s linear infinite;}
+    @keyframes scanlines{0%{background-position:0 0;}100%{background-position:0 100px;}}
+
+    /* NAV cyberpunk */
+    nav{border-bottom:1px solid rgba(0,245,255,.25);box-shadow:0 0 30px rgba(0,245,255,.08);}
+    .nav-logo span{background:linear-gradient(135deg,#00F5FF,#FF006E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:none;}
+
+    /* GLITCH TITLE */
+    .glitch-text{position:relative;display:inline-block;}
+    .glitch-text::before,.glitch-text::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;background:transparent;}
+    .glitch-text::before{left:2px;text-shadow:-2px 0 #FF006E;clip:rect(44px,450px,56px,0);animation:glitch1 3.5s infinite linear alternate-reverse;}
+    .glitch-text::after{left:-2px;text-shadow:2px 0 #00F5FF;clip:rect(44px,450px,56px,0);animation:glitch2 3s infinite linear alternate-reverse;}
+    @keyframes glitch1{0%{clip:rect(14px,9999px,36px,0);}20%{clip:rect(68px,9999px,5px,0);}40%{clip:rect(91px,9999px,74px,0);}60%{clip:rect(11px,9999px,50px,0);}80%{clip:rect(77px,9999px,23px,0);}100%{clip:rect(40px,9999px,80px,0);}}
+    @keyframes glitch2{0%{clip:rect(55px,9999px,12px,0);}25%{clip:rect(4px,9999px,88px,0);}50%{clip:rect(33px,9999px,61px,0);}75%{clip:rect(70px,9999px,19px,0);}100%{clip:rect(25px,9999px,44px,0);}}
+
+    /* NEON HIGHLIGHT */
+    .hl{background:linear-gradient(135deg,#00F5FF,#FF006E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+    /* HERO badge cyberpunk */
+    .hero-badge{background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.4);color:#00F5FF;
+      box-shadow:0 0 20px rgba(0,245,255,.15);}
+    .hero-badge::before{background:#00F5FF;box-shadow:0 0 10px #00F5FF;}
+
+    /* CARDS 3D tilt */
+    .sol-card{transform-style:preserve-3d;transition:transform .15s ease,border-color .3s,box-shadow .3s;
+      border-color:rgba(0,245,255,.18);}
+    .sol-card:hover{border-color:rgba(0,245,255,.6);
+      box-shadow:0 0 20px rgba(0,245,255,.2),0 0 60px rgba(0,245,255,.08),inset 0 0 30px rgba(0,245,255,.03);}
+
+    /* NEON CORNERS on cards */
+    .sol-card::after{content:'';position:absolute;inset:0;border-radius:20px;
+      background:linear-gradient(135deg,rgba(0,245,255,.06),transparent 40%,rgba(255,0,110,.04));
+      pointer-events:none;opacity:0;transition:opacity .3s;}
+    .sol-card:hover::after{opacity:1;}
+
+    /* SECTION titles */
+    .sec-label{color:#00F5FF;letter-spacing:.2em;text-shadow:0 0 10px rgba(0,245,255,.5);}
+    .sec-title{color:var(--txt);}
+
+    /* BUTTONS cyberpunk */
+    .btn-primary{background:linear-gradient(135deg,#7B00FF,#00F5FF);
+      box-shadow:0 0 20px rgba(0,245,255,.3),0 4px 24px rgba(123,0,255,.4);
+      border:1px solid rgba(0,245,255,.3);}
+    .btn-primary:hover{box-shadow:0 0 40px rgba(0,245,255,.5),0 8px 32px rgba(123,0,255,.6);}
+    .btn-outline{border-color:rgba(0,245,255,.5);color:#00F5FF;
+      box-shadow:0 0 10px rgba(0,245,255,.1);}
+    .btn-outline:hover{background:rgba(0,245,255,.1);border-color:#00F5FF;
+      box-shadow:0 0 20px rgba(0,245,255,.25);}
+
+    /* PILLS */
+    .pill{background:rgba(255,224,0,.08);border-color:rgba(255,224,0,.35);color:#FFE000;
+      box-shadow:0 0 10px rgba(255,224,0,.12);}
+    .hero-badge-cyber{animation:badge-pulse 2.5s ease-in-out infinite;}
+    @keyframes badge-pulse{0%,100%{box-shadow:0 0 10px rgba(0,245,255,.2);}50%{box-shadow:0 0 30px rgba(0,245,255,.5);}}
+
+    /* CURSOR cyberpunk */
+    .c-dot{background:#00F5FF;box-shadow:0 0 12px #00F5FF,0 0 24px rgba(0,245,255,.5);}
+    .c-ring{border-color:rgba(0,245,255,.6);}
+
+    /* SLOTS cyberpunk */
+    .slot.sel{background:rgba(0,245,255,.2);border-color:#00F5FF;color:#00F5FF;
+      box-shadow:0 0 12px rgba(0,245,255,.3);}
+
+    /* MILESTONES */
+    .milestone.unlocked{border-color:rgba(255,224,0,.5);
+      box-shadow:0 0 10px rgba(255,224,0,.1);}
+    .m-check.unlocked,.milestone.unlocked .m-check{background:#FFE000;border-color:#FFE000;color:#000;}
+    .m-pts{color:#FFE000;text-shadow:0 0 8px rgba(255,224,0,.4);}
+
+    /* HOURGLASS widget */
+    .hg-widget{border-color:rgba(0,245,255,.3);
+      box-shadow:0 0 20px rgba(0,245,255,.1);}
+    .hg-ttl{color:#00F5FF;text-shadow:0 0 8px rgba(0,245,255,.5);}
+
+    /* INTERESSE BTN */
+    .int-btn{border-color:rgba(0,245,255,.35);color:#00F5FF;}
+    .int-btn:hover,.int-btn.ativo{background:linear-gradient(135deg,#7B00FF,#00F5FF);
+      border-color:transparent;color:#000;font-weight:800;}
+
+    /* LOGO UPLOAD BTN */
+    .logo-btn{border-color:rgba(255,0,110,.4);color:#FF006E;}
+    .logo-btn:hover{background:rgba(255,0,110,.12);border-color:#FF006E;}
+
+    /* NEON DIVIDER */
+    .divider{background:linear-gradient(90deg,transparent,rgba(0,245,255,.4),rgba(255,0,110,.3),transparent);height:1px;}
+
+    /* WA SEND BTN */
+    .wa-send-btn{background:linear-gradient(135deg,#00BB55,#00F5FF) !important;
+      box-shadow:0 0 20px rgba(0,245,255,.25),0 4px 20px rgba(0,187,85,.35) !important;}
+
+    /* URGENCY cyberpunk */
+    .urgency-opt{border-color:rgba(0,245,255,.15);}
+    .urgency-opt:hover{border-color:rgba(0,245,255,.5);box-shadow:0 0 12px rgba(0,245,255,.15);}
+    .urgency-opt.sel{border-color:#00F5FF;box-shadow:0 0 15px rgba(0,245,255,.3);}
+
+    /* CEO card */
+    .ceo-card{border-color:rgba(255,224,0,.2);}
+    .ceo-card:hover{border-color:rgba(255,224,0,.5);box-shadow:0 0 30px rgba(255,224,0,.1);}
+    .ceo-name{background:linear-gradient(135deg,#FFE000,#FF006E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .ceo-badge{border-color:rgba(255,224,0,.4);color:#FFE000;background:rgba(255,224,0,.08);}
+
+    /* TYPING cursor blink */
+    .type-cursor::after{content:'|';animation:cur 0.8s step-end infinite;color:#00F5FF;}
+    @keyframes cur{0%,100%{opacity:1;}50%{opacity:0;}}
+
+    /* NEON PROGRESS BARS */
+    .pts-bar-fill,.lb-bar,.sprint-fill,.skill-fill{
+      background:linear-gradient(90deg,#7B00FF,#00F5FF) !important;
+      box-shadow:0 0 8px rgba(0,245,255,.4);}
+
+    /* GRID bg cyberpunk */
+    #canvas-bg{opacity:.6;}
+    [data-theme="light"] #canvas-bg{opacity:.2;}
+
+    /* ABOUT stats cyberpunk */
+    .s-n,.stat-n,.pts-big,.kpi-val{
+      background:linear-gradient(135deg,#00F5FF,#FFE000) !important;
+      -webkit-background-clip:text !important;-webkit-text-fill-color:transparent !important;background-clip:text !important;}
+
+    /* FOOTER */
+    footer{border-top-color:rgba(0,245,255,.2);box-shadow:0 -1px 30px rgba(0,245,255,.05);}
+    .foot-logo{background:linear-gradient(135deg,#00F5FF,#FF006E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+    /* SECTION backgrounds */
+    #solucoes{background:rgba(0,5,16,.6);}
+    #gamificacao{background:rgba(5,0,16,.5);}
+    #como{background:rgba(0,8,20,.6);}
+    #sobre{background:rgba(5,0,8,.5);}
+
 </style>
 </head>
 <body>
@@ -573,7 +716,82 @@ footer p{font-size:.78rem;color:var(--txt2);}
 <a href="team.html" style="font-size:.74rem;color:var(--p3);text-decoration:none;font-weight:600;border:1px solid rgba(124,58,237,.3);padding:.25rem .7rem;border-radius:6px;transition:all .2s;">HQ da Equipe</a></footer>
 
 <script>
-/* GALAXIA INTERGALATICA */
+/* CYBERPUNK MATRIX BG */
+(function(){
+  var cv=document.getElementById('canvas-bg'),ctx=cv.getContext('2d');
+  var W,H,cols,drops,chars='KAIROS0123456789ABCDEF<>{}[]|$#@!アイウエオカキクケコサ';
+  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;cols=Math.floor(W/18);drops=[];for(var i=0;i<cols;i++)drops[i]=Math.random()*-H;}
+  resize();window.addEventListener('resize',resize);
+
+  // Stars layer
+  var stars=[];for(var s=0;s<200;s++)stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.2+.2,t:Math.random()*Math.PI*2,ts:.01+Math.random()*.03});
+
+  function frame(){
+    // Stars
+    ctx.fillStyle='rgba(0,5,16,.15)';ctx.fillRect(0,0,W,H);
+    stars.forEach(function(s){s.t+=s.ts;var a=0.3+0.7*Math.abs(Math.sin(s.t));ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fillStyle='rgba(0,245,255,'+a+')';ctx.fill();});
+
+    // Matrix rain
+    ctx.font='13px monospace';
+    for(var i=0;i<cols;i++){
+      var ch=chars[Math.floor(Math.random()*chars.length)];
+      var y=drops[i];
+      // Head glow
+      ctx.fillStyle='#00F5FF';ctx.shadowColor='#00F5FF';ctx.shadowBlur=8;
+      ctx.fillText(ch,i*18,y);
+      ctx.shadowBlur=0;
+      // Trail
+      for(var t=1;t<8;t++){
+        var alpha=Math.max(0,(8-t)/8*0.18);
+        ctx.fillStyle='rgba(0,245,255,'+alpha+')';
+        ctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*18,y-t*18);
+      }
+      drops[i]+=18;
+      if(drops[i]>H+100&&Math.random()>.92)drops[i]=Math.random()*-300;
+    }
+
+    // Occasional pink streak
+    if(Math.random()>.985){
+      var px=Math.random()*W;
+      ctx.strokeStyle='rgba(255,0,110,0.4)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(px,0);ctx.lineTo(px+Math.random()*30-15,H);ctx.stroke();
+    }
+
+    requestAnimationFrame(frame);
+  }
+  frame();
+
+  /* NEON EXPLOSION on click */
+  document.addEventListener('click',function(e){
+    if(e.target.closest('button,a,input,select,textarea,.slot,.int-btn,.logo-btn')) return;
+    var bx=e.clientX,by=e.clientY;
+    var st=Date.now(),dur=500;
+    (function pulse(){
+      var p=Math.min((Date.now()-st)/dur,1),ease=1-Math.pow(1-p,3);
+      var r=ease*150;
+      // Cyan ring
+      ctx.save();
+      ctx.strokeStyle='rgba(0,245,255,'+(0.8*(1-p))+')';ctx.lineWidth=2-p*1.5;
+      ctx.shadowColor='#00F5FF';ctx.shadowBlur=20*(1-p);
+      ctx.beginPath();ctx.arc(bx,by,r,0,Math.PI*2);ctx.stroke();
+      // Pink inner ring
+      ctx.strokeStyle='rgba(255,0,110,'+(0.6*(1-p))+')';
+      ctx.beginPath();ctx.arc(bx,by,r*0.5,0,Math.PI*2);ctx.stroke();
+      // Spikes
+      for(var i=0;i<8;i++){
+        var ang=i/8*Math.PI*2;
+        ctx.beginPath();ctx.moveTo(bx+Math.cos(ang)*r*0.6,by+Math.sin(ang)*r*0.6);
+        ctx.lineTo(bx+Math.cos(ang)*r*1.1,by+Math.sin(ang)*r*1.1);
+        ctx.strokeStyle='rgba(255,224,0,'+(0.7*(1-p))+')';
+        ctx.lineWidth=1;ctx.stroke();
+      }
+      ctx.restore();
+      if(p<1)requestAnimationFrame(pulse);
+    })();
+  });
+})();
+
+
 (function(){
   var cv=document.getElementById('canvas-bg'),ctx=cv.getContext('2d');
   var stars=[], nebula=[], W, H;
@@ -695,42 +913,130 @@ footer p{font-size:.78rem;color:var(--txt2);}
 <!-- OVERLAY -->
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 
-<!-- DRAWER DE AGENDAMENTO -->
 <aside class="cart-drawer" id="cartDrawer">
   <div class="drawer-header">
-    <h2>Agendar <span>Reunião</span></h2>
+    <div>
+      <h2>Análise <span>de IA Gratuita</span></h2>
+      <p style="font-size:.72rem;color:var(--txt2);margin-top:.15rem;">Preencha o briefing — nossa equipe entra em contato em até 2h</p>
+    </div>
     <button class="btn-close-drawer" onclick="closeCart()">✕</button>
   </div>
 
   <div class="drawer-body">
 
-    <!-- SERVIÇOS -->
-    <div>
-      <div class="dsec-label">Serviços com interesse</div>
+    <!-- SERVICOS SELECIONADOS -->
+    <div id="servsSection">
+      <div class="dsec-label">Soluções de interesse</div>
       <div class="servs-lista" id="servsList">
-        <div class="servs-vazio" id="servsVazio">Clique em "Tenho Interesse" em qualquer solução para adicioná-la aqui.</div>
+        <div class="servs-vazio" id="servsVazio">Clique em "Tenho Interesse" nos cards para adicionar soluções aqui.</div>
       </div>
     </div>
 
-    <!-- SEUS DADOS -->
+    <!-- DADOS PESSOAIS -->
     <div>
       <div class="dsec-label">Seus dados</div>
       <div class="form-grid">
         <div class="field"><label>Nome completo *</label><input type="text" id="fNome" placeholder="Seu nome"/></div>
+        <div class="field"><label>WhatsApp *</label><input type="tel" id="fTel" placeholder="(62) 9xxxx-xxxx"/></div>
         <div class="field"><label>Empresa *</label><input type="text" id="fEmpresa" placeholder="Nome da empresa"/></div>
-        <div class="field"><label>Cargo / Função</label><input type="text" id="fCargo" placeholder="Ex: Dono, Gerente..."/></div>
-        <div class="field"><label>WhatsApp</label><input type="tel" id="fTel" placeholder="(62) 9xxxx-xxxx"/></div>
-        <div class="field full"><label>Mensagem (opcional)</label><textarea id="fMsg" rows="2" placeholder="Descreva rapidamente o que precisa..."></textarea></div>
+        <div class="field"><label>Cargo / Função</label><input type="text" id="fCargo" placeholder="Ex: Dono, Gerente, Diretor..."/></div>
       </div>
     </div>
 
-    <!-- AGENDAMENTO -->
+    <!-- BRIEFING DA EMPRESA -->
     <div>
-      <div class="dsec-label">Data preferida para reunião</div>
+      <div class="dsec-label">Briefing da empresa</div>
+      <div class="form-grid">
+        <div class="field full">
+          <label>Ramo de atividade *</label>
+          <select id="fRamo">
+            <option value="">Selecione o ramo...</option>
+            <option>🥩 Açougue / Frigorífico</option>
+            <option>🏪 Mercado / Supermercado</option>
+            <option>🏠 Imobiliária / Corretor</option>
+            <option>🍽️ Restaurante / Alimentação</option>
+            <option>🏥 Saúde / Clínica / Farmácia</option>
+            <option>📚 Educação / Cursos</option>
+            <option>🛒 E-commerce / Loja Online</option>
+            <option>🏭 Indústria / Distribuição</option>
+            <option>💼 Serviços / Consultoria</option>
+            <option>💰 Financeiro / Investimentos</option>
+            <option>🔧 Construção / Reforma</option>
+            <option>🚗 Automóveis / Concessionária</option>
+            <option>✂️ Beleza / Barbearia / Estética</option>
+            <option>📦 Logística / Transporte</option>
+            <option>🌐 Tecnologia / Software</option>
+            <option>Outro ramo</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label>Nível de urgência *</label>
+          <div class="urgency-grid" id="urgencyGrid">
+            <div class="urgency-opt" onclick="selUrgency(this,'🔴 Urgente — preciso implementar agora')">
+              <span class="urg-icon">🔴</span>
+              <span class="urg-label">Urgente</span>
+              <span class="urg-sub">Preciso agora</span>
+            </div>
+            <div class="urgency-opt" onclick="selUrgency(this,'🟠 Alta — nos próximos 30 dias')">
+              <span class="urg-icon">🟠</span>
+              <span class="urg-label">Alta</span>
+              <span class="urg-sub">Próx. 30 dias</span>
+            </div>
+            <div class="urgency-opt" onclick="selUrgency(this,'🟡 Média — nos próximos 3 meses')">
+              <span class="urg-icon">🟡</span>
+              <span class="urg-label">Média</span>
+              <span class="urg-sub">Próx. 3 meses</span>
+            </div>
+            <div class="urgency-opt" onclick="selUrgency(this,'🟢 Baixa — estou pesquisando')">
+              <span class="urg-icon">🟢</span>
+              <span class="urg-label">Baixa</span>
+              <span class="urg-sub">Pesquisando</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="field full">
+          <label>Qual o principal desafio que quer resolver? *</label>
+          <textarea id="fDesafio" rows="2" placeholder="Ex: Perco clientes por demora no atendimento, não tenho controle de estoque, quero automatizar meu WhatsApp..."></textarea>
+        </div>
+
+        <div class="field">
+          <label>Já usa alguma IA hoje?</label>
+          <select id="fIA">
+            <option value="">Selecione...</option>
+            <option>Sim, já uso IA ativamente</option>
+            <option>Sim, mas de forma básica</option>
+            <option>Não, mas quero começar</option>
+            <option>Não sei por onde começar</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Tem equipe de TI?</label>
+          <select id="fTI">
+            <option value="">Selecione...</option>
+            <option>Sim, equipe interna</option>
+            <option>Terceirizado / Freelancer</option>
+            <option>Não tenho equipe de TI</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label>Mensagem adicional (opcional)</label>
+          <textarea id="fMsg" rows="2" placeholder="Algo mais que queira nos contar antes da call..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- AGENDAMENTO DA CALL -->
+    <div>
+      <div class="dsec-label">Agendar a call gratuita</div>
       <div class="field" style="margin-bottom:.8rem;">
+        <label>Data preferida *</label>
         <input type="date" id="fData" style="width:100%;"/>
       </div>
-      <div class="dsec-label">Horário preferido</div>
+      <div class="dsec-label">Horário *</div>
       <div class="time-slots" id="timeSlots">
         <div class="slot" onclick="selSlot(this,'08:00')">08:00</div>
         <div class="slot" onclick="selSlot(this,'09:00')">09:00</div>
@@ -747,11 +1053,11 @@ footer p{font-size:.78rem;color:var(--txt2);}
   </div>
 
   <div class="drawer-footer">
-    <button class="wa-send-btn" id="waSendBtn" onclick="enviarWA()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-      Enviar para a Kairos via WhatsApp
+    <button class="wa-send-btn" onclick="enviarWA()">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      Quero minha Análise Gratuita →
     </button>
-    <p class="drawer-note">Você será direcionado ao WhatsApp com todas as informações pré-preenchidas.<br/>Nossa equipe confirmará o agendamento em até 2h.</p>
+    <p class="drawer-note">Você será direcionado ao WhatsApp com o briefing completo.<br/>Nossa equipe retorna em até 2h para confirmar a call.</p>
   </div>
 </aside>
 
@@ -827,34 +1133,48 @@ function selSlot(el, hora){
 }
 
 function enviarWA(){
-  var n   = document.getElementById('fNome').value.trim();
-  var emp = document.getElementById('fEmpresa').value.trim();
-  var tel = document.getElementById('fTel').value.trim();
-  var dt  = document.getElementById('fData').value;
-  if(!n)   { alert('Por favor, informe seu nome completo.'); return; }
-  if(!emp) { alert('Por favor, informe o nome da empresa.'); return; }
-  if(!tel) { alert('Por favor, informe seu WhatsApp.'); return; }
-  if(!dt)  { alert('Por favor, selecione uma data para a reuniao.'); return; }
-  if(!slotSel) { alert('Por favor, selecione um horario preferido.'); return; }
+  var n    = document.getElementById('fNome').value.trim();
+  var tel  = document.getElementById('fTel').value.trim();
+  var emp  = document.getElementById('fEmpresa').value.trim();
+  var ramo = document.getElementById('fRamo').value;
+  var desaf= document.getElementById('fDesafio').value.trim();
+  var dt   = document.getElementById('fData').value;
+  if(!n)     { alert('Por favor, informe seu nome.'); return; }
+  if(!tel)   { alert('Por favor, informe seu WhatsApp.'); return; }
+  if(!emp)   { alert('Por favor, informe o nome da empresa.'); return; }
+  if(!ramo)  { alert('Por favor, selecione o ramo de atividade.'); return; }
+  if(!urgSel){ alert('Por favor, selecione o nivel de urgencia.'); return; }
+  if(!desaf) { alert('Por favor, descreva o principal desafio.'); return; }
+  if(!dt)    { alert('Por favor, selecione uma data para a call.'); return; }
+  if(!slotSel){ alert('Por favor, selecione um horario.'); return; }
   var cargo = document.getElementById('fCargo').value.trim();
+  var ia    = document.getElementById('fIA').value;
+  var ti    = document.getElementById('fTI').value;
   var msg   = document.getElementById('fMsg').value.trim();
   var p = dt.split('-'); var dtFmt = p[2]+'/'+p[1]+'/'+p[0];
-  var txt = 'Ola, Kairos! Vim pelo site e quero agendar uma reuniao.\n\n';
-  txt += '*Meus dados:*\n';
-  txt += '\uD83D\uDC64 *Nome:* ' + n + '\n';
-  txt += '\uD83C\uDFE2 *Empresa:* ' + emp + '\n';
-  if(cargo) txt += '\uD83D\uDCBC *Cargo:* ' + cargo + '\n';
-  txt += '\uD83D\uDCF1 *WhatsApp:* ' + tel + '\n';
+  var txt = '\uD83D\uDE80 *BRIEFING — KAIROS DIGITAL*\n';
+  txt += 'Solicitacao de Analise de IA Gratuita\n\n';
+  txt += '*Dados do Contato:*\n';
+  txt += '\uD83D\uDC64 *Nome:* '+n+'\n';
+  txt += '\uD83D\uDCF1 *WhatsApp:* '+tel+'\n';
+  txt += '\uD83C\uDFE2 *Empresa:* '+emp+'\n';
+  if(cargo) txt += '\uD83D\uDCBC *Cargo:* '+cargo+'\n';
+  txt += '\n*Sobre a Empresa:*\n';
+  txt += '\uD83C\uDFAF *Ramo:* '+ramo+'\n';
+  txt += '\u26A0\uFE0F *Urgencia:* '+urgSel+'\n';
+  if(ia) txt += '\uD83E\uDD16 *Usa IA hoje:* '+ia+'\n';
+  if(ti) txt += '\uD83D\uDCBB *Equipe TI:* '+ti+'\n';
+  txt += '\n*Desafio Principal:*\n'+desaf+'\n';
   if(servicos && servicos.length){
-    txt += '\n*Servicos de interesse:*\n';
-    servicos.forEach(function(s){ txt += '\u2705 ' + s + '\n'; });
+    txt += '\n*Solucoes de Interesse:*\n';
+    servicos.forEach(function(s){ txt += '\u2705 '+s+'\n'; });
   }
-  txt += '\n*Reuniao proposta:*\n';
-  txt += '\uD83D\uDCC5 *Data:* ' + dtFmt + '\n';
-  txt += '\u23F0 *Horario:* ' + slotSel + '\n';
-  if(msg) txt += '\n*Mensagem:* ' + msg;
-  txt += '\n\nAguardo confirmacao, obrigado!';
-  window.open('https://wa.me/5562981554992?text=' + encodeURIComponent(txt), '_blank');
+  txt += '\n*Call Agendada:*\n';
+  txt += '\uD83D\uDCC5 *Data:* '+dtFmt+'\n';
+  txt += '\u23F0 *Horario:* '+slotSel+'\n';
+  if(msg) txt += '\n*Obs:* '+msg;
+  txt += '\n\n_Enviado pelo site Kairos Digital_';
+  window.open('https://wa.me/5562981554992?text='+encodeURIComponent(txt),'_blank');
 }
 function enviarWA_bak(){
   var nome = document.getElementById('fNome').value.trim();
@@ -966,7 +1286,7 @@ document.addEventListener('click',function(){
 function spawnT(x,y){
   var el=document.createElement('div');el.className='c-trail';
   var s=2+Math.random()*5,h=38+Math.random()*30;
-  el.style.cssText='left:'+x+'px;top:'+y+'px;width:'+s+'px;height:'+s+'px;background:hsla('+h+',90%,60%,.8);';
+  el.style.cssText='left:'+x+'px;top:'+y+'px;width:'+s+'px;height:'+s+'px;background:rgba('+hr+',.8);box-shadow:0 0 '+s*2+'px rgba('+hr+',.6);';
   document.body.appendChild(el);
   var st=Date.now(),dur=350+Math.random()*250,vx=(Math.random()-.5)*1.8,vy=(Math.random()-.5)*1.8;
   (function tick(){
