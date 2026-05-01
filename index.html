@@ -601,6 +601,28 @@ footer p{font-size:.78rem;color:var(--txt2);}
     /* Port grid items alinhados */
     .port-grid{align-items:start;}
 
+
+    /* CURSOR AMPULHETA */
+    *{cursor:none!important;}
+    .cursor-hg{position:fixed;pointer-events:none;z-index:999999;transform:translate(-50%,-50%);transition:transform .08s;}
+    .cursor-hg svg{filter:drop-shadow(0 0 8px rgba(0,150,255,.9));}
+    .cursor-ring{position:fixed;width:40px;height:40px;border:1.5px solid rgba(0,245,255,.4);border-radius:50%;pointer-events:none;z-index:999998;transform:translate(-50%,-50%);transition:left .12s,top .12s,width .2s,height .2s,border-color .2s;}
+    
+    /* BOTOES — ripple effect */
+    .btn-ripple{position:relative;overflow:hidden;}
+    .btn-ripple::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.25);width:0;height:0;left:50%;top:50%;transform:translate(-50%,-50%);transition:width .5s,height .5s,opacity .5s;opacity:0;}
+    .btn-ripple:active::after{width:200px;height:200px;opacity:0;}
+    
+    /* Nav links hover glow */
+    .nav-links a{position:relative;}
+    .nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--c);box-shadow:0 0 6px var(--c);transition:width .3s;}
+    .nav-links a:hover::after{width:100%;}
+    
+    /* Botao hero pulse */
+    @keyframes heroPulse{0%,100%{box-shadow:0 0 20px rgba(0,245,255,.3),0 4px 24px rgba(123,0,255,.4);}50%{box-shadow:0 0 35px rgba(0,245,255,.6),0 4px 30px rgba(123,0,255,.65);}}
+    .btn-hero-main{animation:heroPulse 2.5s ease-in-out infinite;}
+    .btn-hero-main:hover{animation:none;}
+
 </style>
 </head>
 <body>
@@ -643,7 +665,7 @@ footer p{font-size:.78rem;color:var(--txt2);}
     <h1>Seu negócio no<br/><span class="hl">momento certo.</span></h1>
     <p class="hero-desc">A Kairos Digital cria soluções sob medida com IA — automações, dashboards e painéis que transformam a operação do seu negócio em tempo real.</p>
     <div class="hero-btns">
-      <a href="#solucoes" class="btn-primary">Ver soluções</a>
+      <a href="#solucoes" class="btn-primary btn-ripple">Ver soluções</a>
       <a href="#cta" class="btn-outline">Falar com a equipe</a>
     </div>
     <div class="hero-stats">
@@ -1276,7 +1298,7 @@ footer p{font-size:.78rem;color:var(--txt2);}
   </div>
 
   <div class="drawer-footer">
-    <button class="wa-send-btn" onclick="enviarWA()" style="cursor:pointer!important;">
+    <button class="wa-send-btn btn-ripple" onclick="enviarWA()" style="cursor:pointer!important;">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
       <span id="waBtnText">Enviar para Vilson via WhatsApp</span>
     </button>
@@ -1547,34 +1569,29 @@ Aguardo o contato para confirmar!';
 </div>
 
 <script>
-/* CURSOR */
-var CD=document.getElementById('cDot'),CR=document.getElementById('cRing');
+/* CURSOR AMPULHETA */
+
+/* CURSOR AMPULHETA */
+var hg=document.getElementById('curHg'),ring=document.getElementById('curRing');
 var mx=window.innerWidth/2,my=window.innerHeight/2;
 document.addEventListener('mousemove',function(e){
   mx=e.clientX;my=e.clientY;
-  CD.style.left=mx+'px';CD.style.top=my+'px';
-  CR.style.left=mx+'px';CR.style.top=my+'px';
-  if(Math.random()>.55)spawnT(mx,my);
+  hg.style.left=mx+'px';hg.style.top=my+'px';
+  ring.style.left=mx+'px';ring.style.top=my+'px';
 });
-document.addEventListener('click',function(){
-  CD.style.transform='translate(-50%,-50%) scale(2)';
-  setTimeout(function(){CD.style.transform='translate(-50%,-50%) scale(1)';},200);
+document.addEventListener('mousedown',function(){
+  hg.style.transform='translate(-50%,-50%) scale(.7) rotate(180deg)';
+  ring.style.width='60px';ring.style.height='60px';ring.style.borderColor='rgba(255,0,110,.7)';
 });
-function spawnT(x,y){
-  var el=document.createElement('div');el.className='c-trail';
-  var s=2+Math.random()*5,h=38+Math.random()*30;
-  el.style.cssText='left:'+x+'px;top:'+y+'px;width:'+s+'px;height:'+s+'px;background:rgba('+hr+',.8);box-shadow:0 0 '+s*2+'px rgba('+hr+',.6);';
-  document.body.appendChild(el);
-  var st=Date.now(),dur=350+Math.random()*250,vx=(Math.random()-.5)*1.8,vy=(Math.random()-.5)*1.8;
-  (function tick(){
-    var p=(Date.now()-st)/dur;if(p>=1){if(el.parentNode)el.parentNode.removeChild(el);return;}
-    el.style.left=(parseFloat(el.style.left)+vx)+'px';
-    el.style.top=(parseFloat(el.style.top)+vy)+'px';
-    el.style.opacity=(1-p)*.8;
-    el.style.transform='translate(-50%,-50%) scale('+(1-p*.6)+')';
-    requestAnimationFrame(tick);
-  })();
-}
+document.addEventListener('mouseup',function(){
+  hg.style.transform='translate(-50%,-50%) scale(1) rotate(0deg)';
+  ring.style.width='40px';ring.style.height='40px';ring.style.borderColor='rgba(0,245,255,.4)';
+});
+// Hover em elementos clicaveis
+document.querySelectorAll('button,a,.sol-card,.port-card,.pc-btn,.urgency-opt,.slot,.consultant-opt').forEach(function(el){
+  el.addEventListener('mouseenter',function(){ring.style.width='55px';ring.style.height='55px';ring.style.borderColor='rgba(0,245,255,.8)';});
+  el.addEventListener('mouseleave',function(){ring.style.width='40px';ring.style.height='40px';ring.style.borderColor='rgba(0,245,255,.4)';});
+});
 
 /* PORTAL TRANSITION */
 var pCv=document.getElementById('portalCv'),pCtx=pCv.getContext('2d'),pBusy=false;
@@ -1707,5 +1724,21 @@ requestAnimationFrame(tickHG);
     </circle>
   </svg>
 </button>
+
+<!-- CURSOR AMPULHETA -->
+<div class="cursor-hg" id="curHg">
+  <svg width="24" height="30" viewBox="0 0 56 76" fill="none">
+    <defs><linearGradient id="chg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00BFFF"/><stop offset="50%" stop-color="#00F5FF"/><stop offset="100%" stop-color="#7B9FFF"/></linearGradient></defs>
+    <rect x="6" y="1" width="44" height="5" rx="2" fill="url(#chg)"/>
+    <rect x="6" y="70" width="44" height="5" rx="2" fill="url(#chg)"/>
+    <path d="M10 6 L28 38 L46 6 Z" fill="rgba(0,200,255,.15)" stroke="url(#chg)" stroke-width="2"/>
+    <path d="M10 70 L28 38 L46 70 Z" fill="rgba(0,180,255,.1)" stroke="url(#chg)" stroke-width="2"/>
+    <circle id="chgWaist" cx="28" cy="38" r="3" fill="#00F5FF">
+      <animate attributeName="opacity" values=".4;1;.4" dur="1s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+</div>
+<div class="cursor-ring" id="curRing"></div>
+
 </body>
 </html>
