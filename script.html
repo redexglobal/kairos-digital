@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kairos — Script de Prospecção</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#000510;--bg2:#050d1a;--bg3:#0a1628;--c:#00F5FF;--m:#FF006E;--y:#FFE000;--p:#7B00FF;--g:#00FF88;--txt:#E0F7FF;--txt2:#7ECFEA;--brd:rgba(0,245,255,.15);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;min-height:100vh;}
+nav{position:sticky;top:0;z-index:100;background:rgba(0,5,16,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px;}
+.nav-logo{display:flex;align-items:center;gap:.5rem;}
+.nav-logo img{height:36px;width:36px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(0,150,255,.7));}
+.nav-logo span{font-family:'Space Grotesk';font-size:1rem;font-weight:800;background:linear-gradient(135deg,#00BFFF,#00F5FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:.06em;}
+.nav-r{display:flex;gap:.6rem;}
+.nav-btn{background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.25);color:var(--c);font-size:.75rem;font-weight:600;padding:.3rem .8rem;border-radius:6px;text-decoration:none;transition:all .2s;cursor:pointer;}
+.nav-btn:hover{background:rgba(0,245,255,.18);}
+.nav-btn.hot{background:linear-gradient(135deg,var(--m),var(--p));border-color:transparent;color:#fff;}
+
+.page{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 5rem;}
+
+/* HEADER */
+.page-header{text-align:center;padding:2.5rem 0 2rem;}
+.page-eyebrow{display:inline-flex;align-items:center;gap:.4rem;background:rgba(0,245,255,.07);border:1px solid rgba(0,245,255,.25);border-radius:50px;padding:.3rem .9rem;font-size:.65rem;font-weight:700;color:var(--c);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem;}
+.page-title{font-family:'Space Grotesk';font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.1;margin-bottom:.7rem;}
+.page-title .cy{background:linear-gradient(135deg,#00F5FF,#7B9FFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-title .mg{background:linear-gradient(135deg,#FF006E,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-sub{font-size:.95rem;color:var(--txt2);max-width:540px;margin:0 auto;line-height:1.7;}
+
+/* TABS */
+.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;border-bottom:1px solid var(--brd);padding-bottom:0;}
+.tab{background:none;border:none;border-bottom:2px solid transparent;color:var(--txt2);font-size:.84rem;font-weight:600;padding:.7rem 1.2rem;cursor:pointer;transition:all .2s;margin-bottom:-1px;letter-spacing:.02em;}
+.tab:hover{color:var(--txt);}
+.tab.active{color:var(--c);border-bottom-color:var(--c);}
+
+/* PANELS */
+.panel{display:none;}
+.panel.active{display:block;}
+
+/* CARDS */
+.script-card{background:var(--bg2);border:1px solid var(--brd);border-radius:16px;margin-bottom:1.2rem;overflow:hidden;}
+.sc-header{display:flex;align-items:center;gap:.8rem;padding:1rem 1.3rem;border-bottom:1px solid var(--brd);cursor:pointer;user-select:none;transition:background .2s;}
+.sc-header:hover{background:rgba(0,245,255,.03);}
+.sc-step{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-size:.8rem;font-weight:800;flex-shrink:0;}
+.step-cyan{background:linear-gradient(135deg,#00F5FF,#7B9FFF);color:#000;}
+.step-pink{background:linear-gradient(135deg,#FF006E,#7B00FF);color:#fff;}
+.step-yellow{background:linear-gradient(135deg,#FFE000,#FF006E);color:#000;}
+.step-green{background:linear-gradient(135deg,#00FF88,#00F5FF);color:#000;}
+.sc-title{font-family:'Space Grotesk';font-size:.95rem;font-weight:700;flex:1;}
+.sc-badge{font-size:.62rem;font-weight:700;padding:.2rem .55rem;border-radius:50px;border:1px solid;}
+.sc-toggle{font-size:.85rem;color:var(--txt2);transition:transform .2s;}
+.sc-body{padding:1.2rem 1.3rem;display:none;}
+.sc-card.open .sc-body{display:block;}
+.sc-card.open .sc-toggle{transform:rotate(180deg);}
+
+/* SCRIPT TEXT */
+.script-text{background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.15);border-left:3px solid var(--c);border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:.9rem;position:relative;}
+.script-label{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--c);margin-bottom:.5rem;}
+.script-bubble{font-size:.88rem;line-height:1.75;color:var(--txt);}
+.script-bubble strong{color:var(--c);}
+.script-bubble em{color:var(--y);font-style:normal;font-weight:600;}
+.copy-btn{position:absolute;top:.6rem;right:.6rem;background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.2);color:var(--c);font-size:.6rem;font-weight:700;padding:.18rem .5rem;border-radius:5px;cursor:pointer;transition:all .2s;letter-spacing:.06em;}
+.copy-btn:hover{background:rgba(0,245,255,.2);}
+.copy-btn.copied{background:rgba(0,255,136,.15);border-color:var(--g);color:var(--g);}
+
+/* OBJ/RESPOSTAS */
+.objection-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:.8rem;}
+.obj-card{background:var(--bg3);border-radius:10px;padding:.9rem;border:1px solid var(--brd);}
+.obj-q{font-size:.78rem;font-weight:700;color:var(--m);margin-bottom:.5rem;display:flex;align-items:center;gap:.3rem;}
+.obj-q::before{content:'❌';}
+.obj-a{font-size:.8rem;color:var(--txt2);line-height:1.6;}
+.obj-a strong{color:var(--txt);}
+
+/* TIPS */
+.tip{display:flex;align-items:flex-start;gap:.7rem;background:rgba(255,224,0,.05);border:1px solid rgba(255,224,0,.2);border-radius:10px;padding:.9rem 1rem;margin-top:.8rem;}
+.tip-icon{font-size:1.2rem;flex-shrink:0;}
+.tip-text{font-size:.82rem;color:var(--txt2);line-height:1.6;}
+.tip-text strong{color:var(--y);}
+
+/* METRICS */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-top:1rem;}
+.metric{background:var(--bg3);border:1px solid var(--brd);border-radius:12px;padding:1rem;text-align:center;}
+.metric-n{font-family:'Space Grotesk';font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--c),var(--y));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.metric-l{font-size:.7rem;color:var(--txt2);margin-top:.2rem;}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:.5rem;margin-top:.8rem;}
+.check-item{display:flex;align-items:center;gap:.7rem;padding:.65rem .9rem;background:var(--bg3);border-radius:9px;border:1px solid var(--brd);cursor:pointer;transition:all .2s;}
+.check-item:hover{border-color:rgba(0,245,255,.3);}
+.check-item.done{border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.04);}
+.check-box{width:20px;height:20px;border-radius:5px;border:2px solid var(--brd);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
+.check-item.done .check-box{background:var(--g);border-color:var(--g);color:#000;font-size:.75rem;}
+.check-label{font-size:.84rem;font-weight:500;}
+.check-item.done .check-label{color:var(--txt2);text-decoration:line-through;}
+
+/* SEGMENT CARDS */
+.seg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1rem;}
+.seg-card{background:var(--bg3);border:1px solid var(--brd);border-radius:14px;padding:1.2rem;}
+.seg-icon{font-size:1.8rem;margin-bottom:.5rem;}
+.seg-name{font-family:'Space Grotesk';font-size:.95rem;font-weight:700;margin-bottom:.4rem;}
+.seg-hook{font-size:.8rem;color:var(--txt2);line-height:1.6;margin-bottom:.6rem;}
+.seg-hook strong{color:var(--c);}
+.seg-script{font-size:.78rem;background:rgba(0,245,255,.04);border-left:2px solid var(--c);padding:.6rem .8rem;border-radius:0 7px 7px 0;color:var(--txt);line-height:1.65;}
+
+@media(max-width:768px){.objection-grid,.metrics{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <img src="kairos_logo.png" alt="Kairos"/>
+    <span>KAIROS</span>
+  </div>
+  <div class="nav-r">
+    <a href="index.html" class="nav-btn">← Site</a>
+    <a href="team.html" class="nav-btn">HQ ⚡</a>
+    <button class="nav-btn hot" onclick="window.open('https://kairos-digital-one.vercel.app','_blank')">🌐 Abrir site</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <div class="page-eyebrow">🎯 Manual do Prospector</div>
+    <h1 class="page-title">Script de <span class="cy">Prospecção</span><br/><span class="mg">Kairos Digital</span></h1>
+    <p class="page-sub">Tudo que você precisa para abordar, apresentar e fechar. Do primeiro "oi" até o contrato assinado.</p>
+    <div class="metrics" style="margin-top:1.5rem;">
+      <div class="metric"><div class="metric-n">3</div><div class="metric-l">Etapas do funil</div></div>
+      <div class="metric"><div class="metric-n">48h</div><div class="metric-l">Tempo médio de fechamento</div></div>
+      <div class="metric"><div class="metric-n">+237%</div><div class="metric-l">Resultado para o cliente</div></div>
+      <div class="metric"><div class="metric-n">100%</div><div class="metric-l">Diagnóstico gratuito</div></div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('abordagem')">1. Abordagem</button>
+    <button class="tab" onclick="showTab('apresentacao')">2. Apresentação</button>
+    <button class="tab" onclick="showTab('fechamento')">3. Fechamento</button>
+    <button class="tab" onclick="showTab('objecoes')">Objeções</button>
+    <button class="tab" onclick="showTab('segmentos')">Por Segmento</button>
+    <button class="tab" onclick="showTab('followup')">Follow-up</button>
+    <button class="tab" onclick="showTab('checklist')">Checklist</button>
+  </div>
+
+  <!-- ══ ABORDAGEM ══ -->
+  <div class="panel active" id="panel-abordagem">
+
+    <div class="script-card sc-card open">
+      <div class="sc-header" onclick="toggleCard(this.parentElement)">
+        <div class="sc-step step-cyan">1</div>
+        <div class="sc-title">Abertura no WhatsApp — Fria</div>
+        <span class="sc-badge" style="color:#00F5FF;border-color:rgba(0,245,255,.3);">WhatsApp</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-label">Mensagem 1 — Conexão</div>
+          <div class="script-bubble">
+            Oi, <strong>[Nome]</strong>! Tudo bem?<br/><br/>
+            Vi que você tem uma <em>[empresa/açougue/clínica...]</em> em Goiânia — muito bacana o que vocês fazem.<br/><br/>
+            Me chamo <strong>Vilson/Matheus</strong>, sou co-fundador da <strong>Kairos Digital</strong>. A gente ajuda empresas como a sua a crescerem usando Inteligência Artificial — de forma prática, sem complicação.<br/><br/>
+            Posso te mostrar em 5 minutos como a IA poderia funcionar no seu negócio? Zero compromisso.
+          </div>
+          <button class="copy-btn" onclick="copyText(this)">COPIAR</button>
+        </div>
+        <div class="tip"><div class="tip-icon">💡</div><div class="tip-text"><strong>Dica:</strong> Personalize o "[Nome]" e o segmento. Nunca mande igual pra todo mundo. Um texto personalizado tem 3x mais resposta que um genérico.</div></div>
+      </div>
+    </div>
+
+    <div class="script-card sc-card">
+      <div class="sc-header" onclick="toggleCard(this.parentElement)">
+        <div class="sc-step step-cyan">2</div>
+        <div class="sc-title">Se não responder em 24h — Follow-up 1</div>
+        <span class="sc-badge" style="color:#00F5FF;border-color:rgba(0,245,255,.3);">WhatsApp</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-label">Mensagem 2 — Prova social</div>
+          <div class="script-bubble">
+            <strong>[Nome]</strong>, só queria deixar um dado aqui:<br/><br/>
+            A gente implementou IA em um <em>[segmento similar]</em> aqui em Goiânia e o negócio cresceu <strong>+237%</strong> em 3 meses.<br/><br/>
+            Não é promessa — é resultado documentado.<br/><br/>
+            Quer ver como funcionaria no seu caso? É rápido e gratuito. 🚀
+          </div>
+          <button class="copy-btn" onclick="copyText(this)">COPIAR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="script-card sc-card">
+      <div class="sc-header" onclick="toggleCard(this.parentElement)">
+        <div class="sc-step step-cyan">3</div>
+        <div class="sc-title">Abordagem Presencial / Ligação</div>
+        <span class="sc-badge" style="color:#FFE000;border-color:rgba(255,224,0,.3);">Presencial</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-label">Abertura</div>
+          <div class="script-bubble">
+            "Olá [Nome], tudo bem? Me chamo <strong>Vilson/Matheus</strong>, sou da <strong>Kairos Digital</strong>.<br/><br/>
+            A gente trabalha com Inteligência Artificial para pequenas e médias empresas aqui em Goiânia.<br/><br/>
+            Você tem <em>2 minutinhos</em>? Quero te mostrar como a IA pode <strong>automatizar uma parte do seu negócio e aumentar o faturamento</strong> — e tem uma análise gratuita que eu posso fazer pra você hoje mesmo."
+          </div>
+          <button class="copy-btn" onclick="copyText(this)">COPIAR</button>
+        </div>
+        <div class="tip"><div class="tip-icon">⚡</div><div class="tip-text"><strong>Técnica:</strong> Peça sempre "2 minutinhos", não "15 minutos". Menor a resistência, maior a abertura. Depois que ele diz sim, o papo flui naturalmente.</div></div>
+      </div>
+    </div>
+
+    <div class="script-card sc-card">
+      <div class="sc-header" onclick="toggleCard(this.parentElement)">
+        <div class="sc-step step-cyan">4</div>
+        <div class="sc-title">Indicação — Abordagem Quente</div>
+        <span class="sc-badge" style="color:#00FF88;border-color:rgba(0,255,136,.3);">Indicação</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-label">Mensagem — Via indicação</div>
+          <div class="script-bubble">
+            Oi <strong>[Nome]</strong>! O <em>[quem indicou]</em> me passou seu contato.<br/><br/>
+            Sou <strong>Vilson/Matheus</strong> da <strong>Kairos Digital</strong> — a gente ajudou o [quem indicou] a [resultado que tiveram] usando IA.<br/><br/>
+            Ele achou que poderia ser muito útil pra você também. Topa uma conversa rápida esta semana?
+          </div>
+          <button class="copy-btn" onclick="copyText(this)">COPIAR</button>
+        </div>
+        <div class="tip"><div class="tip-icon">🔥</div><div class="tip-text"><strong>Ouro:</strong> Indicação tem taxa de fechamento 4x maior que fria. Sempre peça ao cliente satisfeito: "Conhece mais 2 ou 3 empresários que poderiam se beneficiar?"</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ APRESENTAÇÃO ══ -->
+  <div class="panel" id="panel-apresentacao">
+
+    <div class="script-card sc-card open">
+      <div class="sc-header" onclick="toggleCard(this.parentElement)">
+        <div class="sc-step step-pink">1</div>
+        <div class="sc-title">Apresentação com o Site — Fluxo Completo</div>
+        <span class="sc-badge" style="color:#FF006E;border-color:rgba(255,0,110,.3);">Passo a passo</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-label">Passo 1 — Abra o site</div>
+          <div class="script-bubble">
+            Abra <strong>kairos-digital-one.vercel.app</strong> no celular ou notebook do cliente.<br/><br/>
+            <em>"Deixa eu te mostrar o que a Kairos faz em 2 minutos."</em>
+          </div>
+        </div>
+        <div class="script-text">
+          <div class="script-label">Passo 2 — Role até Soluções e clique no serviço certo</div>
+          <div class="script-bubble">
+            Clique no card que faz sentido pro segmento dele.<br/><br/>
+            <em>"Esse aqui é exatamente o que faria sentido pro seu negócio. Deixa eu mostrar como funciona..."</em><br/><br/>
+            O modal abre com a explicação completa, resultados e prova.
+          </div>
+        </div>
+        <div class="script-text">
+          <div class="script-label">Passo 3 — Diagnóstico na hora</div>
+          <div class="script-bubble">
+            Clique em <strong>"Diagnóstico Gratuito"</strong> — aparece o carrinho.<br/><br/>
+            <em>"Preenche aqui os seus dados que eu já faço um diagnóstico gratuito do seu negócio. A gente identifica onde a IA pode gerar mais resultado e te presenta um plano."</em>
+          </div>
+          <button class="copy-btn" onclick="copyText(this)">COPIAR</button>
+        </div>
+        <div class="tip"><div class="tip-icon">🎯</div><div class="tip-text"><strong>Estratégia:</strong> Deixe o cliente interagir com o site. Quanto mais ele clica, mais ele sente que já é cliente. O buraco negro e as animações geram impacto emocional que ajuda no fechamento.</div></div>
+      </div>
+    </div>
+
+    <div class="script-card sc-card">
+      <div class="sc-header" onclick="toggleCard(this.parentElement)">
+        <div class="sc-step step-pink">2</div>
+        <div class="sc-title">Perguntas Diagnóstico — Identificar a Dor</div>
+        <span class="sc-badge" style="color:#FF006E;border-color:rgba(255,0,110,.3);">Diagnóstico</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-label">Faça estas 5 perguntas — ouça mais do que fala</div>
+          <div class="script-bubble">
+            <strong>1.</strong> "Hoje, qual é a maior dor do seu negócio — o que te tira o sono?"<br/><br/>
+            <strong>2.</strong> "Quantas horas por semana você ou sua equipe perdem em tarefas repetitivas?"<br/><br/>
+            <strong>3.</strong> "Como você controla suas vendas e perdas hoje — planilha, sistema, ou de cabeça?"<br/><br/>
+            <strong>4.</strong> "Você já perdeu cliente por demora no atendimento ou falta de informação?"<br/><br/>
+            <strong>5.</strong> "Se eu te dissesse que dá pra automatizar [dor que ele mencionou] em 48 horas — o que mudaria no seu negócio?"
+          </div>
+          <button class="copy-btn" onclick="copyText(this)">COPIAR</button>
+        </div>
+        <div class="tip"><div class="tip-icon">🧠</div><div class="tip-text"><strong>Regra de ouro:</strong> Quem faz a pergunta controla a conversa. Deixe o cliente falar. Cada dor que ele menciona é uma porta de entrada pra oferecer a solução certa.</div></div>
+      </div>
+    </div>
+
+    <div class="script-card sc-card">
+      <div class="sc-header" onclick="toggleCard(this.parentElement)">
+        <div class="sc-step step-pink">3</div>
+        <div class="sc-title">Pitch dos Números — Impacto em 60 segundos</div>
+        <span class="sc-badge" style="color:#FF006E;border-color:rgba(255,0,110,.3);">Pitch</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-label">Pitch rápido com prova</div>
+          <div class="script-bubble">
+            "Deixa eu te mostrar o que a IA fez pra outros negócios como o seu:<br/><br/>
+            — E-commerce que implementou automação: <strong>+312% de crescimento</strong><br/>
+            — Clínica que colocou atendimento 24h: <strong>-60% de faltas</strong><br/>
+            — Mercado com dashboard: <strong>identificou R$152 mil em perdas que não via</strong><br/><br/>
+            Isso não é promessa — é o que a Kairos já entregou. E o diagnóstico pra saber o que a IA faria no SEU negócio é <em>100% gratuito</em>.<br/><br/>
+            Posso fazer o seu hoje?"
+          </div>
+          <button class="copy-btn" onclick="copyText(this)">COPIAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ FECHAMENTO ══ -->
+  <div class="panel" id="panel-fechamento">
+
+    <div class="script-card sc-card open">
+      <div class="sc-header" onclick="toggleCard(this.parentElement)">
+        <div class="sc-step step-yellow">1</div>
+        <div class="sc-title">Fechamento Direto — Após Diagnóstico</div>
+        <span class="sc-badge" style="color:#FFE000;border-color:rgba(255,224,0,.3);">Fechamento</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-label">Feche sempre com uma pergunta de confirmação, não de permissão</div>
+          <div class="script-bubble">
+            <em>"Olha, com base no que você me contou, a solução que faz mais sentido pra você é [X]. A gente consegue implementar em 48 horas e você já vai ver diferença na primeira semana.</em><br/><br/>
+            <em>Você prefere começar na terça ou na quinta?"</em><br/><br/>
+            — ou —<br/><br/>
+            <em>"Você quer que a gente começa pelo [problema principal que ele mencionou] ou prefere atacar os dois juntos?"</em>
+          </div>
+          <button class="copy-btn" onclick="copyText(this)">COPIAR</button>
+        </div>
+        <div class="tip"><div class="tip-icon">⚡</div><div class="tip-text"><strong>Técnica do "ou":</strong> Nunca pergunte "Você quer fechar?" — dê duas opções que ambas levam ao sim. "Terça ou quinta?" "Começamos pelo X ou Y?"</div></div>
+      </div>
+    </div>
+
+    <div class="script-card sc-card">
+      <div class="sc-header" onclick="toggleCard(this.parentElement)">
+        <div class="sc-step step-yellow">2</div>
+        <div class="sc-title">Urgência Real — Criando Senso de Ação</div>
+        <span class="sc-badge" style="color:#FFE000;border-color:rgba(255,224,0,.3);">Urgência</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-label">Use quando o cliente está "pensando"</div>
+          <div class="script-bubble">
+            <em>"[Nome], eu entendo querer pensar. Mas deixa eu te fazer uma pergunta:<br/><br/>
+            Quanto você acha que está perdendo por mês sem isso funcionando? Se a gente estima conservador uns <strong>R$3.000 em perdas ou oportunidades não aproveitadas</strong> — esperar mais um mês custa R$3.000.<br/><br/>
+            O investimento na solução é menor do que você perde esperando. Faz sentido?"</em>
+          </div>
+          <button class="copy-btn" onclick="copyText(this)">COPIAR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="script-card sc-card">
+      <div class="sc-header" onclick="toggleCard(this.parentElement)">
+        <div class="sc-step step-yellow">3</div>
+        <div class="sc-title">Mensagem de Fechamento — WhatsApp Pós-reunião</div>
+        <span class="sc-badge" style="color:#FFE000;border-color:rgba(255,224,0,.3);">WhatsApp</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-label">Enviar em até 1h após a reunião</div>
+          <div class="script-bubble">
+            <strong>[Nome]</strong>, foi muito boa nossa conversa!<br/><br/>
+            Resumindo o que a gente identificou:<br/>
+            ✅ <em>[Dor principal que ele mencionou]</em><br/>
+            ✅ Solução: <em>[produto/serviço que você indicou]</em><br/>
+            ✅ Implementação: <strong>48 horas</strong><br/>
+            ✅ Resultado esperado: <em>[número/resultado específico]</em><br/><br/>
+            Posso confirmar o início para <strong>[data específica]</strong>?<br/><br/>
+            A Kairos tá pronta pra começar quando você quiser. 🚀
+          </div>
+          <button class="copy-btn" onclick="copyText(this)">COPIAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ OBJEÇÕES ══ -->
+  <div class="panel" id="panel-objecoes">
+    <div class="script-card sc-card open">
+      <div class="sc-header" onclick="toggleCard(this.parentElement)">
+        <div class="sc-step step-green">!</div>
+        <div class="sc-title">As 8 Objeções Mais Comuns — Com Resposta</div>
+        <span class="sc-badge" style="color:#00FF88;border-color:rgba(0,255,136,.3);">Objeções</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="objection-grid">
+          <div class="obj-card">
+            <div class="obj-q">É muito caro</div>
+            <div class="obj-a"><strong>"Entendo.</strong> Mas me diz: quanto você está gastando hoje com processos manuais, erros e oportunidades perdidas? A maioria dos nossos clientes recupera o investimento no primeiro mês."</div>
+          </div>
+          <div class="obj-card">
+            <div class="obj-q">Preciso pensar</div>
+            <div class="obj-a"><strong>"Claro, faz sentido pensar.</strong> Me ajuda a entender: o que específicamente você precisa avaliar? Assim eu te passo a informação certa."</div>
+          </div>
+          <div class="obj-card">
+            <div class="obj-q">Não entendo de IA</div>
+            <div class="obj-a"><strong>"Perfeito — e não precisa entender.</strong> Você entende de dirigir sem saber como o motor funciona. A Kairos cuida de tudo técnico. Você só vê o resultado."</div>
+          </div>
+          <div class="obj-card">
+            <div class="obj-q">Não tenho tempo agora</div>
+            <div class="obj-a"><strong>"Exatamente por isso a IA faz sentido.</strong> Você não vai implementar — nós implementamos. E o resultado é ter MAIS tempo depois. Quanto tempo você perderia se não fizer?"</div>
+          </div>
+          <div class="obj-card">
+            <div class="obj-q">Já tenho um sistema</div>
+            <div class="obj-a"><strong>"Ótimo.</strong> A IA não substitui — ela potencializa o que você já tem. A maioria dos nossos clientes tinha algum sistema e cresceu ainda mais depois da integração."</div>
+          </div>
+          <div class="obj-card">
+            <div class="obj-q">Meu negócio é diferente</div>
+            <div class="obj-a"><strong>"Concordo que cada negócio é único.</strong> Por isso o diagnóstico é personalizado. Mas a dor de perder dinheiro com ineficiência é universal. Vamos ver o que faz sentido pro SEU caso?"</div>
+          </div>
+          <div class="obj-card">
+            <div class="obj-q">Não confio em IA</div>
+            <div class="obj-a"><strong>"Faz sentido ser cético.</strong> Mas você usa GPS, Nubank, Spotify — todos IA. A diferença é que agora a IA trabalha pra você, não só pras big techs. Posso te mostrar casos reais?"</div>
+          </div>
+          <div class="obj-card">
+            <div class="obj-q">Vou falar com meu sócio</div>
+            <div class="obj-a"><strong>"Claro.</strong> Posso fazer uma apresentação rápida pros dois juntos? Assim o seu sócio tira as dúvidas na hora e a decisão fica mais fácil. Quando vocês se reúnem?"</div>
+          </div>
+        </div>
+        <div class="tip" style="margin-top:1rem;"><div class="tip-icon">🧠</div><div class="tip-text"><strong>Regra das objeções:</strong> Nunca discuta. Valide ("entendo", "faz sentido"), então redirecione com uma pergunta ou dado. Objeção é sinal de interesse — quem não quer, simplesmente vai embora.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SEGMENTOS ══ -->
+  <div class="panel" id="panel-segmentos">
+    <p style="font-size:.88rem;color:var(--txt2);margin-bottom:1.2rem;">Abordagem personalizada por tipo de cliente — use a linguagem do segmento:</p>
+    <div class="seg-grid">
+      <div class="seg-card">
+        <div class="seg-icon">🥩</div>
+        <div class="seg-name">Açougue / Frigorífico</div>
+        <div class="seg-hook">Dor: <strong>perdas invisíveis, preço manual e WhatsApp caótico</strong></div>
+        <div class="seg-script">"Você sabia que a maioria dos açougues perde entre R$2k-R$8k por mês em mercadoria sem perceber? A gente tem um dashboard que mostra isso em tempo real. Quer ver?"</div>
+      </div>
+      <div class="seg-card">
+        <div class="seg-icon">🏪</div>
+        <div class="seg-name">Mercado / Supermercado</div>
+        <div class="seg-hook">Dor: <strong>ruptura de estoque, precificação errada, perdas</strong></div>
+        <div class="seg-script">"Quantas vezes você perdeu venda porque faltou produto? Com IA, o sistema te avisa antes de acabar e ainda sugere o pedido automático."</div>
+      </div>
+      <div class="seg-card">
+        <div class="seg-icon">🏥</div>
+        <div class="seg-name">Clínica / Consultório</div>
+        <div class="seg-hook">Dor: <strong>faltas, atendimento fora do horário, agenda manual</strong></div>
+        <div class="seg-script">"Quantos pacientes você perdeu esta semana por não conseguir atender fora do horário? A gente coloca uma IA pra responder, agendar e confirmar 24h por dia."</div>
+      </div>
+      <div class="seg-card">
+        <div class="seg-icon">🏨</div>
+        <div class="seg-name">Hotel / Pousada</div>
+        <div class="seg-hook">Dor: <strong>check-in demorado, avaliações baixas, equipe sobrecarregada</strong></div>
+        <div class="seg-script">"No Booking e Google, 1 estrela a mais pode dobrar sua taxa de ocupação. A gente implementa check-in por IA e concierge virtual que melhora avaliações em 30 dias."</div>
+      </div>
+      <div class="seg-card">
+        <div class="seg-icon">🏠</div>
+        <div class="seg-name">Imobiliária / Corretor</div>
+        <div class="seg-hook">Dor: <strong>leads que somem, follow-up manual, atendimento lento</strong></div>
+        <div class="seg-script">"Você perde quantos leads por semana por demorar a responder? IA que responde em segundos, qualifica o lead e já agenda a visita — enquanto você está em reunião."</div>
+      </div>
+      <div class="seg-card">
+        <div class="seg-icon">💼</div>
+        <div class="seg-name">Empresa de Serviços</div>
+        <div class="seg-hook">Dor: <strong>processos repetitivos, relatórios manuais, crescimento travado</strong></div>
+        <div class="seg-script">"Quanto tempo sua equipe gasta em tarefas que uma IA faria em segundos? A gente identifica os 3 processos que mais custam tempo e automatiza tudo em 48h."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ FOLLOW-UP ══ -->
+  <div class="panel" id="panel-followup">
+    <div class="script-card sc-card open">
+      <div class="sc-header" onclick="toggleCard(this.parentElement)">
+        <div class="sc-step step-cyan">📅</div>
+        <div class="sc-title">Sequência de Follow-up — 7 dias</div>
+        <span class="sc-badge" style="color:#00F5FF;border-color:rgba(0,245,255,.3);">Sequência</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-label">Dia 1 — Imediato (até 1h após contato)</div>
+          <div class="script-bubble">
+            "Oi <strong>[Nome]</strong>! Segue o link do site da Kairos pra você explorar quando tiver um tempo: <strong>kairos-digital-one.vercel.app</strong><br/><br/>
+            Qualquer dúvida é só falar. Tô à disposição! 🚀"
+          </div>
+          <button class="copy-btn" onclick="copyText(this)">COPIAR</button>
+        </div>
+        <div class="script-text">
+          <div class="script-label">Dia 2 — Conteúdo de valor</div>
+          <div class="script-bubble">
+            "<strong>[Nome]</strong>, achei esse dado interessante pra compartilhar:<br/><br/>
+            Empresas que implementaram IA cresceram <em>+237% em média</em> nos primeiros 90 dias segundo nossos cases.<br/><br/>
+            Só pra contextualizar o que conversamos ontem. Qualquer hora que quiser dar continuidade, tô aqui. 😊"
+          </div>
+          <button class="copy-btn" onclick="copyText(this)">COPIAR</button>
+        </div>
+        <div class="script-text">
+          <div class="script-label">Dia 4 — Urgência sutil</div>
+          <div class="script-bubble">
+            "Oi <strong>[Nome]</strong>! A gente fechou mais 2 clientes essa semana e estamos com agenda cheia para implementações.<br/><br/>
+            Caso você queira começar este mês ainda, é bom a gente alinhar logo pra garantir sua data. Quer que eu reserve um horário?"
+          </div>
+          <button class="copy-btn" onclick="copyText(this)">COPIAR</button>
+        </div>
+        <div class="script-text">
+          <div class="script-label">Dia 7 — Última tentativa (breakup message)</div>
+          <div class="script-bubble">
+            "<strong>[Nome]</strong>, não quero ser inconveniente — mas antes de parar de te contactar, quero perguntar:<br/><br/>
+            Existe algo que impediu você de avançar com a Kairos? Pode ser feedback, pode ser preço, pode ser momento.<br/><br/>
+            Sua resposta me ajuda muito, mesmo que seja um não. 🙏"
+          </div>
+          <button class="copy-btn" onclick="copyText(this)">COPIAR</button>
+        </div>
+        <div class="tip"><div class="tip-icon">🔑</div><div class="tip-text"><strong>Segredo do follow-up:</strong> O "breakup message" (dia 7) tem uma das maiores taxas de resposta. As pessoas respondem quando acham que vão perder o contato — e muitas vezes reabrem a negociação.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CHECKLIST ══ -->
+  <div class="panel" id="panel-checklist">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+      <div>
+        <h3 style="font-family:'Space Grotesk';font-size:1rem;font-weight:700;margin-bottom:1rem;color:var(--c);">✅ Antes de Prospectar</h3>
+        <div class="checklist" id="check-antes">
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Site da Kairos aberto no celular</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Script memorizado (pelos menos a abertura)</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Lista de empresas do segmento preparada</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Nome do decisor pesquisado</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Horário de pico evitado (almoço/abertura)</span></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Space Grotesk';font-size:1rem;font-weight:700;margin-bottom:1rem;color:var(--m);">⚡ Durante a Apresentação</h3>
+        <div class="checklist" id="check-durante">
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Ouviu mais do que falou</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Identificou a dor principal</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Mostrou o card do serviço certo</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Fez o pitch dos números</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Abriu o carrinho com diagnóstico</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Tentou fechar com pergunta "ou"</span></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Space Grotesk';font-size:1rem;font-weight:700;margin-bottom:1rem;color:var(--y);">📝 Após o Contato</h3>
+        <div class="checklist" id="check-apos">
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Mensagem de follow-up enviada em 1h</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Link do site enviado</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Próximo passo combinado</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Registrado no HQ da equipe</span></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Space Grotesk';font-size:1rem;font-weight:700;margin-bottom:1rem;color:var(--g);">🏆 Meta Diária</h3>
+        <div class="checklist" id="check-meta">
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">10 abordagens realizadas</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">3 apresentações do site</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">1 diagnóstico gratuito agendado</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">1 pedido de indicação feito</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showTab(name){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  event.target.classList.add('active');
+  document.getElementById('panel-'+name).classList.add('active');
+}
+function toggleCard(card){
+  card.classList.toggle('open');
+}
+function toggleCheck(item){
+  item.classList.toggle('done');
+  var box=item.querySelector('.check-box');
+  box.textContent=item.classList.contains('done')?'✓':'';
+}
+function copyText(btn){
+  var txt=btn.previousElementSibling.innerText.replace(/\n{3,}/g,'\n\n');
+  navigator.clipboard.writeText(txt).then(function(){
+    btn.textContent='COPIADO ✓';btn.classList.add('copied');
+    setTimeout(function(){btn.textContent='COPIAR';btn.classList.remove('copied');},2000);
+  });
+}
+// Abre todos os cards do primeiro tab por padrão
+document.querySelectorAll('#panel-abordagem .sc-card:first-child').forEach(function(c){c.classList.add('open');});
+</script>
+</body>
+</html>
