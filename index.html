@@ -204,7 +204,7 @@ footer p{font-size:.78rem;color:var(--txt2);}
   footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
 }
 
-    *{cursor:none!important;} button,a,.sol-card,.port-card,.urgency-opt,.slot,.consultant-opt,.int-btn,.logo-btn,.pc-btn{cursor:none!important;}
+    button,a,[onclick]{cursor:pointer!important;}
     .c-dot{position:fixed;width:11px;height:11px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);box-shadow:0 0 10px rgba(245,158,11,.8);transition:transform .08s;}
     .c-ring{position:fixed;width:32px;height:32px;border:2px solid rgba(245,158,11,.45);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:left .1s,top .1s;}
     .c-trail{position:fixed;border-radius:50%;pointer-events:none;z-index:99997;transform:translate(-50%,-50%);}
@@ -595,1005 +595,14 @@ footer p{font-size:.78rem;color:var(--txt2);}
 
 
     /* FIX: cursor pointer em tudo interativo */
-    a,button,.sol-card,.port-card,.pc-btn,.int-btn,.logo-btn,.urgency-opt,.slot,.consultant-opt{cursor:pointer!important;}
+    a,button,.sol-card,.port-card,.pc-btn,.int-btn,.logo-btn,.urgency-opt,.slot,.consultant-opt,.check-item,[onclick]{cursor:pointer!important;}
     /* Logo img */
     .nav-logo img{background:transparent!important;}
     /* Port grid items alinhados */
     .port-grid{align-items:start;}
 
 
-    /* CURSOR AMPULHETA */
-    *{cursor:none!important;}
-    .cursor-hg{position:fixed;pointer-events:none;z-index:999999;transform:translate(-50%,-50%);transition:transform .08s;}
-    .cursor-hg svg{filter:drop-shadow(0 0 8px rgba(0,150,255,.9));}
-    .cursor-ring{position:fixed;width:40px;height:40px;border:1.5px solid rgba(0,245,255,.4);border-radius:50%;pointer-events:none;z-index:999998;transform:translate(-50%,-50%);transition:left .12s,top .12s,width .2s,height .2s,border-color .2s;}
-    
-    /* BOTOES — ripple effect */
-    .btn-ripple{position:relative;overflow:hidden;}
-    .btn-ripple::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.25);width:0;height:0;left:50%;top:50%;transform:translate(-50%,-50%);transition:width .5s,height .5s,opacity .5s;opacity:0;}
-    .btn-ripple:active::after{width:200px;height:200px;opacity:0;}
-    
-    /* Nav links hover glow */
-    .nav-links a{position:relative;}
-    .nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--c);box-shadow:0 0 6px var(--c);transition:width .3s;}
-    .nav-links a:hover::after{width:100%;}
-    
-    /* Botao hero pulse */
-    @keyframes heroPulse{0%,100%{box-shadow:0 0 20px rgba(0,245,255,.3),0 4px 24px rgba(123,0,255,.4);}50%{box-shadow:0 0 35px rgba(0,245,255,.6),0 4px 30px rgba(123,0,255,.65);}}
-    .btn-hero-main{animation:heroPulse 2.5s ease-in-out infinite;}
-    .btn-hero-main:hover{animation:none;}
-
-</style>
-</head>
-<body>
-
-<canvas id="canvas"></canvas>
-
-<nav>
-  <div class="nav-logo" style="display:flex;align-items:center;gap:.6rem;">
-    <img src="kairos_logo.png" alt="Kairos Digital"
-      style="height:46px;width:46px;object-fit:contain;border-radius:8px;
-             filter:drop-shadow(0 0 14px rgba(0,150,255,.8)) drop-shadow(0 0 6px rgba(0,245,255,.6));"/>
-    <div style="line-height:1.1;">
-      <span style="font-family:Space Grotesk,sans-serif;font-size:1.1rem;font-weight:800;
-        background:linear-gradient(135deg,#00BFFF,#00F5FF);
-        -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-        letter-spacing:.08em;">KAIROS</span>
-      <span style="display:block;font-size:.46rem;font-weight:600;letter-spacing:.22em;
-        color:rgba(0,200,255,.5);text-transform:uppercase;font-family:monospace;">DIGITAL</span>
-    </div>
-  </div>
-  <ul class="nav-links">
-    <li><a href="#solucoes">Soluções</a></li>
-    <li><a href="#como">Como Funciona</a></li>
-    <li><a href="#sobre">Sobre</a></li>
-    <li><a href="#sobre">Contato</a></li>
-  </ul>
-  <div style="display:flex;align-items:center;gap:.75rem;">
-      <button class="nav-cta" onclick="openCart()">Falar com a equipe</button>
-      <button class="cart-btn" id="btnCart" onclick="openCart()" title="Serviços selecionados">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        <span class="cart-badge" id="cartBadge" style="display:none">0</span>
-      </button>
-    </div>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-inner">
-    <div class="hero-badge">✦ Automação com Inteligência Artificial</div>
-    <h1>Seu negócio no<br/><span class="hl">momento certo.</span></h1>
-    <p class="hero-desc">A Kairos Digital cria soluções sob medida com IA — automações, dashboards e painéis que transformam a operação do seu negócio em tempo real.</p>
-    <div class="hero-btns">
-      <a href="#solucoes" class="btn-primary btn-ripple">Ver soluções</a>
-      <a href="#cta" class="btn-outline">Falar com a equipe</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat"><div class="stat-n">8+</div><div class="stat-l">Soluções ativas</div></div>
-      <div class="stat"><div class="stat-n">100%</div><div class="stat-l">IA integrada</div></div>
-      <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">Automação contínua</div></div>
-      <div class="stat"><div class="stat-n">Goiânia</div><div class="stat-l">Base de operações</div></div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SOLUÇÕES -->
-<section id="solucoes" style="background:rgba(0,5,16,.6);">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:3.5rem;">
-      <p class="sec-label">O que fazemos</p>
-      <h2 class="sec-title">Soluções que <span class="hl">transformam negócios</span></h2>
-      <p class="sec-desc" style="margin:0 auto;max-width:580px;">Cada empresa tem uma dor. Temos a solução. Clique em qualquer serviço e descubra como a IA pode escalar o seu negócio ainda este mês.</p>
-      <div style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;">
-        <div style="text-align:center;"><div style="font-family:Space Grotesk,sans-serif;font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#00F5FF,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">+237%</div><div style="font-size:.72rem;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em;">Crescimento médio</div></div>
-        <div style="text-align:center;"><div style="font-family:Space Grotesk,sans-serif;font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#00F5FF,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">48h</div><div style="font-size:.72rem;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em;">Para implementar</div></div>
-        <div style="text-align:center;"><div style="font-family:Space Grotesk,sans-serif;font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#00F5FF,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">24/7</div><div style="font-size:.72rem;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em;">IA trabalhando</div></div>
-      </div>
-    </div>
-    <div class="port-grid" id="portGrid"></div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- COMO FUNCIONA -->
-<section id="como">
-  <div class="container">
-    <div style="text-align:center;">
-      <p class="sec-label">Processo</p>
-      <h2 class="sec-title">Como a Kairos <span class="hl">trabalha</span></h2>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-name">Diagnóstico</div>
-        <div class="step-desc">Entendemos o seu negócio, os processos e onde a automação gera mais impacto imediato.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-name">Construção</div>
-        <div class="step-desc">Desenvolvemos a solução com IA sob medida — rápido, sem burocracia, direto ao ponto.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-name">Deploy</div>
-        <div class="step-desc">Publicamos e configuramos tudo — no seu domínio, na sua TV, no seu WhatsApp. Pronto para usar.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-name">Suporte Contínuo</div>
-        <div class="step-desc">Monitoramos, ajustamos e evoluímos a solução conforme o seu negócio cresce.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SOBRE -->
-<!-- ABOUT -->
-<section id="sobre">
-  <div class="container">
-    <div class="sobre-grid">
-      <div>
-        <p class="sec-label" data-t="ab.label">Quem somos</p>
-        <h2 class="sec-title">A equipe <span class="hl" data-t="ab.hl">Kairos</span></h2>
-        <p class="sec-desc" data-t="ab.desc">Combinamos visão de negócios, expertise em vendas e tecnologia de ponta com IA. Com base em Goiânia-GO, atendemos negócios de todos os tamanhos com soluções que funcionam de verdade.</p>
-
-        <!-- VILSON CARD -->
-        <div class="ceo-card" style="margin-top:2rem;">
-          <div class="ceo-photo-wrap">
-            <img src="vilson.jpeg" alt="Vilson Mota" class="ceo-photo"/>
-            <div class="ceo-glow"></div>
-          </div>
-          <div class="ceo-info">
-            <div class="ceo-badge">Co-CEO &amp; Fundador</div>
-            <h3 class="ceo-name">Vilson Mota</h3>
-            <p class="ceo-title">Especialista em Vendas · IA &amp; Tech · Corretor</p>
-            <p class="ceo-bio">Vendedor nato com presença em mais de 20 estados brasileiros. Ex-consultor da Porto Seguro Seguradora, corretor de imóveis em Goiânia e pioneiro em tecnologia DeFi na região. Certificado pela Anthropic — criadora do Claude Code — em IA aplicada e educação digital. Membro do time de elite do Cultura Builder.</p>
-            <div class="ceo-tags">
-              <span class="ceo-tag">🤖 Anthropic · Claude Code</span>
-              <span class="ceo-tag">🏆 Cultura Builder</span>
-              <span class="ceo-tag">🏠 Corretor · Goiânia</span>
-              <span class="ceo-tag">🛡️ Porto Seguro</span>
-              <span class="ceo-tag">₿ DeFi Pioneer</span>
-            </div>
-            <div class="ceo-elite">
-              <span class="elite-label">Time de elite</span>
-              <span class="elite-names">Kelvin Nascimento · Caio Vicentino · Deco Montenegro · Bruno Pessoa</span>
-            </div>
-            <div class="ceo-contacts">
-              <a href="https://wa.me/5562984452548" target="_blank" class="ceo-contact-btn">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-                (62) 98445-2548
-              </a>
-              <a href="https://wa.me/5562984924326" target="_blank" class="ceo-contact-btn">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-                (62) 98492-4326
-              </a>
-              <a href="https://instagram.com/motavilson" target="_blank" class="ceo-contact-btn ig">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                @motavilson
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- MATHEUS CARD -->
-        <div class="ceo-card" style="margin-top:1.2rem;border-color:rgba(0,245,255,.2);">
-          <div class="ceo-photo-wrap">
-            <div style="width:140px;height:170px;border-radius:14px;background:linear-gradient(135deg,#00F5FF22,#7B00FF33);border:2px solid rgba(0,245,255,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <span style="font-family:'Space Grotesk';font-size:4rem;font-weight:800;background:linear-gradient(135deg,#00F5FF,#7B00FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">M</span>
-            </div>
-            <div class="ceo-glow" style="background:linear-gradient(135deg,rgba(0,245,255,.12),rgba(123,0,255,.1));"></div>
-          </div>
-          <div class="ceo-info">
-            <div class="ceo-badge" style="border-color:rgba(0,245,255,.4);color:#00F5FF;background:rgba(0,245,255,.08);">Co-CEO &amp; Fundador</div>
-            <h3 class="ceo-name" style="background:linear-gradient(135deg,#00F5FF,#7B00FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Matheus Schelle</h3>
-            <p class="ceo-title" style="color:#00F5FF;">Especialista em Vendas · Cripto &amp; Investimentos · Trader · IA &amp; Tech</p>
-            <p class="ceo-bio">Empreendedor nato, com visão estratégica e mente criativa. Especialista em mercado cripto, investimentos e vendas. CEO do IBCCF (Instituto Brasileiro de Criminalística e Ciências Forenses). Certificado pela Anthropic — criadora do Claude Code — em IA aplicada. Empresário visionário com base em Goiânia.</p>
-            <div class="ceo-tags">
-              <span class="ceo-tag" style="border-color:rgba(0,245,255,.25);color:#00F5FF;">🤖 Anthropic · Claude Code</span>
-              <span class="ceo-tag" style="border-color:rgba(0,245,255,.25);color:#00F5FF;">🏆 IBCCF — Criminalística</span>
-              <span class="ceo-tag" style="border-color:rgba(0,245,255,.25);color:#00F5FF;">🏙️ Empresário · Goiânia</span>
-              <span class="ceo-tag" style="border-color:rgba(0,245,255,.25);color:#00F5FF;">📈 Trader · Cripto &amp; Investimentos</span>
-            </div>
-            <div class="ceo-contacts">
-              <a href="https://wa.me/5562981554992" target="_blank" class="ceo-contact-btn">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-                (62) 98155-4992
-              </a>
-              <a href="https://instagram.com/_matheusschelle" target="_blank" class="ceo-contact-btn ig">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                @_matheusschelle
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="s-stats">
-        <div class="s-stat"><div class="s-n">20+</div><div class="s-l">Estados atendidos</div></div>
-        <div class="s-stat"><div class="s-n">8+</div><div class="s-l" data-t="ab.s1">Soluções ativas</div></div>
-        <div class="s-stat"><div class="s-n">48h</div><div class="s-l" data-t="ab.s2">Entrega média</div></div>
-        <div class="s-stat"><div class="s-n">100%</div><div class="s-l" data-t="ab.s3">IA integrada</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<footer style="background:rgba(0,5,16,.97);border-top:1px solid rgba(0,200,255,.15);
-  padding:2rem 2.5rem;position:relative;z-index:1;">
-  <div style="max-width:1160px;margin:0 auto;">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.5rem;">
-      <div style="display:flex;align-items:center;gap:.7rem;">
-        <img src="kairos_logo.png" alt="Kairos Digital" style="height:40px;width:40px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(0,150,255,.6));border-radius:6px;"/>
-        <div>
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:800;background:linear-gradient(135deg,#00BFFF,#00F5FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:.08em;display:block;">KAIROS DIGITAL</span>
-          <span style="font-size:.58rem;color:rgba(0,200,255,.4);letter-spacing:.15em;font-family:monospace;">AUTOMAÇÃO COM IA · GOIÂNIA · 2026</span>
-        </div>
-      </div>
-      <!-- BOTÃO DIAGNÓSTICO -->
-      <button onclick="openCart()" style="background:linear-gradient(135deg,#FF006E,#7B00FF);border:none;color:#fff;
-        font-size:.88rem;font-weight:800;padding:.8rem 2rem;border-radius:50px;cursor:pointer!important;
-        display:flex;align-items:center;gap:.5rem;
-        box-shadow:0 0 20px rgba(255,0,110,.4),0 4px 20px rgba(123,0,255,.3);
-        transition:all .25s;letter-spacing:.05em;"
-        onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 0 35px rgba(255,0,110,.65)'"
-        onmouseout="this.style.transform='';this.style.boxShadow='0 0 20px rgba(255,0,110,.4)'"
-      >
-        <span style="font-size:1rem;">⚡</span>
-        Diagnóstico Gratuito de IA
-      </button>
-      <div style="display:flex;gap:.8rem;align-items:center;">
-        <a href="team.html" style="font-size:.7rem;color:rgba(0,245,255,.45);text-decoration:none;border:1px solid rgba(0,245,255,.2);padding:.2rem .6rem;border-radius:5px;font-weight:600;letter-spacing:.05em;transition:all .2s;"
-          onmouseover="this.style.borderColor='#00F5FF';this.style.color='#00F5FF'"
-          onmouseout="this.style.borderColor='rgba(0,245,255,.2)';this.style.color='rgba(0,245,255,.45)'">
-          HQ INTERNO ⚡
-        </a>
-        <span style="font-size:.6rem;color:rgba(0,245,255,.2);font-family:monospace;">K+K PRES.MODE</span>
-      </div>
-    </div>
-    <div style="border-top:1px solid rgba(0,245,255,.08);padding-top:1rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;">
-      <p style="font-size:.7rem;color:rgba(0,245,255,.3);">© 2026 Kairos Digital — Todos os direitos reservados</p>
-      <p style="font-size:.7rem;color:rgba(0,245,255,.2);">Vilson Mota · Matheus Schelle · Goiânia, GO</p>
-    </div>
-  </div>
-</footer>
-
-<script>
-/* CYBERPUNK CITY BG */
-(function(){
-  var cv=document.getElementById('canvas-bg'),ctx=cv.getContext('2d');
-  var W,H;
-  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
-  resize();window.addEventListener('resize',function(){resize();buildCity();});
-
-  // Stars
-  var stars=[];
-  for(var i=0;i<200;i++)stars.push({x:Math.random(),y:Math.random()*0.6,r:Math.random()*1+.2,t:Math.random()*6.28,ts:.005+Math.random()*.02});
-
-  // Buildings
-  var buildings=[];
-  function buildCity(){
-    buildings=[];
-    // Far layer
-    for(var i=0;i<30;i++){
-      var w=30+Math.random()*60,h=80+Math.random()*200;
-      buildings.push({x:i*(W/28),y:H-h,w:w,h:h,layer:0,
-        color:'rgba(5,10,30,0.9)',
-        windows:[],neon:Math.random()>.6?'rgba(0,180,255,.35)':'rgba(150,0,255,.25)'});
-    }
-    // Mid layer
-    for(var j=0;j<20;j++){
-      var mw=40+Math.random()*80,mh=120+Math.random()*280;
-      var wins=[];
-      for(var r=0;r<Math.floor(mh/18);r++)for(var col=0;col<Math.floor(mw/14);col++){
-        wins.push({r:r,c:col,on:Math.random()>.35,blink:Math.random()>.88,phase:Math.random()*6.28});
-      }
-      buildings.push({x:j*(W/18),y:H-mh,w:mw,h:mh,layer:1,color:'rgba(8,15,40,0.95)',windows:wins,
-        neon:['rgba(0,200,255,.5)','rgba(255,0,150,.4)','rgba(0,255,150,.35)'][Math.floor(Math.random()*3)]});
-    }
-    // Near layer
-    for(var k=0;k<8;k++){
-      var nw=60+Math.random()*120,nh=200+Math.random()*350;
-      buildings.push({x:k*(W/7),y:H-nh,w:nw,h:nh,layer:2,color:'rgba(3,8,20,0.98)',windows:[],
-        neon:'rgba(0,245,255,.3)'});
-    }
-  }
-  buildCity();
-
-  // Drones
-  var drones=[];
-  for(var d=0;d<12;d++)drones.push({
-    x:Math.random()*W,y:H*0.1+Math.random()*H*0.4,
-    vx:(Math.random()-.5)*0.8,vy:(Math.random()-.5)*0.2,
-    trail:[],color:['#00F5FF','#FF006E','#FFE000'][Math.floor(Math.random()*3)]
-  });
-
-  // Comets
-  var comets=[];
-  function spawnComet(){
-    comets.push({x:Math.random()*W,y:Math.random()*H*0.4,vx:3+Math.random()*5,vy:1+Math.random()*3,life:1});
-    if(comets.length>4)comets.shift();
-  }
-  setInterval(spawnComet,2500+Math.random()*3000);
-
-  var t=0;
-  function frame(){
-    t+=0.016;
-    ctx.clearRect(0,0,W,H);
-
-    // SKY gradient
-    var sky=ctx.createLinearGradient(0,0,0,H);
-    sky.addColorStop(0,'#000308');
-    sky.addColorStop(0.5,'#010820');
-    sky.addColorStop(0.75,'#030d1a');
-    sky.addColorStop(1,'#000508');
-    ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
-
-    // Stars
-    stars.forEach(function(s){
-      s.t+=s.ts;
-      var a=0.15+0.6*Math.abs(Math.sin(s.t));
-      ctx.globalAlpha=a;ctx.fillStyle='#fff';
-      ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fill();
-    });
-    ctx.globalAlpha=1;
-
-    // Comets
-    comets.forEach(function(cm){
-      cm.x+=cm.vx;cm.y+=cm.vy;cm.life-=0.012;
-      if(cm.life<=0)return;
-      ctx.save();ctx.globalAlpha=cm.life*0.6;
-      ctx.strokeStyle='rgba(200,240,255,0.8)';ctx.lineWidth=1.5;
-      ctx.shadowColor='#00F5FF';ctx.shadowBlur=8;
-      ctx.beginPath();ctx.moveTo(cm.x-cm.vx*12,cm.y-cm.vy*12);ctx.lineTo(cm.x,cm.y);ctx.stroke();
-      ctx.restore();
-    });
-    comets=comets.filter(function(cm){return cm.life>0&&cm.x<W+100;});
-
-    // Atmospheric haze bottom
-    var haze=ctx.createLinearGradient(0,H*0.55,0,H);
-    haze.addColorStop(0,'rgba(0,20,60,0)');
-    haze.addColorStop(0.6,'rgba(0,30,80,0.25)');
-    haze.addColorStop(1,'rgba(0,40,100,0.5)');
-    ctx.fillStyle=haze;ctx.fillRect(0,H*0.55,W,H*0.45);
-
-    // Buildings far
-    buildings.filter(function(b){return b.layer===0;}).forEach(function(b){
-      ctx.fillStyle=b.color;ctx.fillRect(b.x,b.y,b.w,b.h);
-      // Roof neon glow
-      ctx.fillStyle=b.neon;ctx.fillRect(b.x,b.y,b.w,2);
-      ctx.shadowColor=b.neon;ctx.shadowBlur=8;ctx.fillRect(b.x,b.y,b.w,1);ctx.shadowBlur=0;
-    });
-
-    // Buildings mid
-    buildings.filter(function(b){return b.layer===1;}).forEach(function(b){
-      ctx.fillStyle=b.color;ctx.fillRect(b.x,b.y,b.w,b.h);
-      // Windows
-      b.windows.forEach(function(w){
-        var lit=w.blink?Math.sin(t*2+w.phase)>0:w.on;
-        if(lit){
-          ctx.fillStyle='rgba(255,240,180,0.7)';
-          ctx.fillRect(b.x+w.c*14+3,b.y+w.r*18+3,8,10);
-        }
-      });
-      // Roof neon
-      ctx.shadowColor=b.neon;ctx.shadowBlur=15;
-      ctx.fillStyle=b.neon;ctx.fillRect(b.x,b.y,b.w,3);
-      ctx.shadowBlur=0;
-    });
-
-    // Ground neon reflection
-    var refl=ctx.createLinearGradient(0,H*0.8,0,H);
-    refl.addColorStop(0,'rgba(0,100,200,0)');
-    refl.addColorStop(0.5,'rgba(0,80,180,0.1)');
-    refl.addColorStop(1,'rgba(0,60,150,0.25)');
-    ctx.fillStyle=refl;ctx.fillRect(0,H*0.8,W,H*0.2);
-
-    // Buildings near (silhouette)
-    buildings.filter(function(b){return b.layer===2;}).forEach(function(b){
-      ctx.fillStyle=b.color;ctx.fillRect(b.x,b.y,b.w,b.h);
-      ctx.shadowColor=b.neon;ctx.shadowBlur=20;
-      ctx.fillStyle=b.neon;ctx.fillRect(b.x,b.y,b.w,2);
-      ctx.shadowBlur=0;
-    });
-
-    // Drones
-    drones.forEach(function(dr){
-      dr.x+=dr.vx;dr.y+=dr.vy;
-      if(dr.x<0||dr.x>W)dr.vx*=-1;
-      if(dr.y<H*0.1||dr.y>H*0.55)dr.vy*=-1;
-      dr.trail.push({x:dr.x,y:dr.y});
-      if(dr.trail.length>12)dr.trail.shift();
-      // Trail
-      dr.trail.forEach(function(pt,i){
-        ctx.globalAlpha=(i/dr.trail.length)*0.25;
-        ctx.fillStyle=dr.color;ctx.beginPath();ctx.arc(pt.x,pt.y,1,0,Math.PI*2);ctx.fill();
-      });
-      ctx.globalAlpha=1;
-      // Drone dot with glow
-      ctx.shadowColor=dr.color;ctx.shadowBlur=12;
-      ctx.fillStyle=dr.color;ctx.beginPath();ctx.arc(dr.x,dr.y,2.5,0,Math.PI*2);ctx.fill();
-      ctx.shadowBlur=0;
-    });
-
-    requestAnimationFrame(frame);
-  }
-  frame();
-
-  /* NEON EXPLOSION on click */
-  document.addEventListener('click',function(e){
-    if(e.target.closest('button,a,input,select,textarea,.slot,.int-btn,.logo-btn,.pc-btn,.port-card,.sol-card'))return;
-    var bx=e.clientX,by=e.clientY;
-    var st=Date.now(),dur=500;
-    (function pulse(){
-      var p=Math.min((Date.now()-st)/dur,1),ease=1-Math.pow(1-p,3);
-      var r=ease*160;
-      ctx.save();
-      ctx.strokeStyle='rgba(0,200,255,'+(0.8*(1-p))+')';ctx.lineWidth=2-p*1.5;
-      ctx.shadowColor='#00F5FF';ctx.shadowBlur=20*(1-p);
-      ctx.beginPath();ctx.arc(bx,by,r,0,Math.PI*2);ctx.stroke();
-      ctx.strokeStyle='rgba(255,0,150,'+(0.6*(1-p))+')';ctx.shadowColor='#FF0096';
-      ctx.beginPath();ctx.arc(bx,by,r*0.5,0,Math.PI*2);ctx.stroke();
-      for(var i=0;i<8;i++){var ang=i/8*Math.PI*2;
-        ctx.beginPath();ctx.moveTo(bx+Math.cos(ang)*r*0.55,by+Math.sin(ang)*r*0.55);
-        ctx.lineTo(bx+Math.cos(ang)*r*1.1,by+Math.sin(ang)*r*1.1);
-        ctx.strokeStyle='rgba(0,245,255,'+(0.7*(1-p))+')';ctx.lineWidth=1;ctx.stroke();}
-      ctx.restore();
-      if(p<1)requestAnimationFrame(pulse);
-    })();
-  });
-})();
-
-/* BLACK HOLE on click */
-  document.addEventListener('click',function(e){
-    if(e.target.closest('button,a,input,select,textarea,.slot,.int-btn,.logo-btn')) return;
-    var bx=e.clientX,by=e.clientY;
-    var st=Date.now(),dur=500;
-    (function pulse(){
-      var p=Math.min((Date.now()-st)/dur,1),ease=1-Math.pow(1-p,3);
-      var r=ease*150;
-      // Cyan ring
-      ctx.save();
-      ctx.strokeStyle='rgba(0,245,255,'+(0.8*(1-p))+')';ctx.lineWidth=2-p*1.5;
-      ctx.shadowColor='#00F5FF';ctx.shadowBlur=20*(1-p);
-      ctx.beginPath();ctx.arc(bx,by,r,0,Math.PI*2);ctx.stroke();
-      // Pink inner ring
-      ctx.strokeStyle='rgba(255,0,110,'+(0.6*(1-p))+')';
-      ctx.beginPath();ctx.arc(bx,by,r*0.5,0,Math.PI*2);ctx.stroke();
-      // Spikes
-      for(var i=0;i<8;i++){
-        var ang=i/8*Math.PI*2;
-        ctx.beginPath();ctx.moveTo(bx+Math.cos(ang)*r*0.6,by+Math.sin(ang)*r*0.6);
-        ctx.lineTo(bx+Math.cos(ang)*r*1.1,by+Math.sin(ang)*r*1.1);
-        ctx.strokeStyle='rgba(255,224,0,'+(0.7*(1-p))+')';
-        ctx.lineWidth=1;ctx.stroke();
-      }
-      ctx.restore();
-      if(p<1)requestAnimationFrame(pulse);
-    })();
-  });
-})();
-
-
-(function(){
-  var cv=document.getElementById('canvas-bg'),ctx=cv.getContext('2d');
-  var stars=[], nebula=[], W, H;
-  function resize(){ W=cv.width=innerWidth; H=cv.height=innerHeight; initStars(); }
-  window.addEventListener('resize',resize);
-
-  function initStars(){
-    stars=[];
-    for(var i=0;i<350;i++){
-      stars.push({
-        x:Math.random()*W, y:Math.random()*H,
-        r:Math.random()*1.8+.2,
-        twinkle:Math.random()*Math.PI*2,
-        twinkleSpeed:0.02+Math.random()*0.04,
-        color:['#fff','#a78bfa','#67e8f9','#fde68a','#f9a8d4'][Math.floor(Math.random()*5)],
-        alpha:0.4+Math.random()*0.6
-      });
-    }
-    nebula=[];
-    for(var j=0;j<6;j++){
-      nebula.push({
-        x:Math.random()*W, y:Math.random()*H,
-        rx:80+Math.random()*200, ry:40+Math.random()*120,
-        angle:Math.random()*Math.PI,
-        color:['rgba(124,58,237,','rgba(6,182,212,','rgba(168,85,247,','rgba(59,130,246,'][Math.floor(Math.random()*4)],
-        alpha:0.03+Math.random()*0.05
-      });
-    }
-  }
-  resize();
-
-  var rot=0;
-  function frame(){
-    ctx.clearRect(0,0,W,H);
-    rot+=0.0003;
-
-    // Nebulas
-    nebula.forEach(function(n){
-      ctx.save();
-      ctx.translate(n.x,n.y);
-      ctx.rotate(n.angle+rot);
-      var g=ctx.createRadialGradient(0,0,0,0,0,n.rx);
-      g.addColorStop(0,n.color+(n.alpha*3)+')');
-      g.addColorStop(1,n.color+'0)');
-      ctx.fillStyle=g;
-      ctx.scale(1,n.ry/n.rx);
-      ctx.beginPath();ctx.arc(0,0,n.rx,0,Math.PI*2);ctx.fill();
-      ctx.restore();
-    });
-
-    // Stars
-    stars.forEach(function(s){
-      s.twinkle+=s.twinkleSpeed;
-      var alpha=s.alpha*(0.5+0.5*Math.sin(s.twinkle));
-      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle=s.color.replace(')',','+alpha+')').replace('#','rgba('+parseInt(s.color.slice(1,3),16)+','+parseInt(s.color.slice(3,5),16)+','+parseInt(s.color.slice(5,7),16)+',');
-      // simpler approach:
-      ctx.globalAlpha=alpha;
-      ctx.fillStyle=s.color;
-      ctx.fill();
-      ctx.globalAlpha=1;
-    });
-
-    // Galaxy arm spiral
-    ctx.save();
-    ctx.translate(W/2,H/2);
-    ctx.rotate(rot*0.5);
-    for(var arm=0;arm<2;arm++){
-      for(var t=0;t<200;t++){
-        var angle=t*0.15+arm*Math.PI;
-        var radius=t*1.2;
-        var x=Math.cos(angle)*radius, y=Math.sin(angle)*radius*0.4;
-        var alpha2=Math.max(0,(1-t/200)*0.06);
-        ctx.beginPath();ctx.arc(x,y,0.8+t*0.006,0,Math.PI*2);
-        ctx.fillStyle='rgba(168,85,247,'+alpha2+')';ctx.fill();
-      }
-    }
-    ctx.restore();
-
-    requestAnimationFrame(frame);
-  }
-  frame();
-
-  /* BLACK HOLE on click */
-  document.addEventListener('click',function(e){
-    if(e.target.closest('button,a,input,select,textarea,.slot,.interest-btn,.logo-upload-btn')) return;
-    var bx=e.clientX, by=e.clientY;
-    var start=Date.now(), dur=600;
-    (function pulse(){
-      var p=Math.min((Date.now()-start)/dur,1);
-      var eased=1-Math.pow(1-p,3);
-      var r=eased*180;
-      ctx.save();
-      // Black hole accretion disk
-      var grd=ctx.createRadialGradient(bx,by,0,bx,by,r);
-      grd.addColorStop(0,'rgba(0,0,0,'+(0.7*(1-p))+')');
-      grd.addColorStop(0.3,'rgba(124,58,237,'+(0.5*(1-p))+')');
-      grd.addColorStop(0.6,'rgba(6,182,212,'+(0.3*(1-p))+')');
-      grd.addColorStop(1,'rgba(0,0,0,0)');
-      ctx.fillStyle=grd;
-      ctx.beginPath();ctx.arc(bx,by,r,0,Math.PI*2);ctx.fill();
-      // Spiral arms
-      ctx.translate(bx,by);
-      ctx.rotate(eased*Math.PI*3);
-      for(var i=0;i<3;i++){
-        ctx.beginPath();
-        ctx.strokeStyle='rgba(168,85,247,'+(0.6*(1-p))+')';
-        ctx.lineWidth=1.5;
-        ctx.arc(0,0,r*(0.3+i*0.2),0,Math.PI*(0.8+i*0.3));
-        ctx.stroke();
-      }
-      ctx.restore();
-      if(p<1) requestAnimationFrame(pulse);
-    })();
-  });
-})();
-</script>
-
-<!-- OVERLAY -->
-<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-<aside class="cart-drawer" id="cartDrawer">
-  <div class="drawer-header">
-    <div>
-      <h2>Diagnóstico <span>Gratuito de IA</span></h2>
-      <p style="font-size:.7rem;color:var(--txt2);margin-top:.15rem;">Selecione o serviço · Preencha · Enviamos em segundos</p>
-    </div>
-    <button class="btn-close-drawer" onclick="closeCart()" style="cursor:pointer!important;">✕</button>
-  </div>
-
-  <div class="drawer-body">
-
-    <!-- CONSULTOR -->
-    <div>
-      <div class="dsec-label">Falar com qual consultor?</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;">
-        <div class="consultant-opt sel" id="cOpt0" onclick="selConsultor(0)" style="cursor:pointer!important;">
-          <div class="cons-avatar" style="background:linear-gradient(135deg,#7B00FF,#FFE000);">V</div>
-          <div><div class="cons-name">Vilson Mota</div><div class="cons-role">CEO · Vendas &amp; IA</div></div>
-        </div>
-        <div class="consultant-opt" id="cOpt1" onclick="selConsultor(1)" style="cursor:pointer!important;">
-          <div class="cons-avatar" style="background:linear-gradient(135deg,#00F5FF,#7B00FF);">M</div>
-          <div><div class="cons-name">Matheus Schelle</div><div class="cons-role">Co-CEO · Cripto &amp; Tech</div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SERVIÇOS SELECIONADOS (auto) -->
-    <div>
-      <div class="dsec-label">Serviço de interesse</div>
-      <div id="servsList">
-        <div id="servsVazio" style="font-size:.8rem;color:var(--txt2);padding:.8rem;text-align:center;background:rgba(0,245,255,.03);border:1px dashed var(--brd);border-radius:9px;">
-          Clique em qualquer card de serviço ou selecione abaixo.
-        </div>
-      </div>
-      <select id="fSolucao" style="width:100%;margin-top:.5rem;background:var(--bg3);border:1px solid var(--brd);color:var(--txt);border-radius:9px;padding:.6rem .85rem;font-size:.84rem;outline:none;transition:border-color .2s;">
-        <option value="">Ou selecione o serviço...</option>
-        <option>📊 Dashboard Inteligente</option>
-        <option>🤖 Automação com IA</option>
-        <option>🏥 Clínica 24h com IA</option>
-        <option>🏨 Hospitalidade 4.0</option>
-        <option>🎯 Consultoria Estratégica</option>
-        <option>🥩 Painel Digital de Açougue</option>
-        <option>🏪 Vitrine Digital de Produtos</option>
-        <option>Outro / Quero saber mais</option>
-      </select>
-    </div>
-
-    <!-- DADOS OBRIGATÓRIOS -->
-    <div>
-      <div class="dsec-label">Seus dados</div>
-      <div style="display:flex;flex-direction:column;gap:.65rem;">
-        <div class="field"><label>Nome completo *</label><input type="text" id="fNome" placeholder="Seu nome"/></div>
-        <div class="field"><label>Empresa *</label><input type="text" id="fEmpresa" placeholder="Nome da empresa"/></div>
-        <div class="field"><label>WhatsApp *</label><input type="tel" id="fTel" placeholder="(62) 9xxxx-xxxx"/></div>
-      </div>
-    </div>
-
-    <!-- OPCIONAIS (colapsáveis) -->
-    <div>
-      <div class="dsec-label" onclick="toggleOpcional()" style="cursor:pointer!important;user-select:none;">
-        Informações opcionais <span id="opcToggle" style="color:var(--txt2);font-size:.8rem;">▼ ver</span>
-      </div>
-      <div id="opcionalFields" style="display:none;flex-direction:column;gap:.65rem;margin-top:.5rem;">
-        <div class="field"><label>Cargo / Função</label><input type="text" id="fCargo" placeholder="Ex: Dono, Gerente, Diretor..."/></div>
-        <div class="field"><label>Ramo de atividade</label>
-          <select id="fRamo" style="background:var(--bg3);border:1px solid var(--brd);color:var(--txt);border-radius:9px;padding:.6rem .85rem;font-size:.84rem;outline:none;">
-            <option value="">Selecione o ramo...</option>
-            <option>🥩 Açougue / Frigorífico</option><option>🏪 Mercado / Supermercado</option>
-            <option>🏠 Imobiliária / Corretor</option><option>🍽️ Restaurante / Alimentação</option>
-            <option>🏥 Saúde / Clínica</option><option>📚 Educação / Cursos</option>
-            <option>🛒 E-commerce</option><option>🏭 Indústria / Distribuição</option>
-            <option>💼 Serviços / Consultoria</option><option>💰 Financeiro / Investimentos</option>
-            <option>🌐 Tecnologia / Software</option><option>Outro</option>
-          </select>
-        </div>
-        <div class="field"><label>Nível de urgência</label>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-top:.3rem;" id="urgencyGrid">
-            <div class="urgency-opt" onclick="selUrgency(this,'🔴 Urgente')" style="cursor:pointer!important;">
-              <span class="urg-icon">🔴</span><span class="urg-label">Urgente</span><span class="urg-sub">Agora</span>
-            </div>
-            <div class="urgency-opt" onclick="selUrgency(this,'🟠 Alta — 30 dias')" style="cursor:pointer!important;">
-              <span class="urg-icon">🟠</span><span class="urg-label">Alta</span><span class="urg-sub">30 dias</span>
-            </div>
-            <div class="urgency-opt" onclick="selUrgency(this,'🟡 Média — 3 meses')" style="cursor:pointer!important;">
-              <span class="urg-icon">🟡</span><span class="urg-label">Média</span><span class="urg-sub">3 meses</span>
-            </div>
-            <div class="urgency-opt" onclick="selUrgency(this,'🟢 Baixa')" style="cursor:pointer!important;">
-              <span class="urg-icon">🟢</span><span class="urg-label">Baixa</span><span class="urg-sub">Pesquisando</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="drawer-footer">
-    <button class="wa-send-btn btn-ripple" onclick="enviarWA()" style="cursor:pointer!important;">
-      <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-      <span id="waBtnText">Enviar para Vilson via WhatsApp</span>
-    </button>
-    <p class="drawer-note">Diagnóstico 100% gratuito · Resposta em até 2h ⚡</p>
-  </div>
-</aside>
-
-<script>
-
-/* ── CARRINHO DE SERVIÇOS ── */
-var servicos = [];
-var slotSel = '';
-
-function openCart(){
-  document.getElementById('cartDrawer').classList.add('open');
-  document.getElementById('cartOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeCart(){
-  document.getElementById('cartDrawer').classList.remove('open');
-  document.getElementById('cartOverlay').classList.remove('open');
-  document.body.style.overflow='';
-}
-
-function addService(btn){
-  var card = btn.closest('.sol-card');
-  var nome = card.querySelector('.sol-name').textContent.trim();
-  if(servicos.indexOf(nome)===-1){
-    servicos.push(nome);
-    btn.textContent='Selecionado ✓';
-    btn.classList.add('ativo');
-  } else {
-    servicos.splice(servicos.indexOf(nome),1);
-    btn.textContent='Tenho Interesse ✦';
-    btn.classList.remove('ativo');
-  }
-  updateCartUI();
-  openCart();
-}
-
-function removeService(nome){
-  servicos.splice(servicos.indexOf(nome),1);
-  // Desmarca o botão correspondente
-  document.querySelectorAll('.interesse-btn').forEach(function(b){
-    var n = b.closest('.sol-card').querySelector('.sol-name').textContent.trim();
-    if(n===nome){ b.textContent='Tenho Interesse ✦'; b.classList.remove('ativo'); }
-  });
-  updateCartUI();
-}
-
-function updateCartUI(){
-  var badge = document.getElementById('cartBadge');
-  badge.textContent = servicos.length;
-  badge.style.display = servicos.length>0?'flex':'none';
-
-  var lista = document.getElementById('servsList');
-  var vazio = document.getElementById('servsVazio');
-  lista.innerHTML = '';
-
-  if(servicos.length===0){
-    lista.appendChild(vazio);
-    vazio.style.display='block';
-  } else {
-    vazio.style.display='none';
-    servicos.forEach(function(s){
-      var el=document.createElement('div');el.className='serv-item';
-      el.innerHTML='<span class="serv-item-nome">'+s+'</span><button class="serv-remove" onclick="removeService(''+s.replace(/'/g,"\'")+'')" title="Remover">✕</button>';
-      lista.appendChild(el);
-    });
-  }
-}
-
-function selSlot(el, hora){
-  document.querySelectorAll('.slot').forEach(function(s){s.classList.remove('sel');});
-  el.classList.add('sel');
-  slotSel = hora;
-}
-
-
-/* CONSULTOR */
-var consultorIdx = 0;
-var CONSULTORES = [
-  {nome:'Vilson Mota',   wa:'5562984452548'},
-  {nome:'Matheus Schelle',wa:'5562981554992'}
-];
-function selConsultor(i){
-  consultorIdx = i;
-  document.querySelectorAll('.consultant-opt').forEach(function(o,j){
-    o.classList.toggle('sel', j===i);
-  });
-  document.getElementById('waBtnText').textContent = 'Enviar para '+CONSULTORES[i].nome+' via WhatsApp';
-}
-
-function enviarWA(){
-  var n   = document.getElementById('fNome').value.trim();
-  var emp = document.getElementById('fEmpresa').value.trim();
-  var tel = document.getElementById('fTel').value.trim();
-  if(!n)  {alert('Informe seu nome.');return;}
-  if(!emp){alert('Informe a empresa.');return;}
-  if(!tel){alert('Informe seu WhatsApp.');return;}
-  var sol   = document.getElementById('fSolucao') ? document.getElementById('fSolucao').value : '';
-  var cargo = document.getElementById('fCargo') ? document.getElementById('fCargo').value.trim() : '';
-  var ramo  = document.getElementById('fRamo') ? document.getElementById('fRamo').value : '';
-  var cons  = CONSULTORES[consultorIdx];
-  var txt = '\uD83D\uDE80 *DIAGN\u00D3STICO GRATUITO — KAIROS DIGITAL*\n';
-  txt += 'Consultor: '+cons.nome+'\n\n';
-  txt += '*Nome:* '+n+'\n';
-  txt += '*Empresa:* '+emp+'\n';
-  txt += '*WhatsApp:* '+tel+'\n';
-  if(cargo) txt += '*Cargo:* '+cargo+'\n';
-  if(ramo)  txt += '*Ramo:* '+ramo+'\n';
-  if(sol)   txt += '*Servi\u00E7o de interesse:* '+sol+'\n';
-  if(urgSel) txt += '*Urg\u00EAncia:* '+urgSel+'\n';
-  if(servicos && servicos.length){
-    txt += '\n*Solu\u00E7\u00F5es marcadas:*\n';
-    servicos.forEach(function(s){txt+='\u2705 '+s+'\n';});
-  }
-  txt += '\n_Enviado via Kairos Digital_';
-  window.open('https://wa.me/'+cons.wa+'?text='+encodeURIComponent(txt),'_blank');
-}
-  var cargo= document.getElementById('fCargo').value.trim();
-  var ia   = document.getElementById('fIA') ? document.getElementById('fIA').value : '';
-  var ti   = document.getElementById('fTI') ? document.getElementById('fTI').value : '';
-  var msg  = document.getElementById('fMsg').value.trim();
-  var pp = dt.split('-'); var dtf = pp[2]+'/'+pp[1]+'/'+pp[0];
-  var cons = CONSULTORES[consultorIdx];
-
-  var txt = '\uD83D\uDE80 *DIAGN\u00D3STICO GRATUITO — KAIROS DIGITAL*\n';
-  txt += 'Solicitacao via site · Consultor: '+cons.nome+'\n\n';
-  txt += '*Contato:*\n\uD83D\uDC64 '+n+'\n\uD83D\uDCF1 '+tel+'\n\uD83C\uDFE2 '+emp+'\n';
-  if(cargo) txt += '\uD83D\uDCBC '+cargo+'\n';
-  txt += '\n*Empresa:*\n\uD83C\uDFAF Ramo: '+ramo+'\n';
-  if(urgSel) txt += '\u26A0\uFE0F Urgencia: '+urgSel+'\n';
-  if(ia) txt += '\uD83E\uDD16 Usa IA: '+ia+'\n';
-  if(ti) txt += '\uD83D\uDCBB TI: '+ti+'\n';
-  if(servicos && servicos.length){
-    txt += '\n*Solucoes de interesse:*\n';
-    servicos.forEach(function(s){ txt += '\u2705 '+s+'\n'; });
-  }
-  if(desaf) txt += '\n*Desafio principal:*\n'+desaf+'\n';
-  txt += '\n*Call agendada:*\n\uD83D\uDCC5 '+dtf+' \u23F0 '+slotSel+'\n';
-  if(msg) txt += '\n*Obs:* '+msg;
-  txt += '\n\n_Enviado via Kairos Digital_';
-  window.open('https://wa.me/'+cons.wa+'?text='+encodeURIComponent(txt),'_blank');
-}
-
-function enviarWA_bak(){
-  var nome = document.getElementById('fNome').value.trim();
-  var empresa = document.getElementById('fEmpresa').value.trim();
-  var cargo = document.getElementById('fCargo').value.trim();
-  var tel = document.getElementById('fTel').value.trim();
-  var msg = document.getElementById('fMsg').value.trim();
-  var data = document.getElementById('fData').value;
-
-  if(!nome || !empresa){
-    alert('Por favor, preencha ao menos seu nome e empresa.');
-    return;
-  }
-
-  // Formata data
-  var dataFmt = data ? (function(){var p=data.split('-');return p[2]+'/'+p[1]+'/'+p[0];})() : 'A definir';
-
-  var texto = 'Olá, Kairos! Vim pelo site de vocês e tenho interesse em soluções.
-
-';
-  texto += '*Meus dados:*
-';
-  texto += '👤 *Nome:* ' + nome + '
-';
-  texto += '🏢 *Empresa:* ' + empresa + '
-';
-  if(cargo) texto += '💼 *Cargo:* ' + cargo + '
-';
-  if(tel) texto += '📱 *WhatsApp:* ' + tel + '
-';
-
-  if(servicos.length>0){
-    texto += '
-*Serviços de interesse:*
-';
-    servicos.forEach(function(s){ texto += '✅ ' + s + '
-'; });
-  }
-
-  texto += '
-*Proposta de reunião:*
-';
-  texto += '📅 Data: ' + dataFmt + '
-';
-  texto += '⏰ Horário: ' + (slotSel||'A definir') + '
-';
-
-  if(msg) texto += '
-*Observações:*
-' + msg + '
-';
-  texto += '
-Aguardo o contato para confirmar!';
-
-  var url = 'https://wa.me/5562981554992?text=' + encodeURIComponent(texto);
-  window.open(url,'_blank');
-}
-
-// Preenche data minima (hoje)
-(function(){
-  var inp = document.getElementById('fData');
-  if(inp){
-    var hoje = new Date();
-    var d = String(hoje.getDate()).padStart(2,'0');
-    var m = String(hoje.getMonth()+1).padStart(2,'0');
-    inp.min = hoje.getFullYear()+'-'+m+'-'+d;
-  }
-})();
-
-</script>
-
-<div class="c-dot" id="cDot"></div>
-<div class="c-ring" id="cRing"></div>
-<canvas class="portal-ov" id="portalCv"></canvas>
-<div class="hg-widget" id="hgW">
-  <div class="hg-ttl">Seu Tempo</div>
-  <div class="hg-svg-w">
-    <svg width="64" height="88" viewBox="0 0 64 88">
-      <!-- Frame top/bottom -->
-      <rect x="6" y="1"  width="52" height="6" rx="3" fill="url(#hgGrad)" opacity=".9"/>
-      <rect x="6" y="81" width="52" height="6" rx="3" fill="url(#hgGrad)" opacity=".9"/>
-      <!-- Gradients -->
-      <defs>
-        <linearGradient id="hgGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#00F5FF"/>
-          <stop offset="50%" stop-color="#FFE000"/>
-          <stop offset="100%" stop-color="#FF006E"/>
-        </linearGradient>
-        <linearGradient id="sandGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#FFE000" stop-opacity=".9"/>
-          <stop offset="100%" stop-color="#FF006E" stop-opacity=".6"/>
-        </linearGradient>
-        <linearGradient id="sandBotGrad" x1="0" y1="1" x2="0" y2="0">
-          <stop offset="0%" stop-color="#00F5FF" stop-opacity=".8"/>
-          <stop offset="100%" stop-color="#7B00FF" stop-opacity=".5"/>
-        </linearGradient>
-        <!-- Clip: top triangle -->
-        <clipPath id="tc"><path d="M10 7 L32 44 L54 7 Z"/></clipPath>
-        <!-- Clip: bottom triangle -->
-        <clipPath id="bc"><path d="M10 81 L32 44 L54 81 Z"/></clipPath>
-      </defs>
-      <!-- Triangle outlines -->
-      <path d="M10 7 L32 44 L54 7 Z"  fill="rgba(0,245,255,.06)" stroke="url(#hgGrad)" stroke-width="1.5"/>
-      <path d="M10 81 L32 44 L54 81 Z" fill="rgba(0,245,255,.04)" stroke="url(#hgGrad)" stroke-width="1.5"/>
-      <!-- SAND TOP (decreases from bottom of top triangle) -->
-      <rect id="sTop" x="8" y="7"  width="48" height="37"
-            fill="url(#sandGrad)" clip-path="url(#tc)"/>
-      <!-- SAND BOTTOM (grows from top of bottom triangle upward) -->
-      <rect id="sBot" x="8" y="81" width="48" height="0"
-            fill="url(#sandBotGrad)" clip-path="url(#bc)"
-            transform="scale(1,-1) translate(0,-88)"/>
-      <!-- Falling particles -->
-      <g id="sP"></g>
-      <!-- Neon glow center waist -->
-      <circle cx="32" cy="44" r="3" fill="#FFE000" opacity=".8">
-        <animate attributeName="opacity" values=".4;1;.4" dur="1.2s" repeatCount="indefinite"/>
-      </circle>
-    </svg>
-  </div>
-  <div class="hg-msg" id="hgMsg">Oportunidade disponivel</div>
-  <div class="hg-urg" id="hgUrg" style="display:none"></div>
-  <button class="hg-cta-btn" onclick="openCart()">Fechar Agora</button>
-</div>
-
-<script>
-/* CURSOR AMPULHETA */
-
-/* CURSOR AMPULHETA */
-var hg=document.getElementById('curHg'),ring=document.getElementById('curRing');
-var mx=window.innerWidth/2,my=window.innerHeight/2;
-document.addEventListener('mousemove',function(e){
-  mx=e.clientX;my=e.clientY;
-  hg.style.left=mx+'px';hg.style.top=my+'px';
-  ring.style.left=mx+'px';ring.style.top=my+'px';
-});
-document.addEventListener('mousedown',function(){
-  hg.style.transform='translate(-50%,-50%) scale(.7) rotate(180deg)';
-  ring.style.width='60px';ring.style.height='60px';ring.style.borderColor='rgba(255,0,110,.7)';
-});
-document.addEventListener('mouseup',function(){
-  hg.style.transform='translate(-50%,-50%) scale(1) rotate(0deg)';
-  ring.style.width='40px';ring.style.height='40px';ring.style.borderColor='rgba(0,245,255,.4)';
-});
-// Hover em elementos clicaveis
-document.querySelectorAll('button,a,.sol-card,.port-card,.pc-btn,.urgency-opt,.slot,.consultant-opt').forEach(function(el){
-  el.addEventListener('mouseenter',function(){ring.style.width='55px';ring.style.height='55px';ring.style.borderColor='rgba(0,245,255,.8)';});
-  el.addEventListener('mouseleave',function(){ring.style.width='40px';ring.style.height='40px';ring.style.borderColor='rgba(0,245,255,.4)';});
-});
-
-/* PORTAL TRANSITION */
+    /* PORTAL TRANSITION */
 var pCv=document.getElementById('portalCv'),pCtx=pCv.getContext('2d'),pBusy=false;
 function runPortal(cb){
   if(pBusy)return;pBusy=true;
@@ -1725,20 +734,141 @@ requestAnimationFrame(tickHG);
   </svg>
 </button>
 
-<!-- CURSOR AMPULHETA -->
-<div class="cursor-hg" id="curHg">
-  <svg width="24" height="30" viewBox="0 0 56 76" fill="none">
-    <defs><linearGradient id="chg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00BFFF"/><stop offset="50%" stop-color="#00F5FF"/><stop offset="100%" stop-color="#7B9FFF"/></linearGradient></defs>
-    <rect x="6" y="1" width="44" height="5" rx="2" fill="url(#chg)"/>
-    <rect x="6" y="70" width="44" height="5" rx="2" fill="url(#chg)"/>
-    <path d="M10 6 L28 38 L46 6 Z" fill="rgba(0,200,255,.15)" stroke="url(#chg)" stroke-width="2"/>
-    <path d="M10 70 L28 38 L46 70 Z" fill="rgba(0,180,255,.1)" stroke="url(#chg)" stroke-width="2"/>
-    <circle id="chgWaist" cx="28" cy="38" r="3" fill="#00F5FF">
-      <animate attributeName="opacity" values=".4;1;.4" dur="1s" repeatCount="indefinite"/>
-    </circle>
-  </svg>
+
+
+
+<!-- CATÁLOGO DE SERVIÇOS -->
+<div id="catalogo" style="background:rgba(0,5,16,.8);padding:4rem 2rem;position:relative;z-index:1;">
+<div style="max-width:1160px;margin:0 auto;">
+<p style="font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#00F5FF;margin-bottom:.4rem;text-align:center;">Catálogo Completo</p>
+<h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:800;text-align:center;margin-bottom:.6rem;">Selecione os <span style="background:linear-gradient(135deg,#00F5FF,#FF006E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">serviços</span> de interesse</h2>
+<p style="font-size:.88rem;color:#7ECFEA;max-width:500px;margin:0 auto 2rem;text-align:center;">Clique em Tenho Interesse, preencha seus dados e enviamos no WhatsApp.</p>
+<div style="display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin-bottom:2rem;">
+<button class="cff active" onclick="fcatalog('todos',this)">Todos</button>
+<button class="cff" onclick="fcatalog('dashboard',this)">📊 Dashboards</button>
+<button class="cff" onclick="fcatalog('automacao',this)">🤖 Automação</button>
+<button class="cff" onclick="fcatalog('clinica',this)">🏥 Clínicas</button>
+<button class="cff" onclick="fcatalog('hotel',this)">🏨 Hospitalidade</button>
+<button class="cff" onclick="fcatalog('consultoria',this)">🎯 Consultoria</button>
+<button class="cff" onclick="fcatalog('autoridade',this)">⚡ IA Avançada</button>
 </div>
-<div class="cursor-ring" id="curRing"></div>
+<div id="catGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-bottom:1.5rem;"></div>
+<div id="catCart" style="display:none;background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.2);border-radius:16px;padding:1.4rem;">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem;">
+<span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;">Selecionados</span>
+<button onclick="clearCC()" style="background:rgba(255,0,110,.1);border:1px solid rgba(255,0,110,.3);color:#FF006E;font-size:.7rem;font-weight:700;padding:.22rem .6rem;border-radius:6px;cursor:pointer!important;">Limpar</button>
+</div>
+<div id="catItems" style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.75rem;">
+<div><label style="font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:#7ECFEA;display:block;margin-bottom:.25rem;">Nome *</label><input id="ccN" type="text" placeholder="Seu nome" style="width:100%;background:#0a1628;border:1px solid rgba(0,245,255,.2);color:#E0F7FF;border-radius:8px;padding:.52rem .75rem;font-size:.82rem;outline:none;"/></div>
+<div><label style="font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:#7ECFEA;display:block;margin-bottom:.25rem;">WhatsApp *</label><input id="ccT" type="tel" placeholder="(62) 9xxxx-xxxx" style="width:100%;background:#0a1628;border:1px solid rgba(0,245,255,.2);color:#E0F7FF;border-radius:8px;padding:.52rem .75rem;font-size:.82rem;outline:none;"/></div>
+<div><label style="font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:#7ECFEA;display:block;margin-bottom:.25rem;">Empresa</label><input id="ccE" type="text" placeholder="Empresa (opcional)" style="width:100%;background:#0a1628;border:1px solid rgba(0,245,255,.2);color:#E0F7FF;border-radius:8px;padding:.52rem .75rem;font-size:.82rem;outline:none;"/></div>
+<div><label style="font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:#7ECFEA;display:block;margin-bottom:.25rem;">Consultor</label><select id="ccC" style="width:100%;background:#0a1628;border:1px solid rgba(0,245,255,.2);color:#E0F7FF;border-radius:8px;padding:.52rem .75rem;font-size:.82rem;outline:none;"><option value="5562984452548">Vilson Mota</option><option value="5562981554992">Matheus Schelle</option></select></div>
+</div>
+<button onclick="sendCC()" style="width:100%;padding:.85rem;background:linear-gradient(135deg,#16a34a,#22c55e);border:none;color:#fff;font-size:.88rem;font-weight:800;border-radius:11px;cursor:pointer!important;box-shadow:0 4px 18px rgba(34,197,94,.35);">📲 Enviar Interesse no WhatsApp</button>
+</div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:rgba(0,5,16,.97);border-top:1px solid rgba(0,245,255,.1);padding:1.4rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:relative;z-index:1;">
+<div style="display:flex;align-items:center;gap:.6rem;"><img src="kairos_logo.png" alt="Kairos Digital" style="height:36px;width:36px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(0,150,255,.6));border-radius:6px;"/><div><span style="font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:800;background:linear-gradient(135deg,#00BFFF,#00F5FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:.07em;display:block;">KAIROS DIGITAL</span><span style="font-size:.5rem;color:rgba(0,200,255,.4);letter-spacing:.15em;font-family:monospace;">AUTOMAÇÃO COM IA · GOIÂNIA · 2026</span></div></div>
+<button onclick="openCart()" style="background:linear-gradient(135deg,#FF006E,#7B00FF);border:none;color:#fff;font-size:.8rem;font-weight:800;padding:.6rem 1.5rem;border-radius:50px;cursor:pointer!important;box-shadow:0 0 14px rgba(255,0,110,.35);">⚡ Diagnóstico Gratuito</button>
+<div style="display:flex;gap:.6rem;"><a href="team.html" style="font-size:.65rem;color:rgba(0,245,255,.4);text-decoration:none;border:1px solid rgba(0,245,255,.18);padding:.18rem .5rem;border-radius:5px;">HQ</a><a href="script.html" style="font-size:.65rem;color:rgba(255,0,110,.4);text-decoration:none;border:1px solid rgba(255,0,110,.18);padding:.18rem .5rem;border-radius:5px;">Script</a></div>
+<p style="font-size:.65rem;color:rgba(0,245,255,.2);width:100%;text-align:center;margin-top:.2rem;">© 2026 Kairos Digital · Vilson Mota · Matheus Schelle</p>
+</footer>
+
+<style>
+.cff{background:rgba(0,245,255,.06);border:1px solid rgba(0,245,255,.18);color:#7ECFEA;font-size:.73rem;font-weight:600;padding:.38rem .85rem;border-radius:50px;cursor:pointer!important;transition:all .2s;}
+.cff:hover{border-color:rgba(0,245,255,.4);color:#E0F7FF;}
+.cff.active{background:rgba(0,245,255,.13);border-color:#00F5FF;color:#00F5FF;}
+.cc-c{background:#0a1628;border:1px solid rgba(0,245,255,.15);border-radius:13px;overflow:hidden;transition:all .28s;cursor:pointer!important;}
+.cc-c:hover{transform:translateY(-4px);border-color:rgba(0,245,255,.45);box-shadow:0 10px 25px rgba(0,245,255,.1);}
+.cc-c.sel{border-color:#00FF88;box-shadow:0 0 14px rgba(0,255,136,.15);}
+.cc-ci{height:175px;overflow:hidden;}
+.cc-ci img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
+.cc-c:hover .cc-ci img{transform:scale(1.06);}
+.cc-cb{padding:.85rem .95rem 1rem;}
+.cc-cn{font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:.4rem;}
+.cc-ccat{font-size:.57rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:#00F5FF;margin-bottom:.3rem;}
+.cc-btn{width:100%;padding:.44rem;border-radius:7px;font-size:.74rem;font-weight:700;cursor:pointer!important;transition:all .2s;}
+.cc-btn.a{background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.25);color:#00F5FF;}
+.cc-btn.s{background:rgba(0,255,136,.1);border:1px solid #00FF88;color:#00FF88;}
+.cc-tag{display:flex;align-items:center;gap:.35rem;background:rgba(0,245,255,.07);border:1px solid rgba(0,245,255,.18);border-radius:50px;padding:.22rem .65rem;font-size:.72rem;font-weight:600;}
+.cc-tag button{background:none;border:none;color:#7ECFEA;cursor:pointer!important;font-size:.82rem;line-height:1;}
+.cc-tag button:hover{color:#FF006E;}
+</style>
+
+<script>
+var CAT=[
+  {id:'d1',cat:'dashboard',n:'Dashboard Inteligente',i:'insta_dashboard_1.png',l:'📊 Dashboard'},
+  {id:'d2',cat:'dashboard',n:'Dashboard de Vendas',i:'insta_dashboard_2.png',l:'📊 Dashboard'},
+  {id:'d3',cat:'dashboard',n:'Dashboard de Perdas',i:'insta_dashboard_3.png',l:'📊 Dashboard'},
+  {id:'a1',cat:'automacao',n:'Automação com IA',i:'insta_automacao_1.png',l:'🤖 Automação'},
+  {id:'a2',cat:'automacao',n:'Claude Code — Escala com IA',i:'insta_automacao_2.png',l:'🤖 Automação'},
+  {id:'c1',cat:'clinica',n:'Clínica 24h com IA',i:'insta_clinica_1.png',l:'🏥 Clínica'},
+  {id:'c2',cat:'clinica',n:'Triagem Inteligente',i:'insta_clinica_2.png',l:'🏥 Clínica'},
+  {id:'c3',cat:'clinica',n:'Lembretes Anti-faltas',i:'insta_clinica_3.png',l:'🏥 Clínica'},
+  {id:'h1',cat:'hotel',n:'Hospitalidade 4.0',i:'insta_hotel_1.png',l:'🏨 Hotel'},
+  {id:'h2',cat:'hotel',n:'Experiência Personalizada',i:'insta_hotel_2.png',l:'🏨 Hotel'},
+  {id:'h3',cat:'hotel',n:'Reviews & Reputação',i:'insta_hotel_3.png',l:'🏨 Hotel'},
+  {id:'co1',cat:'consultoria',n:'Consultoria Estratégica',i:'insta_consultoria_1.png',l:'🎯 Consultoria'},
+  {id:'co2',cat:'consultoria',n:'Encontre a Dor, Escale',i:'insta_consultoria_2.png',l:'🎯 Consultoria'},
+  {id:'co3',cat:'consultoria',n:'ROI Comprovado',i:'insta_consultoria_3.png',l:'🎯 Consultoria'},
+  {id:'au1',cat:'autoridade',n:'Velocidade Surreal',i:'insta_autoridade_1.png',l:'⚡ IA Avançada'},
+  {id:'au2',cat:'autoridade',n:'Agentes de IA',i:'insta_autoridade_2.png',l:'⚡ IA Avançada'},
+  {id:'au3',cat:'autoridade',n:'IA Mais Avançada do Mundo',i:'insta_autoridade_3.png',l:'⚡ IA Avançada'},
+  {id:'au4',cat:'autoridade',n:'Claude Code vs Tradicional',i:'insta_autoridade_5.png',l:'⚡ IA Avançada'},
+  {id:'au5',cat:'autoridade',n:'Escalamos com Inteligência',i:'insta_autoridade_6.png',l:'⚡ IA Avançada'},
+  {id:'au6',cat:'autoridade',n:'Tecnologia de Ponta',i:'insta_autoridade_7.png',l:'⚡ IA Avançada'},
+  {id:'au7',cat:'autoridade',n:'Workflow Empresarial',i:'insta_autoridade_8.png',l:'⚡ IA Avançada'},
+  {id:'au8',cat:'autoridade',n:'Domine seu Mercado',i:'insta_autoridade_9.png',l:'⚡ IA Avançada'},
+  {id:'au9',cat:'autoridade',n:'Certificado Anthropic',i:'insta_autoridade_10.png',l:'⚡ IA Avançada'},
+];
+var cSel={},cF='todos';
+function rcat(){
+  var g=document.getElementById('catGrid');if(!g)return;
+  var items=cF==='todos'?CAT:CAT.filter(function(s){return s.cat===cF;});
+  g.innerHTML='';
+  items.forEach(function(s){
+    var sel=!!cSel[s.id];
+    var el=document.createElement('div');el.className='cc-c'+(sel?' sel':'');
+    el.innerHTML='<div class="cc-ci"><img src="'+s.i+'" alt="'+s.n+'" loading="lazy"/></div>'+
+      '<div class="cc-cb"><div class="cc-ccat">'+s.l+'</div><div class="cc-cn">'+s.n+'</div>'+
+      '<button class="cc-btn '+(sel?'s':'a')+'" onclick="tcat(\''+s.id+'\',event)">'+(sel?'✓ Selecionado':'+ Tenho Interesse')+'</button></div>';
+    g.appendChild(el);
+  });
+}
+function fcatalog(f,btn){cF=f;document.querySelectorAll('.cff').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');rcat();}
+function tcat(id,e){e.stopPropagation();var s=CAT.find(function(x){return x.id===id;});if(!s)return;if(cSel[id])delete cSel[id];else cSel[id]=s;rcat();ucc();}
+function ucc(){
+  var keys=Object.keys(cSel);
+  var cart=document.getElementById('catCart');if(!cart)return;
+  cart.style.display=keys.length?'block':'none';
+  var items=document.getElementById('catItems');if(!items)return;
+  items.innerHTML='';
+  keys.forEach(function(id){var s=cSel[id];var el=document.createElement('div');el.className='cc-tag';el.innerHTML='<span>'+s.n+'</span><button onclick="tcat(\''+id+'\',event)">✕</button>';items.appendChild(el);});
+  if(keys.length===1)setTimeout(function(){cart.scrollIntoView({behavior:'smooth',block:'nearest'});},120);
+}
+function clearCC(){cSel={};rcat();ucc();}
+function sendCC(){
+  var n=document.getElementById('ccN').value.trim();
+  var t=document.getElementById('ccT').value.trim();
+  if(!n){alert('Informe seu nome.');return;}
+  if(!t){alert('Informe seu WhatsApp.');return;}
+  var keys=Object.keys(cSel);
+  if(!keys.length){alert('Selecione ao menos um serviço.');return;}
+  var cons=document.getElementById('ccC').value;
+  var e=document.getElementById('ccE').value.trim();
+  var txt='🚀 *INTERESSE — KAIROS DIGITAL*\n\n*Nome:* '+n+'\n*WhatsApp:* '+t+'\n';
+  if(e)txt+='*Empresa:* '+e+'\n';
+  txt+='\n*Serviços de interesse:*\n';
+  keys.forEach(function(id){txt+='✅ '+cSel[id].n+'\n';});
+  txt+='\n_Catálogo Kairos Digital_';
+  window.open('https://wa.me/'+cons+'?text='+encodeURIComponent(txt),'_blank');
+}
+rcat();
+</script>
 
 </body>
 </html>
