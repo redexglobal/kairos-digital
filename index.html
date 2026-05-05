@@ -737,6 +737,64 @@ requestAnimationFrame(tickHG);
 
 
 
+<!-- PORTFÓLIO DE SERVIÇOS -->
+<section id="portfolio" style="background:rgba(0,5,16,.75);padding:5rem 2rem;position:relative;z-index:1;">
+<div style="max-width:1280px;margin:0 auto;">
+  <div style="text-align:center;margin-bottom:3rem;">
+    <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.3);border-radius:50px;padding:.38rem 1rem;font-size:.72rem;font-weight:700;color:#00F5FF;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem;">Cases Reais · Resultados Comprovados</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:800;line-height:1.08;margin-bottom:1rem;">Transformamos negócios<br/>com <span style="background:linear-gradient(135deg,#FF006E,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Inteligência Artificial.</span></h2>
+    <p style="font-size:clamp(.9rem,1.8vw,1.05rem);color:#7ECFEA;max-width:580px;margin:0 auto 2rem;line-height:1.75;">Cada empresa tem uma dor. Temos a solução. Clique em qualquer serviço e descubra como a IA pode escalar o seu negócio ainda este mês.</p>
+    <div style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem;">
+      <div style="text-align:center;"><div style="font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;background:linear-gradient(135deg,#00F5FF,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">+237%</div><div style="font-size:.72rem;color:#7ECFEA;margin-top:.1rem;text-transform:uppercase;letter-spacing:.06em;">Crescimento médio</div></div>
+      <div style="text-align:center;"><div style="font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;background:linear-gradient(135deg,#00F5FF,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">48h</div><div style="font-size:.72rem;color:#7ECFEA;margin-top:.1rem;text-transform:uppercase;letter-spacing:.06em;">Para implementar</div></div>
+      <div style="text-align:center;"><div style="font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;background:linear-gradient(135deg,#00F5FF,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">5</div><div style="font-size:.72rem;color:#7ECFEA;margin-top:.1rem;text-transform:uppercase;letter-spacing:.06em;">Segmentos atendidos</div></div>
+      <div style="text-align:center;"><div style="font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;background:linear-gradient(135deg,#00F5FF,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">24/7</div><div style="font-size:.72rem;color:#7ECFEA;margin-top:.1rem;text-transform:uppercase;letter-spacing:.06em;">IA trabalhando</div></div>
+    </div>
+  </div>
+  <div id="portGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;align-items:start;"></div>
+</div>
+</section>
+
+<!-- DETAIL MODAL -->
+<div id="detailOverlay" style="position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.92);display:none;align-items:flex-start;justify-content:center;padding:1rem;backdrop-filter:blur(12px);overflow-y:auto;">
+<div style="background:#050d1a;border:1px solid rgba(0,245,255,.18);border-radius:24px;max-width:900px;width:100%;margin:2rem auto;position:relative;box-shadow:0 0 80px rgba(0,245,255,.12);animation:slideUp .35s ease;">
+  <button onclick="closeDetail()" style="position:absolute;top:1rem;right:1rem;background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.25);color:#00F5FF;cursor:pointer;width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;z-index:10;transition:all .2s;">✕</button>
+  <div style="position:relative;height:320px;border-radius:22px 22px 0 0;overflow:hidden;">
+    <img id="dHeroImg" src="" alt="" style="width:100%;height:100%;object-fit:cover;"/>
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,5,16,.92) 0%,rgba(0,5,16,.5) 60%,transparent 100%),linear-gradient(to top,rgba(0,5,16,.8) 0%,transparent 50%);"></div>
+    <div style="position:absolute;bottom:2rem;left:2.5rem;z-index:2;max-width:55%;">
+      <div id="dEyebrow" style="font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#00F5FF;margin-bottom:.5rem;"></div>
+      <div id="dTitle" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:800;line-height:1.1;margin-bottom:.6rem;"></div>
+      <div id="dSub" style="font-size:.88rem;color:#7ECFEA;line-height:1.6;"></div>
+    </div>
+  </div>
+  <div style="padding:2rem 2.2rem;">
+    <div style="background:linear-gradient(135deg,rgba(255,0,110,.06),rgba(123,0,255,.06));border:1px solid rgba(255,0,110,.2);border-radius:14px;padding:1.4rem;margin-bottom:1.2rem;">
+      <div style="font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#FF006E;margin-bottom:.8rem;">⚠ A DOR QUE O SEU NEGÓCIO SENTE AGORA</div>
+      <div id="dPain" style="font-size:.9rem;color:#7ECFEA;line-height:1.7;"></div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(0,245,255,.05),rgba(0,255,136,.04));border:1px solid rgba(0,245,255,.2);border-radius:14px;padding:1.4rem;margin-bottom:1.2rem;">
+      <div style="font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#00F5FF;margin-bottom:.8rem;">✦ COMO A KAIROS RESOLVE</div>
+      <div id="dGain"></div>
+    </div>
+    <div id="dFeatures" style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.2rem;"></div>
+    <div id="dResults" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.2rem;"></div>
+    <div style="background:linear-gradient(135deg,rgba(255,224,0,.08),rgba(255,0,110,.06));border:1px solid rgba(255,224,0,.25);border-radius:12px;padding:1.1rem 1.4rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:1rem;">
+      <div style="font-size:2rem;flex-shrink:0;">⏳</div>
+      <div id="dUrgency" style="font-size:.85rem;line-height:1.6;color:#7ECFEA;"></div>
+    </div>
+    <div id="dGallery" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1.2rem;"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.9rem;">
+      <button id="dBtnMain" style="padding:1rem;background:linear-gradient(135deg,#FF006E,#7B00FF);border:none;color:#fff;font-size:.9rem;font-weight:800;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;box-shadow:0 0 20px rgba(255,0,110,.35);transition:all .2s;letter-spacing:.04em;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        Quero essa solução agora
+      </button>
+      <button onclick="closeDetail()" style="padding:1rem;background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.35);color:#00F5FF;font-size:.86rem;font-weight:700;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;">← Ver outros serviços</button>
+    </div>
+  </div>
+</div>
+</div>
+
 <!-- CATÁLOGO DE SERVIÇOS -->
 <div id="catalogo" style="background:rgba(0,5,16,.8);padding:4rem 2rem;position:relative;z-index:1;">
 <div style="max-width:1160px;margin:0 auto;">
@@ -774,7 +832,7 @@ requestAnimationFrame(tickHG);
 <footer style="background:rgba(0,5,16,.97);border-top:1px solid rgba(0,245,255,.1);padding:1.4rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:relative;z-index:1;">
 <div style="display:flex;align-items:center;gap:.6rem;"><img src="kairos_logo.png" alt="Kairos Digital" style="height:36px;width:36px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(0,150,255,.6));border-radius:6px;"/><div><span style="font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:800;background:linear-gradient(135deg,#00BFFF,#00F5FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:.07em;display:block;">KAIROS DIGITAL</span><span style="font-size:.5rem;color:rgba(0,200,255,.4);letter-spacing:.15em;font-family:monospace;">AUTOMAÇÃO COM IA · GOIÂNIA · 2026</span></div></div>
 <button onclick="openCart()" style="background:linear-gradient(135deg,#FF006E,#7B00FF);border:none;color:#fff;font-size:.8rem;font-weight:800;padding:.6rem 1.5rem;border-radius:50px;cursor:pointer!important;box-shadow:0 0 14px rgba(255,0,110,.35);">⚡ Diagnóstico Gratuito</button>
-<div style="display:flex;gap:.6rem;"><a href="team.html" style="font-size:.65rem;color:rgba(0,245,255,.4);text-decoration:none;border:1px solid rgba(0,245,255,.18);padding:.18rem .5rem;border-radius:5px;">HQ</a><a href="script.html" style="font-size:.65rem;color:rgba(255,0,110,.4);text-decoration:none;border:1px solid rgba(255,0,110,.18);padding:.18rem .5rem;border-radius:5px;">Script</a></div>
+<div style="display:flex;gap:.6rem;"><a href="team.html" style="font-size:.65rem;color:rgba(0,245,255,.4);text-decoration:none;border:1px solid rgba(0,245,255,.18);padding:.18rem .5rem;border-radius:5px;">HQ</a></div>
 <p style="font-size:.65rem;color:rgba(0,245,255,.2);width:100%;text-align:center;margin-top:.2rem;">© 2026 Kairos Digital · Vilson Mota · Matheus Schelle</p>
 </footer>
 
@@ -868,6 +926,111 @@ function sendCC(){
   window.open('https://wa.me/'+cons+'?text='+encodeURIComponent(txt),'_blank');
 }
 rcat();
+
+/* ── PORTFÓLIO ── */
+var SERVICES=[
+  {id:'dashboard',category:'BI & Analytics',badge:'rgba(0,245,255,.12)|#00F5FF|rgba(0,245,255,.4)',title:'Dashboards que Falam',subtitle:'Decisões em Tempo Real',desc:'Transformamos números brutos em painel interativo que mostra vendas, perdas, estoque e KPIs em segundos.',tags:['Stock em tempo real','Vendas monitoradas','Perdas reduzidas','KPIs automáticos'],imgs:['insta_dashboard_1.png','insta_dashboard_2.png','insta_dashboard_3.png'],pain:'Você toma decisões no escuro. Não sabe quais produtos vendem mais, onde está perdendo dinheiro, nem qual dia tem mais saída. <strong style="color:#E0F7FF;">Cada decisão sem dados é uma aposta.</strong>',gain:'<p style="font-size:.9rem;color:#7ECFEA;line-height:1.7;">Dashboard em tempo real que centraliza <strong style="color:#E0F7FF;">todas as informações</strong> em uma tela — automático, sempre atualizado.</p>',features:[{icon:'📊',title:'Stock em Tempo Real',desc:'Saiba o que está vendendo antes de acabar'},{icon:'💰',title:'Vendas Monitoradas',desc:'Ticket médio, faturamento e metas com alertas'},{icon:'📉',title:'Perdas Identificadas',desc:'Detecta desperdício antes de virar prejuízo'},{icon:'🧠',title:'Decisões Inteligentes',desc:'IA sugere ações baseadas nos padrões'}],results:[{n:'+87%',l:'Visibilidade operacional'},{n:'-34%',l:'Perdas identificadas'},{n:'3h→0',l:'Tempo em relatórios'}],urgency:'<strong style="color:#FFE000;">Cada dia sem dados é dinheiro invisível.</strong> A Kairos implementa em 48h. O que você está esperando?',wa_msg:'Quero um Dashboard Inteligente para meu negocio'},
+  {id:'automacao',category:'IA & Automação',badge:'rgba(255,0,110,.12)|#FF006E|rgba(255,0,110,.4)',title:'Escala com IA',subtitle:'O Futuro é Agora',desc:'Automatize tarefas repetitivas, atendimento, relatórios e processos operacionais. Sua equipe foca no que importa.',tags:['WhatsApp automático','Atendimento 24/7','Processos escaláveis','Zero tarefa repetitiva'],imgs:['insta_automacao_1.png','insta_automacao_2.png','insta_dashboard_1.png'],pain:'Você está pagando salário humano para tarefa que uma IA executa em 2 segundos. <strong style="color:#E0F7FF;">Isso é dinheiro e tempo desperdiçados.</strong>',gain:'<p style="font-size:.9rem;color:#7ECFEA;line-height:1.7;">Automações que <strong style="color:#E0F7FF;">trabalham 24h por dia sem folga, sem erro.</strong> WhatsApp, e-mail, relatórios — tudo automatizado.</p>',features:[{icon:'💬',title:'WhatsApp com IA',desc:'Responde, qualifica leads e agenda automaticamente'},{icon:'⚡',title:'Processos Zerados',desc:'Elimina tarefas manuais repetitivas'},{icon:'📱',title:'Multi-canal',desc:'Instagram, WhatsApp, e-mail integrados'},{icon:'📈',title:'Escala Sem Limites',desc:'Atenda 10x mais sem contratar ninguém'}],results:[{n:'10x',l:'Capacidade de atendimento'},{n:'-60%',l:'Custo operacional'},{n:'24/7',l:'Disponibilidade total'}],urgency:'<strong style="color:#FFE000;">Cada mês sem automação é receita perdida.</strong> A Kairos entrega em 48h.',wa_msg:'Quero automatizar meu negocio com IA'},
+  {id:'clinica',category:'Saúde & Clínicas',badge:'rgba(0,255,136,.1)|#00FF88|rgba(0,255,136,.35)',title:'Clínica 24h com IA',subtitle:'Atendimento que Nunca Para',desc:'IA que responde, agenda consultas e filtra urgências enquanto sua equipe descansa.',tags:['Agendamento automático','Atendimento 24h','Triagem inteligente','Sem recepcionista extra'],imgs:['insta_clinica_1.png','insta_clinica_2.png','insta_clinica_3.png'],pain:'Pacientes ligam às 22h e ninguém atende. <strong style="color:#E0F7FF;">Você perde pacientes todo dia por falta de atendimento fora do horário.</strong>',gain:'<p style="font-size:.9rem;color:#7ECFEA;line-height:1.7;">Assistente de IA que <strong style="color:#E0F7FF;">atende seus pacientes 24 horas</strong>, agenda automaticamente e reduz faltas em 60%.</p>',features:[{icon:'🏥',title:'Atendimento 24/7',desc:'Nenhum paciente fica sem resposta'},{icon:'📅',title:'Agenda Automática',desc:'Marca e reagenda sem intervenção humana'},{icon:'📲',title:'Lembretes Inteligentes',desc:'Reduz faltas em até 60%'},{icon:'🔍',title:'Triagem com IA',desc:'Identifica urgências automaticamente'}],results:[{n:'-60%',l:'Taxa de faltas'},{n:'+40%',l:'Novos agendamentos'},{n:'24h',l:'Atendimento ativo'}],urgency:'<strong style="color:#FFE000;">Pacientes não atendidos vão para o concorrente — e raramente voltam.</strong> A Kairos implementa em 48h.',wa_msg:'Quero implementar IA na minha clinica'},
+  {id:'hotel',category:'Hospitalidade 4.0',badge:'rgba(255,224,0,.12)|#FFE000|rgba(255,224,0,.4)',title:'Hotel & Pousada com IA',subtitle:'Check-in que Encanta',desc:'IA que faz check-in, responde dúvidas, sugere atividades e transforma avaliações.',tags:['Check-in automático','Concierge virtual','Experiências personalizadas','Reviews positivos'],imgs:['insta_hotel_1.png','insta_hotel_2.png','insta_hotel_3.png'],pain:'Check-in lento, equipe sobrecarregada, avaliações medianas. <strong style="color:#E0F7FF;">Sem 5 estrelas, perde reservas.</strong>',gain:'<p style="font-size:.9rem;color:#7ECFEA;line-height:1.7;"><strong style="color:#E0F7FF;">Concierge virtual com IA</strong> que faz check-in, responde dúvidas e melhora suas avaliações no Booking e Google.</p>',features:[{icon:'🏨',title:'Check-in Inteligente',desc:'Processo rápido que encanta desde a chegada'},{icon:'🤖',title:'Concierge Virtual',desc:'Recomendações personalizadas 24/7'},{icon:'⭐',title:'Reviews Automáticos',desc:'Incentiva avaliações positivas'},{icon:'📊',title:'Dashboard da Pousada',desc:'Taxa de ocupação e métricas em tempo real'}],results:[{n:'+43%',l:'Avaliações positivas'},{n:'+28%',l:'Taxa de retorno'},{n:'5★',l:'Meta de rating'}],urgency:'<strong style="color:#FFE000;">Uma estrela a mais no Booking pode dobrar sua taxa de ocupação.</strong>',wa_msg:'Quero modernizar minha pousada com IA'},
+  {id:'consultoria',category:'Estratégia & Crescimento',badge:'rgba(123,0,255,.15)|#C084FC|rgba(123,0,255,.4)',title:'Encontre a Dor. Escale o Negócio.',subtitle:'Consultoria Estratégica com IA',desc:'Diagnóstico completo + plano de escala personalizado. Identificamos gargalos invisíveis.',tags:['Diagnóstico completo','Plano de escala','KPIs definidos','Implementação guiada'],imgs:['insta_consultoria_1.png','insta_consultoria_2.png','insta_consultoria_3.png'],pain:'Crescendo sem saber por quê, ou estagnado sem saber como sair. <strong style="color:#E0F7FF;">Crescimento sem estratégia é sorte — e sorte acaba.</strong>',gain:'<p style="font-size:.9rem;color:#7ECFEA;line-height:1.7;"><strong style="color:#E0F7FF;">Diagnóstico cirúrgico</strong> — onde está perdendo dinheiro e qual alavanca gera resultado imediato. Entregamos o plano e implementamos.</p>',features:[{icon:'🔍',title:'Diagnóstico Profundo',desc:'Análise completa de processos e oportunidades'},{icon:'🎯',title:'Alavancas Identificadas',desc:'Onde está o dinheiro escondido'},{icon:'📋',title:'Plano de Escala',desc:'Roadmap 90 dias priorizado por impacto'},{icon:'🤝',title:'Implementação Guiada',desc:'Não só o plano — executamos junto'}],results:[{n:'+237%',l:'Crescimento médio'},{n:'305%',l:'ROI médio'},{n:'90d',l:'Para resultados'}],urgency:'<strong style="color:#FFE000;">Cada mês sem estratégia é receita que fica na mesa.</strong> A Kairos já diagnosticou empresas que cresceram 237% em 90 dias.',wa_msg:'Quero a consultoria estrategica da Kairos'}
+];
+
+(function addPortfolioStyles(){
+  var s=document.createElement('style');
+  s.textContent='.port-srv-card{background:#050d1a;border:1px solid rgba(0,245,255,.18);border-radius:22px;overflow:hidden;cursor:pointer;transition:all .35s;position:relative;transform-style:preserve-3d;}'
+    +'.port-srv-card:hover{transform:translateY(-8px) perspective(800px) rotateY(2deg);box-shadow:0 0 30px rgba(0,245,255,.2),0 20px 60px rgba(0,0,0,.5);}'
+    +'.port-srv-card::before{content:"";position:absolute;inset:0;border-radius:22px;background:linear-gradient(135deg,rgba(0,245,255,.05),transparent 50%,rgba(255,0,110,.04));opacity:0;transition:opacity .35s;z-index:2;pointer-events:none;}'
+    +'.port-srv-card:hover::before{opacity:1;}'
+    +'.port-srv-card.featured{grid-column:span 2;}'
+    +'@media(max-width:900px){.port-srv-card.featured{grid-column:span 1;}}'
+    +'.port-srv-img{position:relative;height:300px;overflow:hidden;}'
+    +'.port-srv-card.featured .port-srv-img{height:400px;}'
+    +'.port-srv-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;display:block;}'
+    +'.port-srv-card:hover .port-srv-img img{transform:scale(1.08);}'
+    +'.port-srv-img-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,5,16,.95) 0%,rgba(0,5,16,.4) 50%,transparent 100%);z-index:1;}'
+    +'.port-srv-bdg{position:absolute;top:1rem;right:1rem;z-index:3;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .7rem;border-radius:50px;border:1px solid;}'
+    +'.port-srv-body{padding:1.5rem 1.6rem 1.7rem;position:relative;z-index:2;}'
+    +'.port-srv-cat{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#00F5FF;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;}'
+    +'.port-srv-cat::before{content:"";width:8px;height:2px;background:#00F5FF;border-radius:1px;box-shadow:0 0 6px #00F5FF;}'
+    +'.port-srv-ttl{font-family:"Space Grotesk",sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:.5rem;line-height:1.2;}'
+    +'.port-srv-desc{font-size:.83rem;color:#7ECFEA;line-height:1.65;margin-bottom:1rem;}'
+    +'.port-srv-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1rem;}'
+    +'.port-srv-tag{font-size:.62rem;font-weight:600;padding:.16rem .5rem;border-radius:50px;background:rgba(0,245,255,.07);border:1px solid rgba(0,245,255,.18);color:rgba(0,245,255,.75);}'
+    +'.port-srv-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:700;color:#00F5FF;background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.3);padding:.45rem 1rem;border-radius:8px;cursor:pointer;transition:all .2s;}'
+    +'.port-srv-btn:hover{background:rgba(0,245,255,.18);box-shadow:0 0 20px rgba(0,245,255,.3);}'
+    +'@keyframes slideUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}'
+    +'#detailOverlay.open{display:flex!important;}'
+    +'#dFeatures .dfeat{display:flex;align-items:flex-start;gap:.75rem;padding:.9rem 1rem;background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.12);border-radius:10px;}'
+    +'#dResults .dres{background:#0a1628;border:1px solid rgba(0,245,255,.18);border-radius:12px;padding:1rem;text-align:center;}'
+    +'#dResults .dres-n{font-family:"Space Grotesk",sans-serif;font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#00F5FF,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}'
+    +'#dResults .dres-l{font-size:.7rem;color:#7ECFEA;margin-top:.2rem;}'
+    +'#dGallery img{width:100%;border-radius:8px;border:1px solid rgba(0,245,255,.18);transition:transform .2s;cursor:pointer;}'
+    +'#dGallery img:hover{transform:scale(1.03);border-color:rgba(0,245,255,.4);}'
+    +'@media(max-width:700px){#dFeatures,#dResults{grid-template-columns:1fr!important;}#dGallery{grid-template-columns:1fr 1fr!important;}}';
+  document.head.appendChild(s);
+})();
+
+function renderPortfolio(){
+  var grid=document.getElementById('portGrid');if(!grid)return;
+  grid.innerHTML='';
+  SERVICES.forEach(function(s,i){
+    var bdgParts=s.badge.split('|');
+    var card=document.createElement('div');
+    card.className='port-srv-card'+(i===0?' featured':'');
+    card.onclick=function(){openSrvDetail(s);};
+    card.innerHTML='<div class="port-srv-img"><img src="'+s.imgs[0]+'" alt="'+s.title+'" loading="lazy"/><div class="port-srv-img-ov"></div>'+
+      '<div class="port-srv-bdg" style="background:'+bdgParts[0]+';color:'+bdgParts[1]+';border-color:'+bdgParts[2]+';">'+s.category+'</div></div>'+
+      '<div class="port-srv-body"><div class="port-srv-cat">'+s.category+'</div><div class="port-srv-ttl">'+s.title+'</div>'+
+      '<div class="port-srv-desc">'+s.desc+'</div>'+
+      '<div class="port-srv-tags">'+s.tags.map(function(t){return'<span class="port-srv-tag">'+t+'</span>';}).join('')+'</div>'+
+      '<button class="port-srv-btn">Ver detalhes →</button></div>';
+    grid.appendChild(card);
+  });
+}
+
+function openSrvDetail(s){
+  document.getElementById('dHeroImg').src=s.imgs[0];
+  document.getElementById('dEyebrow').textContent=s.category;
+  document.getElementById('dTitle').textContent=s.title;
+  document.getElementById('dSub').textContent=s.subtitle;
+  document.getElementById('dPain').innerHTML=s.pain;
+  document.getElementById('dGain').innerHTML=s.gain;
+  var feats=document.getElementById('dFeatures');
+  feats.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.2rem;';
+  feats.innerHTML='';
+  s.features.forEach(function(f){feats.innerHTML+='<div class="dfeat"><div style="font-size:1.3rem;flex-shrink:0;margin-top:.1rem;">'+f.icon+'</div><div><div style="font-size:.85rem;font-weight:700;color:#E0F7FF;margin-bottom:.12rem;">'+f.title+'</div><div style="font-size:.75rem;color:#7ECFEA;line-height:1.5;">'+f.desc+'</div></div></div>';});
+  var res=document.getElementById('dResults');
+  res.style.cssText='display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.2rem;';
+  res.innerHTML='';
+  s.results.forEach(function(r){res.innerHTML+='<div class="dres"><div class="dres-n">'+r.n+'</div><div class="dres-l">'+r.l+'</div></div>';});
+  document.getElementById('dUrgency').innerHTML=s.urgency;
+  var gal=document.getElementById('dGallery');
+  gal.style.cssText='display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1.2rem;';
+  gal.innerHTML='';
+  s.imgs.forEach(function(img){gal.innerHTML+='<img src="'+img+'" alt="'+s.title+'" loading="lazy"/>';});
+  document.getElementById('dBtnMain').onclick=function(){
+    window.open('https://wa.me/5562981554992?text='+encodeURIComponent('Ola, vim pelo site da Kairos e '+s.wa_msg),'_blank');
+  };
+  document.getElementById('detailOverlay').classList.add('open');
+  document.getElementById('detailOverlay').scrollTop=0;
+}
+function closeDetail(){document.getElementById('detailOverlay').classList.remove('open');}
+
+document.addEventListener('mousemove',function(e){
+  document.querySelectorAll('.port-srv-card').forEach(function(c){
+    var r=c.getBoundingClientRect();
+    var dx=(e.clientX-(r.left+r.width/2))/r.width*14;
+    var dy=(e.clientY-(r.top+r.height/2))/r.height*14;
+    if(Math.abs(dx)<22&&Math.abs(dy)<22&&r.width>0)
+      c.style.transform='perspective(900px) rotateY('+dx+'deg) rotateX('+(-dy)+'deg) translateY(-6px)';
+  });
+});
+document.addEventListener('mouseleave',function(){
+  document.querySelectorAll('.port-srv-card').forEach(function(c){c.style.transform='';});
+});
+
+renderPortfolio();
 </script>
 
 </body>

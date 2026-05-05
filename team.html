@@ -12,6 +12,7 @@
   --a:#06B6D4;--g:#10B981;--r:#EF4444;
   --gold:#F59E0B;--gold2:#FCD34D;
   --txt:#F1F5F9;--txt2:#94A3B8;--brd:rgba(124,58,237,0.18);
+  --c:#00F5FF;--m:#FF006E;--y:#FFE000;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -38,10 +39,18 @@ nav{position:sticky;top:0;z-index:100;background:rgba(3,7,18,.92);backdrop-filte
 .btn-site:hover{background:rgba(124,58,237,.28);color:#fff;}
 #clockEl{font-family:'Space Grotesk';font-size:.92rem;font-weight:700;color:var(--gold);letter-spacing:.08em;}
 
+/* VIEW TABS */
+.view-tabs{position:sticky;top:64px;z-index:99;display:flex;background:rgba(3,7,18,.95);border-bottom:1px solid var(--brd);backdrop-filter:blur(10px);}
+.view-tab{flex:1;padding:.7rem 1.5rem;background:none;border:none;border-bottom:2px solid transparent;color:var(--txt2);font-family:'Space Grotesk';font-size:.84rem;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.04em;}
+.view-tab:hover{color:var(--txt);background:rgba(124,58,237,.05);}
+.view-tab.active{color:var(--p2);border-bottom-color:var(--p2);background:rgba(124,58,237,.08);}
+.view-panel{display:none;}
+.view-panel.active{display:block;}
+
 /* PAGE */
 .page{max-width:1280px;margin:0 auto;padding:2rem 2rem 4rem;}
 
-/* HERO STATS */
+/* KPI STRIP */
 .kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-bottom:2rem;}
 .kpi{background:var(--bg2);border:1px solid var(--brd);border-radius:16px;padding:1.4rem 1.5rem;position:relative;overflow:hidden;}
 .kpi::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--kc,rgba(124,58,237,.06)),transparent);pointer-events:none;}
@@ -79,7 +88,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(3,7,18,.92);backdrop-filte
 .lb-bar-wrap{width:120px;background:rgba(255,255,255,.06);border-radius:4px;height:6px;overflow:hidden;}
 .lb-bar{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--p2),var(--gold));}
 .lb-badges{display:flex;gap:.25rem;}
-.badge{font-size:.85rem;title:attr(title);}
+.badge{font-size:.85rem;}
 
 /* SPRINT */
 .sprint-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
@@ -157,18 +166,88 @@ nav{position:sticky;top:0;z-index:100;background:rgba(3,7,18,.92);backdrop-filte
 .btn-primary{display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;font-weight:600;font-size:.88rem;padding:.7rem 1.6rem;border-radius:9px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;}
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,58,237,.4);}
 
-/* confetti */
+/* CONFETTI */
 .cf{position:fixed;width:9px;height:9px;border-radius:2px;animation:cff 3s ease-in forwards;pointer-events:none;z-index:9999;}
 @keyframes cff{0%{transform:translateY(-20px)rotate(0);opacity:1;}100%{transform:translateY(100vh)rotate(720deg);opacity:0;}}
 
-/* scrollbar */
+/* SCROLLBAR */
 ::-webkit-scrollbar{width:5px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:rgba(124,58,237,.4);border-radius:3px;}
 
+/* ─── SCRIPT DE PROSPECÇÃO ─── */
+.sc-page{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 5rem;}
+.sc-header{text-align:center;padding:2.5rem 0 2rem;}
+.sc-eyebrow{display:inline-flex;align-items:center;gap:.4rem;background:rgba(0,245,255,.07);border:1px solid rgba(0,245,255,.25);border-radius:50px;padding:.3rem .9rem;font-size:.65rem;font-weight:700;color:var(--c);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem;}
+.sc-title{font-family:'Space Grotesk';font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.1;margin-bottom:.7rem;}
+.sc-cy{background:linear-gradient(135deg,#00F5FF,#7B9FFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sc-mg{background:linear-gradient(135deg,#FF006E,#FFE000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sc-sub{font-size:.95rem;color:#7ECFEA;max-width:540px;margin:0 auto;line-height:1.7;}
+.sc-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-top:1rem;}
+.sc-metric{background:var(--bg3);border:1px solid rgba(0,245,255,.15);border-radius:12px;padding:1rem;text-align:center;}
+.sc-metric-n{font-family:'Space Grotesk';font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--c),var(--y));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sc-metric-l{font-size:.7rem;color:#7ECFEA;margin-top:.2rem;}
+.sc-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;border-bottom:1px solid rgba(0,245,255,.15);padding-bottom:0;}
+.sc-tab{background:none;border:none;border-bottom:2px solid transparent;color:#7ECFEA;font-size:.84rem;font-weight:600;padding:.7rem 1.2rem;cursor:pointer;transition:all .2s;margin-bottom:-1px;letter-spacing:.02em;}
+.sc-tab:hover{color:#E0F7FF;}
+.sc-tab.active{color:var(--c);border-bottom-color:var(--c);}
+.sc-panel{display:none;}
+.sc-panel.active{display:block;}
+.script-card{background:var(--bg2);border:1px solid rgba(0,245,255,.15);border-radius:16px;margin-bottom:1.2rem;overflow:hidden;}
+.sc-hd{display:flex;align-items:center;gap:.8rem;padding:1rem 1.3rem;border-bottom:1px solid rgba(0,245,255,.1);cursor:pointer;user-select:none;transition:background .2s;}
+.sc-hd:hover{background:rgba(0,245,255,.03);}
+.sc-step{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-size:.8rem;font-weight:800;flex-shrink:0;}
+.step-cyan{background:linear-gradient(135deg,#00F5FF,#7B9FFF);color:#000;}
+.step-pink{background:linear-gradient(135deg,#FF006E,#7B00FF);color:#fff;}
+.step-yellow{background:linear-gradient(135deg,#FFE000,#FF006E);color:#000;}
+.step-green{background:linear-gradient(135deg,#00FF88,#00F5FF);color:#000;}
+.sc-card-title{font-family:'Space Grotesk';font-size:.95rem;font-weight:700;flex:1;}
+.sc-badge{font-size:.62rem;font-weight:700;padding:.2rem .55rem;border-radius:50px;border:1px solid;}
+.sc-toggle{font-size:.85rem;color:#7ECFEA;transition:transform .2s;}
+.sc-card.open .sc-toggle{transform:rotate(180deg);}
+.sc-body{padding:1.2rem 1.3rem;display:none;}
+.sc-card.open .sc-body{display:block;}
+.script-text{background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.15);border-left:3px solid var(--c);border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:.9rem;position:relative;}
+.script-lbl{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--c);margin-bottom:.5rem;}
+.script-bubble{font-size:.88rem;line-height:1.75;color:#E0F7FF;}
+.script-bubble strong{color:var(--c);}
+.script-bubble em{color:var(--y);font-style:normal;font-weight:600;}
+.copy-btn{position:absolute;top:.6rem;right:.6rem;background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.2);color:var(--c);font-size:.6rem;font-weight:700;padding:.18rem .5rem;border-radius:5px;cursor:pointer;transition:all .2s;letter-spacing:.06em;}
+.copy-btn:hover{background:rgba(0,245,255,.2);}
+.copy-btn.copied{background:rgba(0,255,136,.15);border-color:#00FF88;color:#00FF88;}
+.obj-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:.8rem;}
+.obj-card{background:var(--bg3);border-radius:10px;padding:.9rem;border:1px solid rgba(0,245,255,.12);}
+.obj-q{font-size:.78rem;font-weight:700;color:var(--m);margin-bottom:.5rem;display:flex;align-items:center;gap:.3rem;}
+.obj-q::before{content:'❌';}
+.obj-a{font-size:.8rem;color:#7ECFEA;line-height:1.6;}
+.obj-a strong{color:#E0F7FF;}
+.sc-tip{display:flex;align-items:flex-start;gap:.7rem;background:rgba(255,224,0,.05);border:1px solid rgba(255,224,0,.2);border-radius:10px;padding:.9rem 1rem;margin-top:.8rem;}
+.sc-tip-icon{font-size:1.2rem;flex-shrink:0;}
+.sc-tip-text{font-size:.82rem;color:#7ECFEA;line-height:1.6;}
+.sc-tip-text strong{color:var(--y);}
+.sc-checklist{display:flex;flex-direction:column;gap:.5rem;margin-top:.8rem;}
+.sc-check-item{display:flex;align-items:center;gap:.7rem;padding:.65rem .9rem;background:var(--bg3);border-radius:9px;border:1px solid rgba(0,245,255,.12);cursor:pointer;transition:all .2s;}
+.sc-check-item:hover{border-color:rgba(0,245,255,.3);}
+.sc-check-item.done{border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.04);}
+.sc-check-box{width:20px;height:20px;border-radius:5px;border:2px solid rgba(0,245,255,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
+.sc-check-item.done .sc-check-box{background:#00FF88;border-color:#00FF88;color:#000;font-size:.75rem;}
+.sc-check-label{font-size:.84rem;font-weight:500;}
+.sc-check-item.done .sc-check-label{color:#7ECFEA;text-decoration:line-through;}
+.seg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1rem;}
+.seg-card{background:var(--bg3);border:1px solid rgba(0,245,255,.12);border-radius:14px;padding:1.2rem;}
+.seg-icon{font-size:1.8rem;margin-bottom:.5rem;}
+.seg-name{font-family:'Space Grotesk';font-size:.95rem;font-weight:700;margin-bottom:.4rem;}
+.seg-hook{font-size:.8rem;color:#7ECFEA;line-height:1.6;margin-bottom:.6rem;}
+.seg-hook strong{color:var(--c);}
+.seg-script-text{font-size:.78rem;background:rgba(0,245,255,.04);border-left:2px solid var(--c);padding:.6rem .8rem;border-radius:0 7px 7px 0;color:#E0F7FF;line-height:1.65;}
+
 @media(max-width:900px){
   .kpi-strip{grid-template-columns:1fr 1fr;}
   .sprint-grid,.skills-grid,.box-grid{grid-template-columns:1fr;}
+  .obj-grid,.sc-metrics{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  .obj-grid,.sc-metrics{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -190,9 +269,16 @@ nav{position:sticky;top:0;z-index:100;background:rgba(3,7,18,.92);backdrop-filte
   </div>
 </nav>
 
+<!-- VIEW TABS -->
+<div class="view-tabs">
+  <button class="view-tab active" onclick="switchView('hq',this)">🏠 HQ da Equipe</button>
+  <button class="view-tab" onclick="switchView('script',this)">🎯 Script de Prospecção</button>
+</div>
+
+<!-- ═══════════ HQ VIEW ═══════════ -->
+<div id="view-hq" class="view-panel active">
 <div class="page z1">
 
-  <!-- KPIs -->
   <div class="kpi-strip">
     <div class="kpi" style="--kc:rgba(245,158,11,.08);--kc2:#F59E0B;--kc3:#FCD34D;">
       <div class="kpi-icon">⭐</div>
@@ -221,8 +307,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(3,7,18,.92);backdrop-filte
   </div>
 
   <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:1.5rem;margin-bottom:2rem;">
-
-    <!-- LEADERBOARD -->
     <div class="sec">
       <div class="sec-head">
         <div class="sec-title">🏆 Leaderboard da Equipe</div>
@@ -230,8 +314,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(3,7,18,.92);backdrop-filte
       </div>
       <div class="lb-grid" id="lbGrid"></div>
     </div>
-
-    <!-- FEED DE ATIVIDADES -->
     <div class="sec">
       <div class="sec-head">
         <div class="sec-title">📡 Feed de Atividades</div>
@@ -239,10 +321,8 @@ nav{position:sticky;top:0;z-index:100;background:rgba(3,7,18,.92);backdrop-filte
       </div>
       <div class="feed" id="feedList"></div>
     </div>
-
   </div>
 
-  <!-- SPRINTS -->
   <div class="sec">
     <div class="sec-head">
       <div class="sec-title">⚡ Sprints & Desafios</div>
@@ -251,7 +331,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(3,7,18,.92);backdrop-filte
     <div class="sprint-grid" id="sprintGrid"></div>
   </div>
 
-  <!-- SKILLS XP -->
   <div class="sec">
     <div class="sec-head">
       <div class="sec-title">🧠 Habilidades & XP</div>
@@ -261,28 +340,316 @@ nav{position:sticky;top:0;z-index:100;background:rgba(3,7,18,.92);backdrop-filte
   </div>
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;">
-
-    <!-- CONQUISTAS -->
     <div class="sec">
-      <div class="sec-head">
-        <div class="sec-title">🎖️ Conquistas & Badges</div>
-      </div>
+      <div class="sec-head"><div class="sec-title">🎖️ Conquistas & Badges</div></div>
       <div class="ach-grid" id="achGrid"></div>
     </div>
-
-    <!-- CAIXAS SURPRESA -->
     <div class="sec">
-      <div class="sec-head">
-        <div class="sec-title">🎁 Caixas Surpresa</div>
-      </div>
+      <div class="sec-head"><div class="sec-title">🎁 Caixas Surpresa</div></div>
       <div class="box-grid" id="boxGrid"></div>
     </div>
-
   </div>
 
 </div>
+</div><!-- /view-hq -->
 
-<!-- MODALS -->
+<!-- ═══════════ SCRIPT VIEW ═══════════ -->
+<div id="view-script" class="view-panel">
+<div class="sc-page">
+
+  <div class="sc-header">
+    <div class="sc-eyebrow">🎯 Manual do Prospector</div>
+    <h1 class="sc-title">Script de <span class="sc-cy">Prospecção</span><br/><span class="sc-mg">Kairos Digital</span></h1>
+    <p class="sc-sub">Tudo que você precisa para abordar, apresentar e fechar. Do primeiro "oi" até o contrato assinado.</p>
+    <div class="sc-metrics">
+      <div class="sc-metric"><div class="sc-metric-n">3</div><div class="sc-metric-l">Etapas do funil</div></div>
+      <div class="sc-metric"><div class="sc-metric-n">48h</div><div class="sc-metric-l">Tempo médio de fechamento</div></div>
+      <div class="sc-metric"><div class="sc-metric-n">+237%</div><div class="sc-metric-l">Resultado para o cliente</div></div>
+      <div class="sc-metric"><div class="sc-metric-n">100%</div><div class="sc-metric-l">Diagnóstico gratuito</div></div>
+    </div>
+  </div>
+
+  <div class="sc-tabs">
+    <button class="sc-tab active" onclick="showScTab('abordagem',this)">1. Abordagem</button>
+    <button class="sc-tab" onclick="showScTab('apresentacao',this)">2. Apresentação</button>
+    <button class="sc-tab" onclick="showScTab('fechamento',this)">3. Fechamento</button>
+    <button class="sc-tab" onclick="showScTab('objecoes',this)">Objeções</button>
+    <button class="sc-tab" onclick="showScTab('segmentos',this)">Por Segmento</button>
+    <button class="sc-tab" onclick="showScTab('followup',this)">Follow-up</button>
+    <button class="sc-tab" onclick="showScTab('checklist',this)">Checklist</button>
+  </div>
+
+  <!-- ABORDAGEM -->
+  <div class="sc-panel active" id="sc-panel-abordagem">
+    <div class="script-card sc-card open">
+      <div class="sc-hd" onclick="toggleScCard(this.parentElement)">
+        <div class="sc-step step-cyan">1</div>
+        <div class="sc-card-title">Abertura no WhatsApp — Fria</div>
+        <span class="sc-badge" style="color:#00F5FF;border-color:rgba(0,245,255,.3);">WhatsApp</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-lbl">Mensagem 1 — Conexão</div>
+          <div class="script-bubble">Oi, <strong>[Nome]</strong>! Tudo bem?<br/><br/>Vi que você tem uma <em>[empresa/açougue/clínica...]</em> em Goiânia — muito bacana o que vocês fazem.<br/><br/>Me chamo <strong>Vilson/Matheus</strong>, sou co-fundador da <strong>Kairos Digital</strong>. A gente ajuda empresas como a sua a crescerem usando Inteligência Artificial — de forma prática, sem complicação.<br/><br/>Posso te mostrar em 5 minutos como a IA poderia funcionar no seu negócio? Zero compromisso.</div>
+          <button class="copy-btn" onclick="copyScText(this)">COPIAR</button>
+        </div>
+        <div class="sc-tip"><div class="sc-tip-icon">💡</div><div class="sc-tip-text"><strong>Dica:</strong> Personalize o "[Nome]" e o segmento. Nunca mande igual pra todo mundo. Um texto personalizado tem 3x mais resposta que um genérico.</div></div>
+      </div>
+    </div>
+    <div class="script-card sc-card">
+      <div class="sc-hd" onclick="toggleScCard(this.parentElement)">
+        <div class="sc-step step-cyan">2</div>
+        <div class="sc-card-title">Se não responder em 24h — Follow-up 1</div>
+        <span class="sc-badge" style="color:#00F5FF;border-color:rgba(0,245,255,.3);">WhatsApp</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-lbl">Mensagem 2 — Prova social</div>
+          <div class="script-bubble"><strong>[Nome]</strong>, só queria deixar um dado aqui:<br/><br/>A gente implementou IA em um <em>[segmento similar]</em> aqui em Goiânia e o negócio cresceu <strong>+237%</strong> em 3 meses.<br/><br/>Não é promessa — é resultado documentado.<br/><br/>Quer ver como funcionaria no seu caso? É rápido e gratuito. 🚀</div>
+          <button class="copy-btn" onclick="copyScText(this)">COPIAR</button>
+        </div>
+      </div>
+    </div>
+    <div class="script-card sc-card">
+      <div class="sc-hd" onclick="toggleScCard(this.parentElement)">
+        <div class="sc-step step-cyan">3</div>
+        <div class="sc-card-title">Abordagem Presencial / Ligação</div>
+        <span class="sc-badge" style="color:#FFE000;border-color:rgba(255,224,0,.3);">Presencial</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-lbl">Abertura</div>
+          <div class="script-bubble">"Olá [Nome], tudo bem? Me chamo <strong>Vilson/Matheus</strong>, sou da <strong>Kairos Digital</strong>.<br/><br/>A gente trabalha com Inteligência Artificial para pequenas e médias empresas aqui em Goiânia.<br/><br/>Você tem <em>2 minutinhos</em>? Quero te mostrar como a IA pode <strong>automatizar uma parte do seu negócio e aumentar o faturamento</strong> — e tem uma análise gratuita que eu posso fazer pra você hoje mesmo."</div>
+          <button class="copy-btn" onclick="copyScText(this)">COPIAR</button>
+        </div>
+        <div class="sc-tip"><div class="sc-tip-icon">⚡</div><div class="sc-tip-text"><strong>Técnica:</strong> Peça sempre "2 minutinhos", não "15 minutos". Menor a resistência, maior a abertura.</div></div>
+      </div>
+    </div>
+    <div class="script-card sc-card">
+      <div class="sc-hd" onclick="toggleScCard(this.parentElement)">
+        <div class="sc-step step-cyan">4</div>
+        <div class="sc-card-title">Indicação — Abordagem Quente</div>
+        <span class="sc-badge" style="color:#00FF88;border-color:rgba(0,255,136,.3);">Indicação</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-lbl">Mensagem — Via indicação</div>
+          <div class="script-bubble">Oi <strong>[Nome]</strong>! O <em>[quem indicou]</em> me passou seu contato.<br/><br/>Sou <strong>Vilson/Matheus</strong> da <strong>Kairos Digital</strong> — a gente ajudou o [quem indicou] a [resultado que tiveram] usando IA.<br/><br/>Ele achou que poderia ser muito útil pra você também. Topa uma conversa rápida esta semana?</div>
+          <button class="copy-btn" onclick="copyScText(this)">COPIAR</button>
+        </div>
+        <div class="sc-tip"><div class="sc-tip-icon">🔥</div><div class="sc-tip-text"><strong>Ouro:</strong> Indicação tem taxa de fechamento 4x maior que fria. Sempre peça ao cliente: "Conhece mais 2 ou 3 empresários que poderiam se beneficiar?"</div></div>
+      </div>
+    </div>
+  </div><!-- /abordagem -->
+
+  <!-- APRESENTAÇÃO -->
+  <div class="sc-panel" id="sc-panel-apresentacao">
+    <div class="script-card sc-card open">
+      <div class="sc-hd" onclick="toggleScCard(this.parentElement)">
+        <div class="sc-step step-pink">1</div>
+        <div class="sc-card-title">Apresentação com o Site — Fluxo Completo</div>
+        <span class="sc-badge" style="color:#FF006E;border-color:rgba(255,0,110,.3);">Passo a passo</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text"><div class="script-lbl">Passo 1 — Abra o site</div><div class="script-bubble">Abra <strong>kairosdigital.vercel.app</strong> no celular ou notebook do cliente.<br/><br/><em>"Deixa eu te mostrar o que a Kairos faz em 2 minutos."</em></div></div>
+        <div class="script-text"><div class="script-lbl">Passo 2 — Role até Portfólio e clique no serviço certo</div><div class="script-bubble">Clique no card que faz sentido pro segmento dele.<br/><br/><em>"Esse aqui é exatamente o que faria sentido pro seu negócio. Deixa eu mostrar como funciona..."</em></div></div>
+        <div class="script-text"><div class="script-lbl">Passo 3 — Diagnóstico na hora</div><div class="script-bubble">Clique em <strong>"Diagnóstico Gratuito"</strong>.<br/><br/><em>"Preenche aqui os seus dados que eu já faço um diagnóstico gratuito do seu negócio."</em></div><button class="copy-btn" onclick="copyScText(this)">COPIAR</button></div>
+        <div class="sc-tip"><div class="sc-tip-icon">🎯</div><div class="sc-tip-text"><strong>Estratégia:</strong> Deixe o cliente interagir com o site. Quanto mais ele clica, mais ele sente que já é cliente.</div></div>
+      </div>
+    </div>
+    <div class="script-card sc-card">
+      <div class="sc-hd" onclick="toggleScCard(this.parentElement)">
+        <div class="sc-step step-pink">2</div>
+        <div class="sc-card-title">Perguntas Diagnóstico — Identificar a Dor</div>
+        <span class="sc-badge" style="color:#FF006E;border-color:rgba(255,0,110,.3);">Diagnóstico</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-lbl">Faça estas 5 perguntas — ouça mais do que fala</div>
+          <div class="script-bubble"><strong>1.</strong> "Hoje, qual é a maior dor do seu negócio — o que te tira o sono?"<br/><br/><strong>2.</strong> "Quantas horas por semana você ou sua equipe perdem em tarefas repetitivas?"<br/><br/><strong>3.</strong> "Como você controla suas vendas e perdas hoje — planilha, sistema, ou de cabeça?"<br/><br/><strong>4.</strong> "Você já perdeu cliente por demora no atendimento ou falta de informação?"<br/><br/><strong>5.</strong> "Se eu te dissesse que dá pra automatizar [dor que ele mencionou] em 48 horas — o que mudaria no seu negócio?"</div>
+          <button class="copy-btn" onclick="copyScText(this)">COPIAR</button>
+        </div>
+        <div class="sc-tip"><div class="sc-tip-icon">🧠</div><div class="sc-tip-text"><strong>Regra de ouro:</strong> Quem faz a pergunta controla a conversa. Cada dor mencionada é uma porta de entrada.</div></div>
+      </div>
+    </div>
+    <div class="script-card sc-card">
+      <div class="sc-hd" onclick="toggleScCard(this.parentElement)">
+        <div class="sc-step step-pink">3</div>
+        <div class="sc-card-title">Pitch dos Números — Impacto em 60 segundos</div>
+        <span class="sc-badge" style="color:#FF006E;border-color:rgba(255,0,110,.3);">Pitch</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-lbl">Pitch rápido com prova</div>
+          <div class="script-bubble">"Deixa eu te mostrar o que a IA fez pra outros negócios como o seu:<br/><br/>— E-commerce com automação: <strong>+312% de crescimento</strong><br/>— Clínica com atendimento 24h: <strong>-60% de faltas</strong><br/>— Mercado com dashboard: <strong>identificou R$152 mil em perdas</strong><br/><br/>Isso não é promessa — é o que a Kairos já entregou. E o diagnóstico é <em>100% gratuito</em>.<br/><br/>Posso fazer o seu hoje?"</div>
+          <button class="copy-btn" onclick="copyScText(this)">COPIAR</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- /apresentacao -->
+
+  <!-- FECHAMENTO -->
+  <div class="sc-panel" id="sc-panel-fechamento">
+    <div class="script-card sc-card open">
+      <div class="sc-hd" onclick="toggleScCard(this.parentElement)">
+        <div class="sc-step step-yellow">1</div>
+        <div class="sc-card-title">Fechamento Direto — Após Diagnóstico</div>
+        <span class="sc-badge" style="color:#FFE000;border-color:rgba(255,224,0,.3);">Fechamento</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-lbl">Feche com pergunta de confirmação, não de permissão</div>
+          <div class="script-bubble"><em>"Olha, com base no que você me contou, a solução que faz mais sentido pra você é [X]. A gente consegue implementar em 48 horas e você já vai ver diferença na primeira semana.</em><br/><br/><em>Você prefere começar na terça ou na quinta?"</em><br/><br/>— ou —<br/><br/><em>"Você quer que a gente começa pelo [problema principal] ou prefere atacar os dois juntos?"</em></div>
+          <button class="copy-btn" onclick="copyScText(this)">COPIAR</button>
+        </div>
+        <div class="sc-tip"><div class="sc-tip-icon">⚡</div><div class="sc-tip-text"><strong>Técnica do "ou":</strong> Nunca pergunte "Você quer fechar?" — dê duas opções que ambas levam ao sim.</div></div>
+      </div>
+    </div>
+    <div class="script-card sc-card">
+      <div class="sc-hd" onclick="toggleScCard(this.parentElement)">
+        <div class="sc-step step-yellow">2</div>
+        <div class="sc-card-title">Urgência Real — Criando Senso de Ação</div>
+        <span class="sc-badge" style="color:#FFE000;border-color:rgba(255,224,0,.3);">Urgência</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-lbl">Use quando o cliente está "pensando"</div>
+          <div class="script-bubble"><em>"[Nome], eu entendo querer pensar. Mas quanto você acha que está perdendo por mês sem isso? Se estimarmos conservador uns <strong>R$3.000 em oportunidades não aproveitadas</strong> — esperar mais um mês custa R$3.000.<br/><br/>O investimento é menor do que você perde esperando. Faz sentido?"</em></div>
+          <button class="copy-btn" onclick="copyScText(this)">COPIAR</button>
+        </div>
+      </div>
+    </div>
+    <div class="script-card sc-card">
+      <div class="sc-hd" onclick="toggleScCard(this.parentElement)">
+        <div class="sc-step step-yellow">3</div>
+        <div class="sc-card-title">Mensagem de Fechamento — WhatsApp Pós-reunião</div>
+        <span class="sc-badge" style="color:#FFE000;border-color:rgba(255,224,0,.3);">WhatsApp</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text">
+          <div class="script-lbl">Enviar em até 1h após a reunião</div>
+          <div class="script-bubble"><strong>[Nome]</strong>, foi muito boa nossa conversa!<br/><br/>Resumindo o que a gente identificou:<br/>✅ <em>[Dor principal que ele mencionou]</em><br/>✅ Solução: <em>[produto/serviço indicado]</em><br/>✅ Implementação: <strong>48 horas</strong><br/>✅ Resultado esperado: <em>[número/resultado específico]</em><br/><br/>Posso confirmar o início para <strong>[data específica]</strong>?<br/><br/>A Kairos tá pronta pra começar quando você quiser. 🚀</div>
+          <button class="copy-btn" onclick="copyScText(this)">COPIAR</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- /fechamento -->
+
+  <!-- OBJEÇÕES -->
+  <div class="sc-panel" id="sc-panel-objecoes">
+    <div class="script-card sc-card open">
+      <div class="sc-hd" onclick="toggleScCard(this.parentElement)">
+        <div class="sc-step step-green">!</div>
+        <div class="sc-card-title">As 8 Objeções Mais Comuns — Com Resposta</div>
+        <span class="sc-badge" style="color:#00FF88;border-color:rgba(0,255,136,.3);">Objeções</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="obj-grid">
+          <div class="obj-card"><div class="obj-q">É muito caro</div><div class="obj-a"><strong>"Entendo.</strong> Mas quanto você está gastando com processos manuais e oportunidades perdidas? A maioria dos nossos clientes recupera o investimento no primeiro mês."</div></div>
+          <div class="obj-card"><div class="obj-q">Preciso pensar</div><div class="obj-a"><strong>"Claro, faz sentido pensar.</strong> Me ajuda a entender: o que especificamente você precisa avaliar? Assim te passo a informação certa."</div></div>
+          <div class="obj-card"><div class="obj-q">Não entendo de IA</div><div class="obj-a"><strong>"Perfeito — e não precisa entender.</strong> Você entende de dirigir sem saber como o motor funciona. A Kairos cuida de tudo técnico. Você só vê o resultado."</div></div>
+          <div class="obj-card"><div class="obj-q">Não tenho tempo agora</div><div class="obj-a"><strong>"Exatamente por isso a IA faz sentido.</strong> Você não vai implementar — nós implementamos. O resultado é ter MAIS tempo depois."</div></div>
+          <div class="obj-card"><div class="obj-q">Já tenho um sistema</div><div class="obj-a"><strong>"Ótimo.</strong> A IA não substitui — ela potencializa o que você já tem. A maioria cresceu ainda mais após a integração."</div></div>
+          <div class="obj-card"><div class="obj-q">Meu negócio é diferente</div><div class="obj-a"><strong>"Concordo que cada negócio é único.</strong> Por isso o diagnóstico é personalizado. A dor de perder dinheiro com ineficiência é universal."</div></div>
+          <div class="obj-card"><div class="obj-q">Não confio em IA</div><div class="obj-a"><strong>"Faz sentido ser cético.</strong> Mas você usa GPS, Nubank, Spotify — todos IA. Agora a IA trabalha pra você. Posso te mostrar casos reais?"</div></div>
+          <div class="obj-card"><div class="obj-q">Vou falar com meu sócio</div><div class="obj-a"><strong>"Claro.</strong> Posso fazer uma apresentação rápida pros dois juntos? Assim seu sócio tira as dúvidas na hora. Quando vocês se reúnem?"</div></div>
+        </div>
+        <div class="sc-tip" style="margin-top:1rem;"><div class="sc-tip-icon">🧠</div><div class="sc-tip-text"><strong>Regra das objeções:</strong> Nunca discuta. Valide ("entendo", "faz sentido"), então redirecione com uma pergunta. Objeção é sinal de interesse.</div></div>
+      </div>
+    </div>
+  </div><!-- /objecoes -->
+
+  <!-- SEGMENTOS -->
+  <div class="sc-panel" id="sc-panel-segmentos">
+    <p style="font-size:.88rem;color:#7ECFEA;margin-bottom:1.2rem;">Abordagem personalizada por tipo de cliente — use a linguagem do segmento:</p>
+    <div class="seg-grid">
+      <div class="seg-card"><div class="seg-icon">🥩</div><div class="seg-name">Açougue / Frigorífico</div><div class="seg-hook">Dor: <strong>perdas invisíveis, preço manual e WhatsApp caótico</strong></div><div class="seg-script-text">"Você sabia que a maioria dos açougues perde entre R$2k-R$8k por mês em mercadoria sem perceber? A gente tem um dashboard que mostra isso em tempo real. Quer ver?"</div></div>
+      <div class="seg-card"><div class="seg-icon">🏪</div><div class="seg-name">Mercado / Supermercado</div><div class="seg-hook">Dor: <strong>ruptura de estoque, precificação errada, perdas</strong></div><div class="seg-script-text">"Quantas vezes você perdeu venda porque faltou produto? Com IA, o sistema te avisa antes de acabar e ainda sugere o pedido automático."</div></div>
+      <div class="seg-card"><div class="seg-icon">🏥</div><div class="seg-name">Clínica / Consultório</div><div class="seg-hook">Dor: <strong>faltas, atendimento fora do horário, agenda manual</strong></div><div class="seg-script-text">"Quantos pacientes você perdeu esta semana por não conseguir atender fora do horário? A gente coloca uma IA pra responder e agendar 24h por dia."</div></div>
+      <div class="seg-card"><div class="seg-icon">🏨</div><div class="seg-name">Hotel / Pousada</div><div class="seg-hook">Dor: <strong>check-in demorado, avaliações baixas, equipe sobrecarregada</strong></div><div class="seg-script-text">"No Booking e Google, 1 estrela a mais pode dobrar sua taxa de ocupação. A gente implementa check-in por IA e concierge virtual que melhora avaliações em 30 dias."</div></div>
+      <div class="seg-card"><div class="seg-icon">🏠</div><div class="seg-name">Imobiliária / Corretor</div><div class="seg-hook">Dor: <strong>leads que somem, follow-up manual, atendimento lento</strong></div><div class="seg-script-text">"Você perde quantos leads por semana por demorar a responder? IA que responde em segundos, qualifica o lead e já agenda a visita — enquanto você está em reunião."</div></div>
+      <div class="seg-card"><div class="seg-icon">💼</div><div class="seg-name">Empresa de Serviços</div><div class="seg-hook">Dor: <strong>processos repetitivos, relatórios manuais, crescimento travado</strong></div><div class="seg-script-text">"Quanto tempo sua equipe gasta em tarefas que uma IA faria em segundos? A gente identifica os 3 processos que mais custam tempo e automatiza tudo em 48h."</div></div>
+    </div>
+  </div><!-- /segmentos -->
+
+  <!-- FOLLOW-UP -->
+  <div class="sc-panel" id="sc-panel-followup">
+    <div class="script-card sc-card open">
+      <div class="sc-hd" onclick="toggleScCard(this.parentElement)">
+        <div class="sc-step step-cyan">📅</div>
+        <div class="sc-card-title">Sequência de Follow-up — 7 dias</div>
+        <span class="sc-badge" style="color:#00F5FF;border-color:rgba(0,245,255,.3);">Sequência</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="script-text"><div class="script-lbl">Dia 1 — Imediato (até 1h após contato)</div><div class="script-bubble">"Oi <strong>[Nome]</strong>! Segue o link do site da Kairos pra você explorar: <strong>kairosdigital.vercel.app</strong><br/><br/>Qualquer dúvida é só falar. Tô à disposição! 🚀"</div><button class="copy-btn" onclick="copyScText(this)">COPIAR</button></div>
+        <div class="script-text"><div class="script-lbl">Dia 2 — Conteúdo de valor</div><div class="script-bubble">"<strong>[Nome]</strong>, achei esse dado interessante:<br/><br/>Empresas que implementaram IA cresceram <em>+237% em média</em> nos primeiros 90 dias.<br/><br/>Só pra contextualizar o que conversamos ontem. Qualquer hora que quiser dar continuidade, tô aqui. 😊"</div><button class="copy-btn" onclick="copyScText(this)">COPIAR</button></div>
+        <div class="script-text"><div class="script-lbl">Dia 4 — Urgência sutil</div><div class="script-bubble">"Oi <strong>[Nome]</strong>! A gente fechou mais 2 clientes essa semana e estamos com agenda cheia.<br/><br/>Caso queira começar este mês ainda, é bom a gente alinhar logo pra garantir sua data. Quer que eu reserve um horário?"</div><button class="copy-btn" onclick="copyScText(this)">COPIAR</button></div>
+        <div class="script-text"><div class="script-lbl">Dia 7 — Última tentativa (breakup message)</div><div class="script-bubble">"<strong>[Nome]</strong>, não quero ser inconveniente — mas antes de parar de te contactar, quero perguntar:<br/><br/>Existe algo que impediu você de avançar com a Kairos? Pode ser feedback, preço, momento.<br/><br/>Sua resposta me ajuda muito, mesmo que seja um não. 🙏"</div><button class="copy-btn" onclick="copyScText(this)">COPIAR</button></div>
+        <div class="sc-tip"><div class="sc-tip-icon">🔑</div><div class="sc-tip-text"><strong>Segredo:</strong> O "breakup message" (dia 7) tem uma das maiores taxas de resposta. As pessoas respondem quando acham que vão perder o contato.</div></div>
+      </div>
+    </div>
+  </div><!-- /followup -->
+
+  <!-- CHECKLIST -->
+  <div class="sc-panel" id="sc-panel-checklist">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+      <div>
+        <h3 style="font-family:'Space Grotesk';font-size:1rem;font-weight:700;margin-bottom:1rem;color:var(--c);">✅ Antes de Prospectar</h3>
+        <div class="sc-checklist">
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">Site da Kairos aberto no celular</span></div>
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">Script memorizado (pelo menos a abertura)</span></div>
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">Lista de empresas do segmento preparada</span></div>
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">Nome do decisor pesquisado</span></div>
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">Horário de pico evitado (almoço/abertura)</span></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Space Grotesk';font-size:1rem;font-weight:700;margin-bottom:1rem;color:var(--m);">⚡ Durante a Apresentação</h3>
+        <div class="sc-checklist">
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">Ouviu mais do que falou</span></div>
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">Identificou a dor principal</span></div>
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">Mostrou o card do serviço certo</span></div>
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">Fez o pitch dos números</span></div>
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">Tentou fechar com pergunta "ou"</span></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Space Grotesk';font-size:1rem;font-weight:700;margin-bottom:1rem;color:var(--y);">📝 Após o Contato</h3>
+        <div class="sc-checklist">
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">Mensagem de follow-up enviada em 1h</span></div>
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">Link do site enviado</span></div>
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">Próximo passo combinado</span></div>
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">Registrado no HQ da equipe</span></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Space Grotesk';font-size:1rem;font-weight:700;margin-bottom:1rem;color:var(--g);">🏆 Meta Diária</h3>
+        <div class="sc-checklist">
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">10 abordagens realizadas</span></div>
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">3 apresentações do site</span></div>
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">1 diagnóstico gratuito agendado</span></div>
+          <div class="sc-check-item" onclick="toggleScCheck(this)"><div class="sc-check-box"></div><span class="sc-check-label">1 pedido de indicação feito</span></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /checklist -->
+
+</div>
+</div><!-- /view-script -->
+
+<!-- ═══════════ MODALS (HQ) ═══════════ -->
 <div class="m-ov" id="addPointsModal">
   <div class="m-box">
     <button class="m-close" onclick="closeM('addPointsModal')">✕</button>
@@ -340,20 +707,15 @@ nav{position:sticky;top:0;z-index:100;background:rgba(3,7,18,.92);backdrop-filte
     <div style="display:flex;flex-direction:column;gap:.8rem;">
       <div><label style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--txt2);display:block;margin-bottom:.3rem;">Habilidade</label>
         <select id="xpSkill" style="width:100%;background:var(--bg3);border:1px solid var(--brd);color:var(--txt);border-radius:8px;padding:.6rem .8rem;font-size:.88rem;outline:none;">
-          <option value="0">🤖 IA & Claude Code</option>
-          <option value="1">💬 WhatsApp API</option>
-          <option value="2">📊 Dashboards</option>
-          <option value="3">🏪 Painéis TV</option>
-          <option value="4">🌐 Front-end</option>
-          <option value="5">📱 Instagram API</option>
+          <option value="0">🤖 IA & Claude Code</option><option value="1">💬 WhatsApp API</option>
+          <option value="2">📊 Dashboards</option><option value="3">🏪 Painéis TV</option>
+          <option value="4">🌐 Front-end</option><option value="5">📱 Instagram API</option>
         </select>
       </div>
       <div><label style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--txt2);display:block;margin-bottom:.3rem;">XP ganho</label>
         <select id="xpAmt" style="width:100%;background:var(--bg3);border:1px solid var(--brd);color:var(--txt);border-radius:8px;padding:.6rem .8rem;font-size:.88rem;outline:none;">
-          <option value="25">+25 XP — Tarefa completada</option>
-          <option value="50">+50 XP — Skill aprendida</option>
-          <option value="100">+100 XP — Projeto entregue</option>
-          <option value="200">+200 XP — Nível avançado</option>
+          <option value="25">+25 XP — Tarefa completada</option><option value="50">+50 XP — Skill aprendida</option>
+          <option value="100">+100 XP — Projeto entregue</option><option value="200">+200 XP — Nível avançado</option>
         </select>
       </div>
       <button class="btn-primary" onclick="addXp()" style="width:100%;justify-content:center;margin-top:.3rem;">Ganhar XP 🧠</button>
@@ -403,6 +765,14 @@ nav{position:sticky;top:0;z-index:100;background:rgba(3,7,18,.92);backdrop-filte
 /* CLOCK */
 function tick(){var a=new Date();document.getElementById('clockEl').textContent=String(a.getHours()).padStart(2,'0')+':'+String(a.getMinutes()).padStart(2,'0')+':'+String(a.getSeconds()).padStart(2,'0');}setInterval(tick,1000);tick();
 
+/* VIEW SWITCHER */
+function switchView(view,btn){
+  document.querySelectorAll('.view-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.view-tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('view-'+view).classList.add('active');
+  if(btn)btn.classList.add('active');
+}
+
 /* STORAGE */
 var GS=JSON.parse(localStorage.getItem('kairosHQ')||JSON.stringify({
   members:[
@@ -416,30 +786,30 @@ var GS=JSON.parse(localStorage.getItem('kairosHQ')||JSON.stringify({
     {name:'Sprint Outubro',goal:'3 contratos novos + 10 leads',days:30,daysLeft:30,progress:0,reward:800,status:'pendente'}
   ],
   skills:[
-    {name:'🤖 IA & Claude Code',  xp:680, maxXp:1000,  lvl:6},
-    {name:'💬 WhatsApp API',       xp:420, maxXp:600,   lvl:4},
-    {name:'📊 Dashboards & BI',    xp:310, maxXp:500,   lvl:3},
-    {name:'🏪 Painéis TV/HUD',    xp:580, maxXp:600,   lvl:5},
-    {name:'🌐 Front-end & UI',     xp:200, maxXp:400,   lvl:2},
-    {name:'📱 Instagram API',      xp:100, maxXp:300,   lvl:1}
+    {name:'🤖 IA & Claude Code',xp:680,maxXp:1000,lvl:6},
+    {name:'💬 WhatsApp API',xp:420,maxXp:600,lvl:4},
+    {name:'📊 Dashboards & BI',xp:310,maxXp:500,lvl:3},
+    {name:'🏪 Painéis TV/HUD',xp:580,maxXp:600,lvl:5},
+    {name:'🌐 Front-end & UI',xp:200,maxXp:400,lvl:2},
+    {name:'📱 Instagram API',xp:100,maxXp:300,lvl:1}
   ],
   achievements:[
-    {icon:'🥇', name:'Primeiro Contrato',    desc:'Feche seu 1° contrato',         pts:100,  unlocked:true,  isNew:false},
-    {icon:'🔥', name:'7 Dias de Streak',     desc:'7 dias consecutivos ativos',    pts:150,  unlocked:true,  isNew:true},
-    {icon:'💡', name:'Mestre da IA',         desc:'1000 XP em IA & Claude',        pts:200,  unlocked:false, isNew:false},
-    {icon:'🤝', name:'Parceiro de Ouro',     desc:'5 contratos fechados',          pts:300,  unlocked:true,  isNew:false},
-    {icon:'🌟', name:'Top Indicador',        desc:'3 indicações convertidas',      pts:250,  unlocked:false, isNew:false},
-    {icon:'🚀', name:'Sprint Master',        desc:'Complete 3 sprints',            pts:400,  unlocked:false, isNew:false},
-    {icon:'🎯', name:'Sniper de Vendas',     desc:'Feche 3 contratos em 7 dias',   pts:500,  unlocked:false, isNew:false},
-    {icon:'🏆', name:'Kairos Champion',      desc:'5.000 Kairos Coins acumulados', pts:1000, unlocked:false, isNew:false}
+    {icon:'🥇',name:'Primeiro Contrato',desc:'Feche seu 1° contrato',pts:100,unlocked:true,isNew:false},
+    {icon:'🔥',name:'7 Dias de Streak',desc:'7 dias consecutivos ativos',pts:150,unlocked:true,isNew:true},
+    {icon:'💡',name:'Mestre da IA',desc:'1000 XP em IA & Claude',pts:200,unlocked:false,isNew:false},
+    {icon:'🤝',name:'Parceiro de Ouro',desc:'5 contratos fechados',pts:300,unlocked:true,isNew:false},
+    {icon:'🌟',name:'Top Indicador',desc:'3 indicações convertidas',pts:250,unlocked:false,isNew:false},
+    {icon:'🚀',name:'Sprint Master',desc:'Complete 3 sprints',pts:400,unlocked:false,isNew:false},
+    {icon:'🎯',name:'Sniper de Vendas',desc:'Feche 3 contratos em 7 dias',pts:500,unlocked:false,isNew:false},
+    {icon:'🏆',name:'Kairos Champion',desc:'5.000 Kairos Coins acumulados',pts:1000,unlocked:false,isNew:false}
   ],
   boxes:[
-    {icon:'📦', name:'Caixa Starter',       req:'100 KC',      pts:100,  status:'opened',   content:'Acesso ao template de proposta comercial Kairos'},
-    {icon:'🎁', name:'Caixa Intermediária', req:'500 KC',       pts:500,  status:'available',content:'Mentoria 1:1 de 1 hora com foco em vendas de IA'},
-    {icon:'🔮', name:'Caixa Premium',       req:'1.000 KC',     pts:1000, status:'locked',   content:'Site premium entregue pela Kairos para você'},
-    {icon:'🤖', name:'Caixa Claude Code',   req:'3.000 KC',     pts:3000, status:'locked',   content:'Curso exclusivo: Claude Code em Ação (8 módulos)'},
-    {icon:'💎', name:'Caixa Diamante',      req:'5.000 KC',     pts:5000, status:'locked',   content:'Partnership oficial Kairos + revenue share 10%'},
-    {icon:'🌟', name:'Caixa Lendária',      req:'10.000 KC',    pts:10000,status:'locked',   content:'Co-fundação de produto SaaS com a equipe Kairos'}
+    {icon:'📦',name:'Caixa Starter',req:'100 KC',pts:100,status:'opened',content:'Acesso ao template de proposta comercial Kairos'},
+    {icon:'🎁',name:'Caixa Intermediária',req:'500 KC',pts:500,status:'available',content:'Mentoria 1:1 de 1 hora com foco em vendas de IA'},
+    {icon:'🔮',name:'Caixa Premium',req:'1.000 KC',pts:1000,status:'locked',content:'Site premium entregue pela Kairos para você'},
+    {icon:'🤖',name:'Caixa Claude Code',req:'3.000 KC',pts:3000,status:'locked',content:'Curso exclusivo: Claude Code em Ação (8 módulos)'},
+    {icon:'💎',name:'Caixa Diamante',req:'5.000 KC',pts:5000,status:'locked',content:'Partnership oficial Kairos + revenue share 10%'},
+    {icon:'🌟',name:'Caixa Lendária',req:'10.000 KC',pts:10000,status:'locked',content:'Co-fundação de produto SaaS com a equipe Kairos'}
   ],
   feed:[
     {icon:'🤝',text:'<strong>Vilson</strong> fechou contrato com <strong>Samuca Carnes</strong>',pts:'+200 KC',time:'há 2h'},
@@ -452,17 +822,11 @@ var GS=JSON.parse(localStorage.getItem('kairosHQ')||JSON.stringify({
 
 function save(){localStorage.setItem('kairosHQ',JSON.stringify(GS));}
 
-/* RENDER */
 function render(){
-  // KPIs
   var totalCoins=GS.members.reduce(function(a,m){return a+m.coins;},0);
   var totalDeals=GS.members.reduce(function(a,m){return a+m.deals;},0);
-  animNum('kpiCoins',totalCoins);
-  animNum('kpiDeals',totalDeals);
-  animNum('kpiRefs',3);
+  animNum('kpiCoins',totalCoins);animNum('kpiDeals',totalDeals);animNum('kpiRefs',3);
   animNum('kpiStreak',Math.max.apply(null,GS.members.map(function(m){return m.streak;})));
-
-  // Leaderboard
   var sorted=[].concat(GS.members).sort(function(a,b){return b.coins-a.coins;});
   var maxCoins=sorted[0].coins||1;
   var lbHtml='';
@@ -470,30 +834,20 @@ function render(){
     var rankClass=['r1','r2','r3','rn'][Math.min(i,3)];
     var rankSymbol=i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1);
     var itemClass=i===0?'first':i===1?'second':i===2?'third':'';
-    lbHtml+='<div class="lb-item '+itemClass+'">'+
-      '<div class="lb-rank '+rankClass+'">'+rankSymbol+'</div>'+
+    lbHtml+='<div class="lb-item '+itemClass+'"><div class="lb-rank '+rankClass+'">'+rankSymbol+'</div>'+
       '<div class="lb-avatar" style="background:'+m.color+'">'+m.avatar+'</div>'+
       '<div class="lb-info"><div class="lb-name">'+m.name+'</div><div class="lb-role">'+m.role+'</div></div>'+
-      '<div class="lb-badges">'+m.badges.slice(0,4).map(function(b){return '<span class="badge">'+b+'</span>';}).join('')+'</div>'+
-      '<div style="text-align:right;">'+
-        '<div class="lb-coins">'+m.coins+' KC</div>'+
-        '<div class="lb-bar-wrap" style="margin-top:.3rem;"><div class="lb-bar" style="width:'+(m.coins/maxCoins*100)+'%"></div></div>'+
-      '</div>'+
-    '</div>';
+      '<div class="lb-badges">'+m.badges.slice(0,4).map(function(b){return'<span class="badge">'+b+'</span>';}).join('')+'</div>'+
+      '<div style="text-align:right;"><div class="lb-coins">'+m.coins+' KC</div>'+
+      '<div class="lb-bar-wrap" style="margin-top:.3rem;"><div class="lb-bar" style="width:'+(m.coins/maxCoins*100)+'%"></div></div></div></div>';
   });
   document.getElementById('lbGrid').innerHTML=lbHtml;
-
-  // Feed
   var fHtml='';
   GS.feed.slice(0,6).forEach(function(f){
-    fHtml+='<div class="feed-item"><div class="feed-icon">'+f.icon+'</div>'+
-      '<div class="feed-text" style="flex:1;">'+f.text+'</div>'+
-      '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;"><div class="feed-pts">'+f.pts+'</div><div class="feed-time">'+f.time+'</div></div>'+
-    '</div>';
+    fHtml+='<div class="feed-item"><div class="feed-icon">'+f.icon+'</div><div class="feed-text" style="flex:1;">'+f.text+'</div>'+
+      '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;"><div class="feed-pts">'+f.pts+'</div><div class="feed-time">'+f.time+'</div></div></div>';
   });
   document.getElementById('feedList').innerHTML=fHtml;
-
-  // Sprints
   var spHtml='';
   GS.sprints.forEach(function(s){
     var tagClass=s.status==='ativo'?'ativo':s.status==='pendente'?'pendente':'concluido';
@@ -501,55 +855,36 @@ function render(){
     spHtml+='<div class="sprint-card '+(s.status==='ativo'?'active':'')+'">'+
       '<div class="sprint-header"><div class="sprint-name">'+s.name+'</div><span class="sprint-tag '+tagClass+'">'+tagLabel+'</span></div>'+
       '<div class="sprint-desc">🎯 Meta: '+s.goal+'</div>'+
-      '<div class="sprint-progress">'+
-        '<div class="sprint-pct-row"><span>Progresso</span><span>'+s.progress+'%</span></div>'+
-        '<div class="sprint-bar"><div class="sprint-fill" style="width:'+s.progress+'%"></div></div>'+
-      '</div>'+
+      '<div class="sprint-progress"><div class="sprint-pct-row"><span>Progresso</span><span>'+s.progress+'%</span></div>'+
+      '<div class="sprint-bar"><div class="sprint-fill" style="width:'+s.progress+'%"></div></div></div>'+
       '<div class="sprint-reward">🏆 Prêmio: '+s.reward+' KC ao completar</div>'+
       '<div class="sprint-days">'+(s.status==='concluido'?'✅ Concluído!':s.daysLeft+' dias restantes')+'</div>'+
       (s.status==='ativo'?'<button onclick="incrementSprint(this)" style="margin-top:.7rem;background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.35);color:var(--a);font-size:.75rem;font-weight:700;padding:.38rem .8rem;border-radius:7px;cursor:pointer;width:100%;">+10% Progresso</button>':'')+
     '</div>';
   });
   document.getElementById('sprintGrid').innerHTML=spHtml;
-
-  // Skills
   var skHtml='';
   GS.skills.forEach(function(s){
     var pct=Math.round(s.xp/s.maxXp*100);
-    skHtml+='<div class="skill-card">'+
-      '<div class="skill-head"><div class="skill-name">'+s.name+'</div><span class="skill-lvl">LVL '+s.lvl+'</span></div>'+
+    skHtml+='<div class="skill-card"><div class="skill-head"><div class="skill-name">'+s.name+'</div><span class="skill-lvl">LVL '+s.lvl+'</span></div>'+
       '<div class="skill-xp-row"><span>'+s.xp+' / '+s.maxXp+' XP</span><span>'+pct+'%</span></div>'+
-      '<div class="skill-bar"><div class="skill-fill" style="width:'+pct+'%"></div></div>'+
-    '</div>';
+      '<div class="skill-bar"><div class="skill-fill" style="width:'+pct+'%"></div></div></div>';
   });
   document.getElementById('skillsGrid').innerHTML=skHtml;
-
-  // Achievements
   var achHtml='';
   GS.achievements.forEach(function(a){
-    achHtml+='<div class="ach-card '+(a.unlocked?'unlocked':'locked')+'">'+
-      (a.isNew?'<div class="ach-new">NOVO!</div>':'')+
-      '<div class="ach-icon">'+a.icon+'</div>'+
-      '<div class="ach-name">'+a.name+'</div>'+
-      '<div class="ach-desc">'+a.desc+'</div>'+
-      '<div class="ach-pts">+'+a.pts+' KC</div>'+
-    '</div>';
+    achHtml+='<div class="ach-card '+(a.unlocked?'unlocked':'locked')+'">'+(a.isNew?'<div class="ach-new">NOVO!</div>':'')+
+      '<div class="ach-icon">'+a.icon+'</div><div class="ach-name">'+a.name+'</div><div class="ach-desc">'+a.desc+'</div><div class="ach-pts">+'+a.pts+' KC</div></div>';
   });
   document.getElementById('achGrid').innerHTML=achHtml;
-
-  // Mystery boxes
   var boxHtml='';
   GS.boxes.forEach(function(b,i){
     var cls=b.status==='available'?'available':b.status==='opened'?'opened':'locked';
-    var label=b.status==='available'?'Abrir!':b.status==='opened'?'Aberta ✓':'Bloqueada 🔒';
-    var onclick=b.status==='available'?'openBox('+i+')':'';
-    boxHtml+='<div class="mystery-box '+cls+'" '+(onclick?'onclick="'+onclick+'"':'')+'>'+
-      '<div class="box-shine"></div>'+
-      '<div class="box-icon">'+b.icon+'</div>'+
-      '<div class="box-name">'+b.name+'</div>'+
-      '<div class="box-req">'+b.req+'</div>'+
+    boxHtml+='<div class="mystery-box '+cls+'" '+(b.status==='available'?'onclick="openBox('+i+')"':'')+'>'+
+      '<div class="box-shine"></div><div class="box-icon">'+b.icon+'</div>'+
+      '<div class="box-name">'+b.name+'</div><div class="box-req">'+b.req+'</div>'+
       '<div class="box-pts">'+(b.status==='opened'?'✅ Resgatada':'Desbloquear: '+b.pts+' KC')+'</div>'+
-      (b.status==='available'?'<div style="margin-top:.5rem;font-size:.75rem;font-weight:700;color:var(--p2);">'+label+'</div>':'')+
+      (b.status==='available'?'<div style="margin-top:.5rem;font-size:.75rem;font-weight:700;color:var(--p2);">Abrir!</div>':'')+
     '</div>';
   });
   document.getElementById('boxGrid').innerHTML=boxHtml;
@@ -558,15 +893,10 @@ function render(){
 function animNum(id,target){
   var el=document.getElementById(id);if(!el)return;
   var cur=0,dur=800,st=Date.now();
-  (function tick(){
-    var p=Math.min((Date.now()-st)/dur,1);
-    var ease=1-Math.pow(1-p,3);
-    el.textContent=Math.round(cur+(target-cur)*ease);
-    if(p<1)requestAnimationFrame(tick);
-  })();
+  (function t(){var p=Math.min((Date.now()-st)/dur,1);var e=1-Math.pow(1-p,3);
+    el.textContent=Math.round(cur+(target-cur)*e);if(p<1)requestAnimationFrame(t);})();
 }
 
-/* ACTIONS */
 var FEED_PTS={'🤝':200,'🔗':100,'📱':50,'⭐':75,'🚀':30,'📚':40,'🎯':150};
 
 function addPoints(){
@@ -586,13 +916,11 @@ function addFeedEntry(){
   var pts=FEED_PTS[type]||50;
   var mi=GS.members.findIndex(function(m){return m.name===member;});
   if(mi>=0){GS.members[mi].coins+=pts;if(type==='🤝')GS.members[mi].deals++;}
-  var desc=type+'</strong> <strong>'+member+'</strong>'+(detail?' — '+detail:'');
-  GS.feed.unshift({icon:type,text:'<strong>'+member+'</strong> '+getActionText(type)+(detail?' — <strong>'+detail+'</strong>':''),pts:'+'+pts+' KC',time:'agora'});
+  var actionMap={'🤝':'fechou contrato','🔗':'converteu indicação','📱':'qualificou lead','⭐':'recebeu avaliação 5⭐','🚀':'realizou deploy','📚':'aprendeu nova skill','🎯':'bateu meta'};
+  GS.feed.unshift({icon:type,text:'<strong>'+member+'</strong> '+(actionMap[type]||'completou atividade')+(detail?' — <strong>'+detail+'</strong>':''),pts:'+'+pts+' KC',time:'agora'});
   save();render();closeM('addFeedModal');confetti();
   document.getElementById('feedDetail').value='';
 }
-
-function getActionText(type){var m={'🤝':'fechou contrato','🔗':'converteu indicação','📱':'qualificou lead','⭐':'recebeu avaliação 5⭐','🚀':'realizou deploy','📚':'aprendeu nova skill','🎯':'bateu meta'};return m[type]||'completou atividade';}
 
 function addXp(){
   var si=parseInt(document.getElementById('xpSkill').value)||0;
@@ -623,7 +951,7 @@ function incrementSprint(btn){
       var reward=GS.sprints[idx].reward;
       GS.members.forEach(function(m){m.coins+=Math.round(reward/GS.members.length);});
       GS.feed.unshift({icon:'🏆',text:'<strong>Sprint concluído!</strong> '+GS.sprints[idx].name,pts:'+'+reward+' KC',time:'agora'});
-      confetti();alert('🏆 Sprint concluído! +'+reward+' KC distribuídos para a equipe!');
+      confetti();alert('🏆 Sprint concluído! +'+reward+' KC distribuídos!');
     }
     save();render();
   }
@@ -633,19 +961,35 @@ function openBox(i){
   var box=GS.boxes[i];
   document.getElementById('boxRevealIcon').textContent=box.icon;
   document.getElementById('boxRevealName').textContent=box.name;
-  document.getElementById('boxRevealDesc').textContent='Parabéns! Você desbloqueou esta caixa surpresa.';
   document.getElementById('boxRevealContent').innerHTML='<div style="font-size:1.4rem;margin-bottom:.5rem;">'+box.icon+'</div><div style="font-weight:700;margin-bottom:.3rem;">'+box.name+'</div><div style="font-size:.85rem;color:var(--txt2);">'+box.content+'</div>';
-  GS.boxes[i].status='opened';
-  save();render();
-  openM('boxModal');confetti();
+  GS.boxes[i].status='opened';save();render();openM('boxModal');confetti();
 }
 
-/* MODALS */
 function openM(id){document.getElementById(id).classList.add('open');}
 function closeM(id){document.getElementById(id).classList.remove('open');}
 
-/* CONFETTI */
 function confetti(){var cols=['#7C3AED','#A855F7','#F59E0B','#06B6D4','#10B981','#FCD34D'];for(var i=0;i<70;i++){var el=document.createElement('div');el.className='cf';el.style.cssText='left:'+Math.random()*100+'vw;top:0;background:'+cols[Math.floor(Math.random()*cols.length)]+';width:'+(6+Math.random()*8)+'px;height:'+(6+Math.random()*8)+'px;animation-delay:'+Math.random()+'s;animation-duration:'+(2+Math.random()*2)+'s;';document.body.appendChild(el);setTimeout(function(e){return function(){if(e.parentNode)e.parentNode.removeChild(e);};}(el),4500);}}
+
+/* SCRIPT FUNCTIONS */
+function showScTab(name,btn){
+  document.querySelectorAll('.sc-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.sc-panel').forEach(function(p){p.classList.remove('active');});
+  if(btn)btn.classList.add('active');
+  document.getElementById('sc-panel-'+name).classList.add('active');
+}
+function toggleScCard(card){card.classList.toggle('open');}
+function toggleScCheck(item){
+  item.classList.toggle('done');
+  var box=item.querySelector('.sc-check-box');
+  box.textContent=item.classList.contains('done')?'✓':'';
+}
+function copyScText(btn){
+  var txt=btn.previousElementSibling.innerText.replace(/\n{3,}/g,'\n\n');
+  navigator.clipboard.writeText(txt).then(function(){
+    btn.textContent='COPIADO ✓';btn.classList.add('copied');
+    setTimeout(function(){btn.textContent='COPIAR';btn.classList.remove('copied');},2000);
+  });
+}
 
 render();
 </script>
